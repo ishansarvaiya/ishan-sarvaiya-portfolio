@@ -55,7 +55,7 @@ export const Hero = () => {
             <div className="w-80 h-80 bg-gradient-to-br from-blue-600/30 to-purple-600/30 rounded-full absolute -inset-4 blur-xl"></div>
             <div className="w-72 h-72 bg-gray-800 rounded-full border border-gray-700 relative overflow-hidden">
               <img 
-                src="/api/placeholder/300/300" 
+                src="https://i.postimg.cc/PfbFTMNY/04-BDD9-E8-0056-4999-B218-E33755855-CF0.jpg" 
                 alt="Ishan Sarvaiya"
                 className="w-full h-full object-cover"
               />
