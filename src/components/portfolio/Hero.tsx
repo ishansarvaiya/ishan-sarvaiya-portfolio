@@ -1,4 +1,3 @@
-
 import { ArrowRight, Coffee, Code, Zap, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -45,7 +44,6 @@ export const Hero = () => {
             </p>
             <p className="text-lg text-gray-400 leading-relaxed max-w-md animate-fade-in" style={{ animationDelay: '0.7s' }}>
               Building scalable solutions in fintech, HRMS, and logistics with 4+ years of experience. 
-              <span className="text-blue-400"> When I'm not debugging, I'm probably thinking about motorsports or philosophy! 🏎️💭</span>
             </p>
           </div>
 
