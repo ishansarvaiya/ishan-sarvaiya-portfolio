@@ -1,3 +1,4 @@
+
 import { ArrowRight, Coffee, Code, Zap, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -17,7 +18,7 @@ export const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
+    <section className="min-h-screen flex items-center justify-center px-6 py-8 md:py-0 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-purple-900/20"></div>
       
       {/* Floating icons animation */}
