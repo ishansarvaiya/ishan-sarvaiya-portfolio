@@ -1,4 +1,3 @@
-
 import { ArrowRight, Coffee, Code, Zap, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -12,8 +11,8 @@ export const Hero = () => {
   };
 
   const downloadResume = () => {
-    // You can replace this URL with your Google Drive PDF link
-    const resumeUrl = "YOUR_GOOGLE_DRIVE_RESUME_LINK_HERE";
+    // Convert Google Drive view link to direct download link
+    const resumeUrl = "https://drive.google.com/uc?export=download&id=1cN-M3bWcEoPf1cwWlgfAg-DCtsyFihMO";
     window.open(resumeUrl, '_blank');
   };
 
