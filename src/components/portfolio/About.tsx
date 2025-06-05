@@ -1,4 +1,3 @@
-
 export const About = () => {
   return (
     <section id="about" className="py-20 px-6 bg-gray-800/50">
@@ -16,13 +15,9 @@ export const About = () => {
                 <span className="text-blue-400 font-medium"> I'm passionate about clean architecture, microservices, and creating performant backend systems.</span>
               </p>
             </div>
-            
             <div className="bg-gray-900/30 p-6 rounded-2xl border border-gray-700/50 hover:border-purple-500/30 transition-all duration-300 hover:scale-102 hover:shadow-lg">
               <p className="text-lg text-gray-300 leading-relaxed">
-                Outside of work, I explore <span className="text-purple-400 font-medium">AI</span> 🤖, 
-                <span className="text-red-400 font-medium"> motorsports</span> 🏎️, 
-                <span className="text-yellow-400 font-medium"> philosophy</span> 🤔, and 
-                <span className="text-green-400 font-medium"> travel</span> ✈️. 
+                Outside of work, I'm actively exploring <span className="text-purple-400 font-medium">AI</span> 🤖, <span className="text-blue-300 font-medium">Cloud</span> ☁️, and <span className="text-pink-400 font-medium">Frontend</span> 🎨 technologies. 
                 <span className="text-gray-400 italic"> I believe in continuous learning and staying updated with the latest technological advancements... and yes, I do read the documentation! 📚</span>
               </p>
             </div>
