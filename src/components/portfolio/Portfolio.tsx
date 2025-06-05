@@ -1,7 +1,7 @@
 export const Portfolio = () => {
   const projects = [
     {
-      name: "OKDollar 💰",
+      name: "Mobile Wallet Backend 💰",
       description:
         "Mobile wallet backend powering transactions, recharges, and gift cards for 10,000+ daily users. Developed secure, high-throughput APIs with .NET Core and JWT.",
       tech: [".NET Core", "SQL Server", "JWT", "Azure"],
@@ -25,7 +25,7 @@ export const Portfolio = () => {
       mood: "💡 Powering digital utilities"
     },
     {
-      name: "PlusHRM Platform 👥",
+      name: "HR Management Platform 👥",
       description:
         "HR management platform with modules for leave tracking, KPIs, Kanban boards, and attendance. Scalable backend supporting 100+ enterprise users.",
       tech: [".NET Core", "Angular", "SQL Server", "Azure"],
@@ -33,7 +33,7 @@ export const Portfolio = () => {
       mood: "🏠 Built for remote and hybrid teams"
     },
     {
-      name: "MNX Logistics APIs 🚚",
+      name: "Shipment Tracking APIs 🚚",
       description:
         "REST APIs for real-time shipment tracking and route optimization. Improved delivery ops efficiency by 25% and enabled smooth courier coordination.",
       tech: [".NET Core", "SQL Server", "REST APIs"],
