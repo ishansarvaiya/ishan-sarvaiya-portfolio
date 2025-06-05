@@ -1,5 +1,5 @@
 
-import { ArrowRight, Coffee, Code, Zap } from "lucide-react";
+import { ArrowRight, Coffee, Code, Zap, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const Hero = () => {
@@ -9,6 +9,12 @@ export const Hero = () => {
 
   const scrollToContact = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const downloadResume = () => {
+    // You can replace this URL with your Google Drive PDF link
+    const resumeUrl = "YOUR_GOOGLE_DRIVE_RESUME_LINK_HERE";
+    window.open(resumeUrl, '_blank');
   };
 
   return (
@@ -51,6 +57,15 @@ export const Hero = () => {
               <span className="group-hover:animate-pulse">View Portfolio</span>
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
+            
+            <Button 
+              onClick={downloadResume}
+              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-3 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/25 group"
+            >
+              <Download className="mr-2 h-4 w-4 group-hover:animate-bounce" />
+              <span className="group-hover:animate-pulse">Download Resume</span>
+            </Button>
+            
             <Button 
               variant="outline" 
               onClick={scrollToContact}
