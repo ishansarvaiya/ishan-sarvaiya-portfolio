@@ -1,5 +1,5 @@
 
-import { Mail, Phone, Coffee, MessageSquare } from "lucide-react";
+import { Mail, Phone, Coffee, MessageSquare, Github } from "lucide-react";
 
 export const Contact = () => {
   return (
@@ -55,6 +55,24 @@ export const Contact = () => {
                     +91 6355344226
                   </a>
                   <p className="text-xs text-gray-500 italic">For urgent bugs or casual tech chats! 📞</p>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-4 bg-gray-900/30 p-4 rounded-xl hover:bg-gray-800/40 transition-all duration-300 hover:scale-105 group">
+                <div className="w-12 h-12 bg-purple-600/20 rounded-lg flex items-center justify-center group-hover:animate-pulse">
+                  <Github className="h-5 w-5 text-purple-400" />
+                </div>
+                <div>
+                  <p className="text-gray-400 text-sm">💻 GitHub</p>
+                  <a 
+                    href="https://github.com/ishansarvaiya/" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white hover:text-purple-400 transition-colors font-medium hover:underline"
+                  >
+                    github.com/ishansarvaiya
+                  </a>
+                  <p className="text-xs text-gray-500 italic">Where my code lives and commits tell stories! 📚</p>
                 </div>
               </div>
             </div>
