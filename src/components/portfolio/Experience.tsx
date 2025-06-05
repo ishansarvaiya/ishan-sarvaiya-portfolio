@@ -6,7 +6,6 @@ export const Experience = () => {
       period: "Sep 2022 – Present",
       achievements: [
         "Led backend development of multiple fintech platforms using .NET Core, boosting system throughput by 30%.",
-        "Built and maintained core modules for:",
         "OKDollar (Mobile Wallet) – Developed wallet transaction, recharge, and gift card APIs, serving 10,000+ daily users.",
         "KYC Management System – Implemented identity verification workflows with OCR and bank checks, reducing processing errors by 35%.",
         "Electricity Bill Payment System – Created custom billing logic supporting 5K+ daily transactions across multiple regions.",
@@ -22,7 +21,6 @@ export const Experience = () => {
       role: "Junior Software Engineer",
       period: "Mar 2021 – Aug 2022",
       achievements: [
-        "Contributed to core backend systems for:",
         "PlusHRM (HRMS Platform) – Developed features for leave tracking, WFH, KPIs, Kanban boards, and attendance for 100+ users.",
         "MNX Logistics – Built APIs for real-time courier dispatch and tracking, improving operational efficiency by 25%.",
         "Inventory Management System (Freelance project) – Delivered complete backend for inventory, payroll, and employee shift tracking for a client in Ireland.",
