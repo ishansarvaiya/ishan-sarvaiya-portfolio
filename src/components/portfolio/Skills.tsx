@@ -2,31 +2,31 @@ export const Skills = () => {
   const skillCategories = [
     {
       category: "Languages 💬",
-      skills: ["C#", "JavaScript", "HTML5", "CSS3", "TypeScript", "T-SQL"],
+      skills: ["C#", "JavaScript", "HTML5", "CSS3"],
       emoji: "🗣️",
       description: "Speaking fluent code in multiple dialects!"
     },
     {
       category: "Frameworks & Libraries 🏗️",
-      skills: [".NET Core", "MVC", "LINQ", "Entity Framework", "AJAX", "jQuery", "Blazor", "ASP.NET Web API"],
+      skills: [".NET Core", "MVC", "LINQ", "Entity Framework", "AJAX", "jQuery", "ASP.NET Web API"],
       emoji: "⚙️",
       description: "Where structure meets scalability!"
     },
     {
       category: "Auth & Security 🔐",
-      skills: ["JWT", "Identity Server", "OAuth2", "Role-based Access Control (RBAC)"],
+      skills: ["JWT", "Identity Server"],
       emoji: "🛡️",
       description: "Guarding gates and securing data!"
     },
     {
       category: "Databases & Caching 🗄️",
-      skills: ["SQL Server", "Redis", "EF Core"],
+      skills: ["SQL Server", "EF Core"],
       emoji: "📦",
       description: "Persistent storage and lightning-fast queries!"
     },
     {
       category: "DevOps & Hosting 🌐",
-      skills: ["IIS", "Linux", "Docker", "CI/CD", "Azure App Services"],
+      skills: ["IIS", "Linux"],
       emoji: "🚀",
       description: "Deploying dreams to production!"
     },
@@ -38,13 +38,13 @@ export const Skills = () => {
     },
     {
       category: "Version Control & PM 📋",
-      skills: ["Git", "SVN", "Jira", "Azure DevOps"],
+      skills: ["Git", "SVN", "Jira"],
       emoji: "🗃️",
       description: "Organized chaos with commits and tasks!"
     },
     {
       category: "Workflow & Methodologies 🧠",
-      skills: ["Agile", "Scrum", "TDD", "Code Reviews"],
+      skills: ["Agile", "Scrum", "Code Reviews"],
       emoji: "🔄",
       description: "Writing clean code in clean cycles!"
     }
