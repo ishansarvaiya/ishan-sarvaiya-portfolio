@@ -36,9 +36,9 @@ export const Hero = () => {
         <div className="space-y-8 animate-fade-in">
           <div>
             <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              <span className="inline-block hover:scale-105 transition-transform duration-300">Ishan</span>
+              <span>Ishan</span>
               <br />
-              <span className="inline-block hover:scale-105 transition-transform duration-300">Sarvaiya.</span>
+              <span>Sarvaiya.</span>
             </h1>
             <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mb-6 animate-pulse"></div>
           </div>
