@@ -1,6 +1,21 @@
 export const Experience = () => {
   const experiences = [
     {
+      company: "iFour Technolab Pvt. Ltd.",
+      role: "Junior Software Engineer",
+      period: "Mar 2021 – Aug 2022",
+      achievements: [
+        "HR Management Platform – Developed features for leave tracking, WFH, KPIs, Kanban boards, and attendance for 100+ users.",
+        "Shipment Tracking APIs – Built APIs for real-time courier dispatch and tracking, improving operational efficiency by 25%.",
+        "Inventory Management System (Freelance project) – Delivered complete backend for inventory, payroll, and employee shift tracking for a client in Ireland.",
+        "Presented a live IoT-Azure integration demo using Raspberry Pi for real-time data logging.",
+        "Optimized database queries and API performance, reducing average response times by 20%.",
+        "Mentored junior developers, supporting onboarding and team collaboration."
+      ],
+      emoji: "🌱",
+      mood: "Where it all began — junior but eager!"
+    },
+    {
       company: "Confidential",
       role: "Software Engineer",
       period: "Sep 2022 – Present",
@@ -15,21 +30,6 @@ export const Experience = () => {
       ],
       emoji: "🔥",
       mood: "Currently crushing it here!"
-    },
-    {
-      company: "iFour Technolab Pvt. Ltd.",
-      role: "Junior Software Engineer",
-      period: "Mar 2021 – Aug 2022",
-      achievements: [
-        "HR Management Platform – Developed features for leave tracking, WFH, KPIs, Kanban boards, and attendance for 100+ users.",
-        "Shipment Tracking APIs – Built APIs for real-time courier dispatch and tracking, improving operational efficiency by 25%.",
-        "Inventory Management System (Freelance project) – Delivered complete backend for inventory, payroll, and employee shift tracking for a client in Ireland.",
-        "Presented a live IoT-Azure integration demo using Raspberry Pi for real-time data logging.",
-        "Optimized database queries and API performance, reducing average response times by 20%.",
-        "Mentored junior developers, supporting onboarding and team collaboration."
-      ],
-      emoji: "🌱",
-      mood: "Where it all began — junior but eager!"
     }
   ];
 
