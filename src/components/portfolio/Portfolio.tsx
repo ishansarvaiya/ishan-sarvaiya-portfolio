@@ -56,7 +56,8 @@ export const Portfolio = () => {
       "A C# desktop application that scrapes movie and show data from Hotstar using Selenium, and stores it in a SQL Server database. Built to explore automation, web scraping, and backend data management workflows.",
     tech: ["C#", ".NET", "Selenium", "SQL Server", "SSMS", "Scraping", "Git"],
     category: "Web Scraping",
-    mood: "🎬 Scraping with style"
+    mood: "🎬 Scraping with style",
+    repo: "https://github.com/ishansarvaiya/HotstarScraper"
   };
 
   return (
@@ -141,7 +142,7 @@ export const Portfolio = () => {
             <p className="text-gray-300 mb-4 leading-relaxed text-sm group-hover:text-gray-200 transition-colors">
               {personalProject.description}
             </p>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 mb-4">
               {personalProject.tech.map((tech, idx) => (
                 <span
                   key={idx}
@@ -151,6 +152,15 @@ export const Portfolio = () => {
                 </span>
               ))}
             </div>
+
+            <a
+              href={personalProject.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-2 bg-yellow-500 text-black text-sm font-medium px-4 py-2 rounded hover:bg-yellow-600 transition-colors shadow hover:shadow-lg"
+            >
+              🔗 View on GitHub
+            </a>
           </div>
 
           <footer className="text-center mt-12">
