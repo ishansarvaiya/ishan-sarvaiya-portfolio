@@ -26,7 +26,7 @@ export const Skills = () => {
     },
     {
       category: "DevOps & Hosting 🌐",
-      skills: ["IIS", "Linux"],
+      skills: ["IIS", "Linux", "Docker", "Kubernetes"],
       emoji: "🚀",
       description: "Deploying dreams to production!"
     },
