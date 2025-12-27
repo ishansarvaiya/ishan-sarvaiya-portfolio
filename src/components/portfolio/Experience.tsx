@@ -1,89 +1,123 @@
+import { Briefcase, Calendar, MapPin } from "lucide-react";
+
 export const Experience = () => {
   const experiences = [
+    {
+      company: "Kinetiq",
+      role: "Software Engineer",
+      period: "Oct 2025 – Present",
+      location: "Remote",
+      current: true,
+      achievements: [
+        "Developing distributed Ad-Harvesting engines for Linear TV and OTT media using .NET 8 and Python.",
+        "Orchestrating asynchronous data pipelines with RabbitMQ to handle high-volume media metadata.",
+        "Implementing ELK Stack (Elasticsearch & Kibana) for real-time observability and data visualization.",
+        "Managing cross-cloud deployments on Azure and AWS."
+      ]
+    },
+    {
+      company: "Crytonix Remote Tech Works",
+      role: "Software Engineer",
+      period: "Sep 2022 – Sep 2025",
+      location: "Remote",
+      current: false,
+      achievements: [
+        "Led backend for a Mobile Wallet platform serving 10,000+ daily users.",
+        "Engineered an OCR-driven KYC System, reducing manual processing errors by 35%.",
+        "Migrated legacy monoliths into 6+ Microservices for increased fault tolerance.",
+        "Developed secure billing APIs supporting 5K+ daily transactions across regions.",
+        "Integrated secure authentication protocols (JWT, Identity Server), enhancing user security."
+      ]
+    },
     {
       company: "iFour Technolab Pvt. Ltd.",
       role: "Junior Software Engineer",
       period: "Mar 2021 – Aug 2022",
+      location: "Ahmedabad, India",
+      current: false,
       achievements: [
-        "HR Management Platform – Developed features for leave tracking, WFH, KPIs, Kanban boards, and attendance for 100+ users.",
-        "Shipment Tracking APIs – Built APIs for real-time courier dispatch and tracking, improving operational efficiency by 25%.",
-        "Inventory Management System (Freelance project) – Delivered complete backend for inventory, payroll, and employee shift tracking for a client in Ireland.",
-        "Presented a live IoT-Azure integration demo using Raspberry Pi for real-time data logging.",
-        "Optimized database queries and API performance, reducing average response times by 20%.",
-        "Mentored junior developers, supporting onboarding and team collaboration."
-      ],
-      emoji: "🌱",
-      mood: "Where it all began — junior but eager!"
-    },
-    {
-      company: "Confidential",
-      role: "Software Engineer",
-      period: "Sep 2022 – Present",
-      achievements: [
-        "Led backend development of multiple fintech platforms using .NET Core, boosting system throughput by 30%.",
-        "Mobile Wallet Backend – Developed wallet transaction, recharge, and gift card APIs, serving 10,000+ daily users.",
-        "KYC Management System – Implemented identity verification workflows with OCR and bank checks, reducing processing errors by 35%.",
-        "Electricity Bill Payment System – Created custom billing logic supporting 5K+ daily transactions across multiple regions.",
-        "Developed 6+ microservices, increasing system modularity and enabling independent deployments.",
-        "Integrated secure authentication protocols (JWT, Identity Server), enhancing user security.",
-        "Collaborated in Agile sprints with DevOps and QA teams, reducing bug fix turnaround by 40%."
-      ],
-      emoji: "🔥",
-      mood: "Currently crushing it here!"
+        "Developed features for HR Management Platform supporting leave tracking, KPIs, and attendance for 100+ users.",
+        "Built APIs for real-time courier dispatch and tracking, improving operational efficiency by 25%.",
+        "Delivered complete backend for Inventory Management System for a client in Ireland.",
+        "Optimized database queries and API performance, reducing average response times by 20%."
+      ]
     }
   ];
 
   return (
-    <section id="experience" className="py-20 px-6 bg-black text-white">
+    <section id="experience" className="py-24 px-6 bg-card">
       <div className="container mx-auto max-w-4xl">
-        <header className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 hover:text-purple-400 transition-colors cursor-default">
-            Experience 💼
-          </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto animate-pulse" />
-          <p className="text-gray-400 mt-4 italic">My journey through the tech universe! 🚀</p>
+        <header className="mb-16">
+          <div className="flex items-center gap-3 mb-4">
+            <Briefcase className="h-6 w-6 text-primary" />
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+              Experience
+            </h2>
+          </div>
+          <div className="w-20 h-1 bg-primary" />
         </header>
 
-        <div className="space-y-8">
-          {experiences.map((exp, index) => (
-            <article
-              key={index}
-              className="bg-gray-800/50 p-8 rounded-2xl border border-gray-700 hover:border-blue-500/50 transition-transform duration-300 hover:scale-105 shadow-md"
-            >
-              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-6">
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-xl font-semibold text-white group-hover:text-blue-300 transition-colors">
-                      {exp.role}
-                    </h3>
-                    <span className="text-2xl animate-bounce">{exp.emoji}</span>
+        <div className="relative">
+          {/* Timeline line */}
+          <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px bg-border" />
+
+          <div className="space-y-12">
+            {experiences.map((exp, index) => (
+              <article
+                key={index}
+                className="relative pl-8 md:pl-20 animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                {/* Timeline dot */}
+                <div className={`absolute left-0 md:left-8 top-2 w-3 h-3 rounded-full -translate-x-1/2 border-2 ${
+                  exp.current 
+                    ? 'bg-primary border-primary' 
+                    : 'bg-card border-border'
+                }`} />
+
+                <div className="bg-secondary/50 border border-border rounded-lg p-6 hover:border-primary/50 transition-colors">
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
+                    <div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="text-xl font-semibold text-foreground">
+                          {exp.role}
+                        </h3>
+                        {exp.current && (
+                          <span className="px-2 py-0.5 text-xs font-medium bg-primary/10 text-primary rounded">
+                            Current
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-lg text-primary font-medium">{exp.company}</p>
+                    </div>
+                    <div className="flex flex-col gap-1 text-sm text-muted-foreground">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="h-4 w-4" />
+                        {exp.period}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <MapPin className="h-4 w-4" />
+                        {exp.location}
+                      </div>
+                    </div>
                   </div>
-                  <h4 className="text-lg text-blue-400 mb-1">{exp.company}</h4>
-                  <p className="text-sm text-gray-500 italic">{exp.mood}</p>
+
+                  <ul className="space-y-3">
+                    {exp.achievements.map((achievement, idx) => (
+                      <li
+                        key={idx}
+                        className="flex items-start gap-3 text-muted-foreground"
+                      >
+                        <span className="w-1.5 h-1.5 mt-2 rounded-full bg-primary flex-shrink-0" />
+                        <span className="leading-relaxed">{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <span className="text-sm text-gray-400 bg-gray-900/50 px-4 py-2 rounded-lg">
-                  {exp.period}
-                </span>
-              </div>
-
-              <ul className="grid md:grid-cols-2 gap-4 list-none">
-                {exp.achievements.map((achievement, idx) => (
-                  <li
-                    key={idx}
-                    className="flex items-start space-x-3 bg-gray-700/10 p-3 rounded-lg hover:bg-gray-700/30 transition-colors"
-                  >
-                    <span className="w-2 h-2 mt-2 rounded-full bg-blue-500 flex-shrink-0" />
-                    <p className="text-gray-300 leading-relaxed">{achievement}</p>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
+              </article>
+            ))}
+          </div>
         </div>
-
-        <footer className="text-center mt-12">
-          <p className="text-gray-400 italic">And the adventure continues... 🎢</p>
-        </footer>
       </div>
     </section>
   );

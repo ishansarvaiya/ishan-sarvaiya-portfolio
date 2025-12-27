@@ -1,171 +1,235 @@
+import { Layers, ExternalLink, Github, Server, MessageSquare, Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
 export const Portfolio = () => {
   const projects = [
     {
-      name: "Mobile Wallet Backend 💰",
-      description:
-        "Mobile wallet backend powering transactions, recharges, and gift cards for 10,000+ daily users. Developed secure, high-throughput APIs with .NET Core and JWT.",
+      name: "Mobile Wallet Backend",
+      description: "High-throughput payment platform processing transactions, recharges, and gift cards for 10,000+ daily active users.",
       tech: [".NET Core", "SQL Server", "JWT", "Azure"],
       category: "Fintech",
-      mood: "💸 Handling money like a boss"
+      metrics: "10K+ DAU"
     },
     {
-      name: "KYC Management System 🔍",
-      description:
-        "OCR-driven identity verification system with automated bank checks. Reduced manual processing errors by 35% and streamlined customer onboarding.",
-      tech: [".NET Core", "OCR", "SQL Server", "Identity Server"],
+      name: "OCR-Driven KYC System",
+      description: "Automated identity verification with OCR processing and bank validation. Reduced manual errors by 35%.",
+      tech: [".NET Core", "OCR", "Identity Server", "SQL Server"],
       category: "Security",
-      mood: "🕵️ Verified and secured"
+      metrics: "35% Error Reduction"
     },
     {
-      name: "Electricity Bill Payment Gateway ⚡",
-      description:
-        "Custom billing logic and secure payment APIs powering 5K+ daily transactions across regions. Optimized backend ensured reliability for critical utility services.",
+      name: "Billing Payment Gateway",
+      description: "Custom billing logic and secure payment APIs supporting 5K+ daily transactions across multiple regions.",
       tech: [".NET Core", "Payment Gateway", "SQL Server"],
-      category: "Payment",
-      mood: "💡 Powering digital utilities"
+      category: "Payments",
+      metrics: "5K+ Daily TXN"
     },
     {
-      name: "HR Management Platform 👥",
-      description:
-        "HR management platform with modules for leave tracking, KPIs, Kanban boards, and attendance. Scalable backend supporting 100+ enterprise users.",
+      name: "HR Management Platform",
+      description: "Enterprise HRMS with modules for leave tracking, KPIs, Kanban boards, and attendance management.",
       tech: [".NET Core", "Angular", "SQL Server", "Azure"],
-      category: "HRMS",
-      mood: "🏠 Built for remote and hybrid teams"
+      category: "Enterprise",
+      metrics: "100+ Users"
     },
     {
-      name: "Shipment Tracking APIs 🚚",
-      description:
-        "REST APIs for real-time shipment tracking and route optimization. Improved delivery ops efficiency by 25% and enabled smooth courier coordination.",
-      tech: [".NET Core", "SQL Server", "REST APIs"],
+      name: "Shipment Tracking APIs",
+      description: "Real-time tracking and route optimization APIs. Improved delivery operations efficiency by 25%.",
+      tech: [".NET Core", "REST APIs", "SQL Server"],
       category: "Logistics",
-      mood: "📦 Fast lanes only"
+      metrics: "25% Efficiency Gain"
     },
     {
-      name: "Inventory Management System 📊",
-      description:
-        "Freelance solution for Irish business. Complete backend for inventory, payroll, and shift tracking with Blazor and .NET Core. Delivered independently.",
-      tech: [".NET Core", "SQL Server", "Blazor"],
+      name: "Inventory Management",
+      description: "Complete backend for inventory, payroll, and shift tracking. Freelance project for Irish enterprise.",
+      tech: [".NET Core", "Blazor", "SQL Server"],
       category: "Inventory",
-      mood: "🍀 From code to commerce"
+      metrics: "Full Delivery"
     }
   ];
 
-  const personalProject = {
-    name: "Hotstar Movie & Show Scraper",
-    description:
-      "A C# desktop application that scrapes movie and show data from Hotstar using Selenium, and stores it in a SQL Server database. Built to explore automation, web scraping, and backend data management workflows.",
-    tech: ["C#", ".NET", "Selenium", "SQL Server", "SSMS", "Scraping", "Git"],
-    category: "Web Scraping",
-    mood: "🎬 Scraping with style",
-    repo: "https://github.com/ishansarvaiya/HotstarScraper"
+  const featuredProject = {
+    name: "Distributed Media Ingestion Engine",
+    description: "A high-scale system designed to harvest ad metadata from global broadcasts. Built for the Media Intelligence sector to process and index millions of ad records with millisecond-latency search capabilities.",
+    techHighlights: [
+      { icon: Server, label: "Python-based Selenium workers for browser automation" },
+      { icon: MessageSquare, label: "RabbitMQ for decoupling ingestion from processing" },
+      { icon: Search, label: "Elasticsearch for millisecond-latency indexing" }
+    ],
+    tech: ["Python", ".NET 8", "Selenium", "RabbitMQ", "Elasticsearch", "Kibana", "Azure", "AWS"]
   };
 
   return (
     <>
-      <section id="portfolio" className="py-20 px-6 bg-gray-800/50">
+      {/* Featured Project */}
+      <section id="portfolio" className="py-24 px-6 bg-card">
+        <div className="container mx-auto max-w-5xl">
+          <header className="mb-16">
+            <div className="flex items-center gap-3 mb-4">
+              <Layers className="h-6 w-6 text-primary" />
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                Featured Project
+              </h2>
+            </div>
+            <div className="w-20 h-1 bg-primary" />
+          </header>
+
+          <div className="bg-secondary/50 border border-border rounded-lg p-8 hover:border-primary/50 transition-colors">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="px-3 py-1 text-xs font-mono bg-primary/10 text-primary rounded">
+                Media Intelligence
+              </span>
+              <span className="px-3 py-1 text-xs font-mono bg-secondary text-muted-foreground rounded border border-border">
+                Active Development
+              </span>
+            </div>
+            
+            <h3 className="text-2xl font-bold text-foreground mb-4">
+              {featuredProject.name}
+            </h3>
+            
+            <p className="text-muted-foreground leading-relaxed mb-8 max-w-3xl">
+              {featuredProject.description}
+            </p>
+
+            <div className="space-y-4 mb-8">
+              <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider">
+                Architecture Highlights
+              </h4>
+              <div className="grid md:grid-cols-3 gap-4">
+                {featuredProject.techHighlights.map((highlight, idx) => {
+                  const Icon = highlight.icon;
+                  return (
+                    <div key={idx} className="flex items-start gap-3 p-4 bg-card rounded-lg border border-border">
+                      <Icon className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-muted-foreground">{highlight.label}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {featuredProject.tech.map((tech, idx) => (
+                <span
+                  key={idx}
+                  className="text-xs font-mono text-muted-foreground bg-card px-3 py-1.5 rounded border border-border"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Project Grid */}
+      <section className="py-24 px-6">
         <div className="container mx-auto max-w-6xl">
-          <header className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover:text-green-400 transition-colors cursor-default">
-              Portfolio 🎨
+          <header className="mb-16">
+            <h2 className="text-2xl font-bold text-foreground mb-2">
+              Professional Projects
             </h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto animate-pulse" />
-            <p className="text-gray-400 mt-4 italic">
-              My digital creations – crafted with clean code, strong coffee, and way too much Stack Overflow ☕
+            <p className="text-muted-foreground">
+              Enterprise systems built for scale and reliability
             </p>
           </header>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, index) => (
-              <div
+              <article
                 key={index}
-                className="bg-gray-900/50 p-6 rounded-2xl border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:scale-105 hover:shadow-xl group"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="bg-card border border-border rounded-lg p-6 hover:border-primary/50 transition-colors animate-fade-in-up group"
+                style={{ animationDelay: `${index * 0.05}s` }}
               >
-                <div className="mb-4 flex justify-between items-start">
-                  <span className="text-xs text-blue-400 bg-blue-400/10 px-3 py-1 rounded-full hover:bg-blue-400/20 transition-colors">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded">
                     {project.category}
                   </span>
-                  <span className="text-xs text-gray-500 italic group-hover:animate-bounce">
-                    {project.mood}
+                  <span className="text-xs font-medium text-muted-foreground">
+                    {project.metrics}
                   </span>
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-blue-300 transition-colors">
+                
+                <h3 className="text-lg font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
                   {project.name}
                 </h3>
-                <p className="text-gray-300 mb-4 leading-relaxed text-sm group-hover:text-gray-200 transition-colors">
+                
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-2">
+                
+                <div className="flex flex-wrap gap-1.5">
                   {project.tech.map((tech, idx) => (
                     <span
                       key={idx}
-                      className="text-xs text-gray-300 bg-gray-800 px-2 py-1 rounded hover:bg-gray-700 hover:text-white transition-all duration-200 hover:scale-110"
+                      className="text-xs font-mono text-muted-foreground bg-secondary px-2 py-1 rounded"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
-              </div>
+              </article>
             ))}
           </div>
-
-          <footer className="text-center mt-12">
-            <p className="text-gray-400 italic">More projects brewing in the code kitchen... 👨‍💻🍳</p>
-          </footer>
         </div>
       </section>
 
-      <section id="personal-projects" className="py-20 px-6 bg-gray-900/40">
+      {/* Personal Project */}
+      <section className="py-24 px-6 bg-card">
         <div className="container mx-auto max-w-4xl">
-          <header className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover:text-yellow-400 transition-colors cursor-default">
-              Personal Project 🛠️
+          <header className="mb-12">
+            <h2 className="text-2xl font-bold text-foreground mb-2">
+              Open Source
             </h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-orange-500 mx-auto animate-pulse" />
-            <p className="text-gray-400 mt-4 italic">
-              A glimpse into what I build when no one's watching – pure curiosity meets code.
+            <p className="text-muted-foreground">
+              Personal exploration and automation projects
             </p>
           </header>
 
-          <div className="bg-gray-900/50 p-6 rounded-2xl border border-gray-700 hover:border-yellow-500/50 transition-all duration-300 hover:scale-105 hover:shadow-xl group">
-            <div className="mb-4 flex justify-between items-start">
-              <span className="text-xs text-yellow-400 bg-yellow-400/10 px-3 py-1 rounded-full hover:bg-yellow-400/20 transition-colors">
-                {personalProject.category}
-              </span>
-              <span className="text-xs text-gray-500 italic group-hover:animate-bounce">
-                {personalProject.mood}
+          <div className="bg-secondary/50 border border-border rounded-lg p-6 hover:border-primary/50 transition-colors">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded">
+                Automation
               </span>
             </div>
-            <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-yellow-300 transition-colors">
-              {personalProject.name}
+            
+            <h3 className="text-xl font-semibold text-foreground mb-3">
+              Hotstar Media Scraper
             </h3>
-            <p className="text-gray-300 mb-4 leading-relaxed text-sm group-hover:text-gray-200 transition-colors">
-              {personalProject.description}
+            
+            <p className="text-muted-foreground mb-6 leading-relaxed">
+              A C# desktop application that scrapes movie and show data from Hotstar using Selenium, 
+              storing it in SQL Server. Demonstrates automation, web scraping, and backend data management.
             </p>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {personalProject.tech.map((tech, idx) => (
+            
+            <div className="flex flex-wrap gap-2 mb-6">
+              {["C#", ".NET", "Selenium", "SQL Server", "Automation"].map((tech, idx) => (
                 <span
                   key={idx}
-                  className="text-xs text-gray-300 bg-gray-800 px-2 py-1 rounded hover:bg-gray-700 hover:text-white transition-all duration-200 hover:scale-110"
+                  className="text-xs font-mono text-muted-foreground bg-card px-2 py-1 rounded border border-border"
                 >
                   {tech}
                 </span>
               ))}
             </div>
 
-            <a
-              href={personalProject.repo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block mt-2 bg-yellow-500 text-black text-sm font-medium px-4 py-2 rounded hover:bg-yellow-600 transition-colors shadow hover:shadow-lg"
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-2"
+              asChild
             >
-              🔗 View on GitHub
-            </a>
+              <a
+                href="https://github.com/ishansarvaiya/HotstarScraper"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="h-4 w-4" />
+                View Repository
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            </Button>
           </div>
-
-          <footer className="text-center mt-12">
-            <p className="text-gray-400 italic">More experiments always on the way... 🚀</p>
-          </footer>
         </div>
       </section>
     </>
