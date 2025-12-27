@@ -1,91 +1,106 @@
-import { ArrowRight, Coffee, Code, Zap, Download } from "lucide-react";
+import { ArrowRight, Download, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
 export const Hero = () => {
   const scrollToPortfolio = () => {
-    document.getElementById('portfolio')?.scrollIntoView({
-      behavior: 'smooth'
-    });
+    document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' });
   };
+
   const scrollToContact = () => {
-    document.getElementById('contact')?.scrollIntoView({
-      behavior: 'smooth'
-    });
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
+
   const downloadResume = () => {
-    // Convert Google Drive view link to direct download link
     const resumeUrl = "https://drive.google.com/uc?export=download&id=1cN-M3bWcEoPf1cwWlgfAg-DCtsyFihMO";
     window.open(resumeUrl, '_blank');
   };
-  return <section className="min-h-screen flex items-center justify-center px-6 py-8 md:py-0 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-purple-900/20"></div>
-      
-      {/* Floating icons animation */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <Code className="absolute top-20 left-10 text-blue-400/30 animate-bounce" size={24} style={{
-        animationDelay: '0s'
-      }} />
-        <Coffee className="absolute top-40 right-20 text-purple-400/30 animate-bounce" size={20} style={{
-        animationDelay: '1s'
-      }} />
-        <Zap className="absolute bottom-40 left-20 text-yellow-400/30 animate-bounce" size={18} style={{
-        animationDelay: '2s'
-      }} />
-      </div>
 
-      <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
-        <div className="space-y-8 animate-fade-in">
+  return (
+    <section className="min-h-screen flex items-center justify-center px-6 py-12 md:py-0 relative overflow-hidden">
+      {/* Subtle grid background */}
+      <div className="absolute inset-0 bg-[linear-gradient(hsl(var(--border))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border))_1px,transparent_1px)] bg-[size:60px_60px] opacity-30" />
+      
+      {/* Accent glow */}
+      <div className="absolute top-1/4 -right-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 -left-32 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+
+      <div className="container mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
+        <div className="space-y-8 animate-fade-in-up">
+          {/* Terminal-style intro */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary rounded-full border border-border">
+            <Terminal className="h-4 w-4 text-primary" />
+            <span className="text-sm font-mono text-muted-foreground">systems.engineer</span>
+          </div>
+
           <div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              <span>Ishan</span>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground">
+              Ishan
               <br />
-              <span>Sarvaiya.</span>
+              <span className="text-primary">Sarvaiya</span>
             </h1>
-            <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mb-6 animate-pulse"></div>
+            <div className="w-20 h-1 bg-primary mt-6" />
           </div>
           
           <div className="space-y-4">
-            <p className="text-xl text-gray-300 font-medium animate-fade-in" style={{
-            animationDelay: '0.5s'
-          }}>
-              Software Engineer | Backend Specialist | Coffee Enthusiast ☕
+            <p className="text-xl md:text-2xl font-medium text-foreground">
+              Senior Backend & Systems Engineer
             </p>
-            <p className="text-lg text-gray-400 leading-relaxed max-w-md animate-fade-in" style={{
-            animationDelay: '0.7s'
-          }}>
-              Building scalable solutions in fintech, HRMS, and logistics with 4+ years of experience. 
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
+              Architecting high-concurrency systems for Media Intelligence and Fintech. 
+              Specialized in .NET 8, Distributed Messaging, and Data Observability.
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{
-          animationDelay: '0.9s'
-        }}>
-            <Button onClick={scrollToPortfolio} className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 group">
-              <span className="group-hover:animate-pulse">View Portfolio</span>
+          <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <Button 
+              onClick={scrollToPortfolio} 
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-base font-medium group"
+            >
+              View Work
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
             
-            <Button onClick={downloadResume} className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-3 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/25 group">
-              <Download className="mr-2 h-4 w-4 group-hover:animate-bounce" />
-              <span className="group-hover:animate-pulse">Download Resume</span>
+            <Button 
+              onClick={downloadResume}
+              variant="outline"
+              className="border-border hover:bg-secondary px-8 py-6 text-base font-medium group"
+            >
+              <Download className="mr-2 h-4 w-4" />
+              Download CV
             </Button>
             
-            <Button variant="outline" onClick={scrollToContact} className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white px-8 py-3 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25">
-              Let's Chat! 👋
+            <Button 
+              variant="ghost" 
+              onClick={scrollToContact} 
+              className="hover:bg-secondary px-8 py-6 text-base font-medium text-muted-foreground hover:text-foreground"
+            >
+              Contact
             </Button>
           </div>
         </div>
 
-        <div className="flex justify-center md:justify-end animate-fade-in" style={{
-        animationDelay: '0.3s'
-      }}>
-          <div className="relative group">
-            <div className="w-80 h-80 bg-gradient-to-br from-blue-600/30 to-purple-600/30 rounded-full absolute -inset-4 blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-            <div className="w-72 h-72 bg-gray-800 rounded-full border border-gray-700 relative overflow-hidden hover:scale-105 transition-transform duration-300 hover:border-blue-500/50">
-              <img src="https://i.postimg.cc/PfbFTMNY/04-BDD9-E8-0056-4999-B218-E33755855-CF0.jpg" alt="Ishan Sarvaiya - Professional yet approachable developer" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+        <div className="flex justify-center lg:justify-end animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <div className="relative">
+            {/* Outer ring with glow */}
+            <div className="absolute -inset-4 bg-primary/20 rounded-full blur-2xl animate-pulse-glow" />
+            
+            {/* Image container */}
+            <div className="w-72 h-72 md:w-80 md:h-80 rounded-full border-2 border-border relative overflow-hidden bg-card">
+              <img 
+                src="https://i.postimg.cc/PfbFTMNY/04-BDD9-E8-0056-4999-B218-E33755855-CF0.jpg" 
+                alt="Ishan Sarvaiya - Senior Backend & Systems Engineer" 
+                className="w-full h-full object-cover"
+              />
             </div>
-            <div className="absolute -bottom-2 -right-2 bg-green-500 w-6 h-6 rounded-full border-4 border-gray-900 animate-pulse"></div>
+            
+            {/* Status indicator */}
+            <div className="absolute bottom-4 right-4 flex items-center gap-2 bg-card px-3 py-1.5 rounded-full border border-border">
+              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <span className="text-xs font-medium text-muted-foreground">Available</span>
+            </div>
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };

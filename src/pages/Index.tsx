@@ -1,4 +1,3 @@
-
 import { Hero } from "@/components/portfolio/Hero";
 import { About } from "@/components/portfolio/About";
 import { Experience } from "@/components/portfolio/Experience";
@@ -8,12 +7,12 @@ import { Contact } from "@/components/portfolio/Contact";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-background text-foreground dark">
       <Hero />
       <About />
       <Experience />
-      <Portfolio />
       <Skills />
+      <Portfolio />
       <Contact />
     </div>
   );

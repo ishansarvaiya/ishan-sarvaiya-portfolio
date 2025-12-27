@@ -1,96 +1,82 @@
-
-import { Mail, Phone, Coffee, MessageSquare, Github } from "lucide-react";
+import { Mail, Github, Linkedin, Download, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const Contact = () => {
+  const downloadResume = () => {
+    const resumeUrl = "https://drive.google.com/uc?export=download&id=1cN-M3bWcEoPf1cwWlgfAg-DCtsyFihMO";
+    window.open(resumeUrl, '_blank');
+  };
+
   return (
-    <section id="contact" className="py-20 px-6 bg-gray-800/50">
-      <div className="container mx-auto max-w-4xl">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 hover:text-pink-400 transition-colors cursor-default">
-            Contact 📞
+    <section id="contact" className="py-24 px-6 bg-card">
+      <div className="container mx-auto max-w-3xl">
+        <header className="mb-16 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Get in Touch
           </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto animate-pulse"></div>
+          <div className="w-20 h-1 bg-primary mx-auto mb-6" />
+          <p className="text-muted-foreground max-w-lg mx-auto">
+            Inquiries for technical consultation or senior engineering roles 
+            can be directed via Email or LinkedIn.
+          </p>
+        </header>
+
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
+          <a
+            href="mailto:ishansarvaiya1@gmail.com"
+            className="flex flex-col items-center p-6 bg-secondary/50 border border-border rounded-lg hover:border-primary/50 transition-colors group"
+          >
+            <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+              <Mail className="h-5 w-5 text-primary" />
+            </div>
+            <span className="text-sm font-medium text-foreground mb-1">Email</span>
+            <span className="text-xs text-muted-foreground text-center">ishansarvaiya1@gmail.com</span>
+          </a>
+
+          <a
+            href="https://linkedin.com/in/ishansarvaiya"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center p-6 bg-secondary/50 border border-border rounded-lg hover:border-primary/50 transition-colors group"
+          >
+            <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+              <Linkedin className="h-5 w-5 text-primary" />
+            </div>
+            <span className="text-sm font-medium text-foreground mb-1">LinkedIn</span>
+            <span className="text-xs text-muted-foreground">Professional Network</span>
+          </a>
+
+          <a
+            href="https://github.com/ishansarvaiya"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center p-6 bg-secondary/50 border border-border rounded-lg hover:border-primary/50 transition-colors group"
+          >
+            <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+              <Github className="h-5 w-5 text-primary" />
+            </div>
+            <span className="text-sm font-medium text-foreground mb-1">GitHub</span>
+            <span className="text-xs text-muted-foreground">Code Repository</span>
+          </a>
         </div>
 
         <div className="flex justify-center">
-          <div className="space-y-8 max-w-md">
-            <div className="bg-gray-900/30 p-6 rounded-2xl border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 hover:scale-105">
-              <div className="flex items-center gap-3 mb-4">
-                <MessageSquare className="h-6 w-6 text-blue-400 animate-bounce" />
-                <h3 className="text-xl font-semibold">Let's Connect! 🤝</h3>
-              </div>
-              <p className="text-gray-300 leading-relaxed mb-6">
-                I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology and innovation.
-                <span className="text-purple-400"> Or we can debate whether tabs are better than spaces! 😄</span>
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              <div className="flex items-center space-x-4 bg-gray-900/30 p-4 rounded-xl hover:bg-gray-800/40 transition-all duration-300 hover:scale-105 group">
-                <div className="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:animate-pulse">
-                  <Mail className="h-5 w-5 text-blue-400" />
-                </div>
-                <div>
-                  <p className="text-gray-400 text-sm">📧 Email (Preferred!)</p>
-                  <a 
-                    href="mailto:ishansarvaiya1@gmail.com" 
-                    className="text-white hover:text-blue-400 transition-colors font-medium hover:underline"
-                  >
-                    ishansarvaiya1@gmail.com
-                  </a>
-                  <p className="text-xs text-gray-500 italic">I promise to reply faster than my build times! ⚡</p>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-4 bg-gray-900/30 p-4 rounded-xl hover:bg-gray-800/40 transition-all duration-300 hover:scale-105 group">
-                <div className="w-12 h-12 bg-green-600/20 rounded-lg flex items-center justify-center group-hover:animate-pulse">
-                  <Phone className="h-5 w-5 text-green-400" />
-                </div>
-                <div>
-                  <p className="text-gray-400 text-sm">📱 Phone</p>
-                  <a 
-                    href="tel:+916355344226" 
-                    className="text-white hover:text-green-400 transition-colors font-medium hover:underline"
-                  >
-                    +91 6355344226
-                  </a>
-                  <p className="text-xs text-gray-500 italic">For urgent bugs or casual tech chats! 📞</p>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-4 bg-gray-900/30 p-4 rounded-xl hover:bg-gray-800/40 transition-all duration-300 hover:scale-105 group">
-                <div className="w-12 h-12 bg-purple-600/20 rounded-lg flex items-center justify-center group-hover:animate-pulse">
-                  <Github className="h-5 w-5 text-purple-400" />
-                </div>
-                <div>
-                  <p className="text-gray-400 text-sm">💻 GitHub</p>
-                  <a 
-                    href="https://github.com/ishansarvaiya/" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white hover:text-purple-400 transition-colors font-medium hover:underline"
-                  >
-                    github.com/ishansarvaiya
-                  </a>
-                  <p className="text-xs text-gray-500 italic">Where my code lives and commits tell stories! 📚</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center bg-gradient-to-r from-blue-900/20 to-purple-900/20 p-6 rounded-2xl border border-blue-500/20">
-              <div className="flex items-center justify-center gap-2 mb-3">
-                <Coffee className="h-5 w-5 text-yellow-400 animate-bounce" />
-                <p className="text-yellow-400 font-medium">Fun Fact</p>
-                <Coffee className="h-5 w-5 text-yellow-400 animate-bounce" style={{ animationDelay: '0.5s' }} />
-              </div>
-              <p className="text-gray-300 text-sm italic">
-                Best time to reach me? After my third cup of coffee! ☕☕☕
-                <br />
-                <span className="text-blue-400">Response time guaranteed to be inversely proportional to caffeine levels! 📈</span>
-              </p>
-            </div>
-          </div>
+          <Button
+            onClick={downloadResume}
+            size="lg"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 gap-2"
+          >
+            <Download className="h-4 w-4" />
+            Download CV
+            <ExternalLink className="h-3 w-3" />
+          </Button>
         </div>
+
+        <footer className="mt-16 pt-8 border-t border-border text-center">
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Ishan Sarvaiya. Built with precision.
+          </p>
+        </footer>
       </div>
     </section>
   );
