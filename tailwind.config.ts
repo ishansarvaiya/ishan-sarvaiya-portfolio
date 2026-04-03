@@ -19,8 +19,9 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'sans': ['Inter', 'system-ui', 'sans-serif'],
-				'mono': ['JetBrains Mono', 'monospace'],
+				sans: ['Inter', 'system-ui', 'sans-serif'],
+				headline: ['Space Grotesk', 'system-ui', 'sans-serif'],
+				mono: ['JetBrains Mono', 'monospace'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -56,16 +57,11 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				}
+				neon: 'hsl(var(--neon))',
+				'surface-low': 'hsl(var(--surface-low))',
+				'surface-mid': 'hsl(var(--surface-mid))',
+				'surface-high': 'hsl(var(--surface-high))',
+				outline: 'hsl(var(--outline))',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
