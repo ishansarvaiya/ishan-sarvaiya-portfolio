@@ -1,5 +1,6 @@
 import { PROJECTS, type Project } from "@/data/portfolio";
 import { MaterialIcon } from "./MaterialIcon";
+import { FadeIn } from "./FadeIn";
 
 function ProjectCard({ project }: { project: Project }) {
   return (
@@ -44,18 +45,22 @@ export function Projects() {
   return (
     <section id="projects" className="py-32 px-8">
       <div className="max-w-7xl mx-auto">
-        <header className="mb-16">
-          <p className="font-mono text-primary text-xs tracking-widest mb-4 uppercase">
-            Selected_Artifacts
-          </p>
-          <h2 className="font-headline text-5xl font-bold tracking-tight">
-            Recent Projects
-          </h2>
-        </header>
+        <FadeIn>
+          <header className="mb-16">
+            <p className="font-mono text-primary text-xs tracking-widest mb-4 uppercase">
+              Selected_Artifacts
+            </p>
+            <h2 className="font-headline text-5xl font-bold tracking-tight">
+              Recent Projects
+            </h2>
+          </header>
+        </FadeIn>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {PROJECTS.map((project) => (
-            <ProjectCard key={project.title} project={project} />
+          {PROJECTS.map((project, i) => (
+            <FadeIn key={project.title} delay={i * 0.06}>
+              <ProjectCard project={project} />
+            </FadeIn>
           ))}
         </div>
       </div>

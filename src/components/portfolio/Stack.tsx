@@ -1,5 +1,6 @@
 import { STACK_ITEMS } from "@/data/portfolio";
 import { MaterialIcon } from "./MaterialIcon";
+import { FadeIn } from "./FadeIn";
 
 function StackCard({ icon, label }: { icon: string; label: string }) {
   return (
@@ -20,7 +21,7 @@ export function Stack() {
     <section id="stack" className="py-32 px-8 bg-surface-mid">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
         {/* Philosophy column */}
-        <div className="lg:col-span-5">
+        <FadeIn className="lg:col-span-5" direction="left">
           <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-8">
             Continuous Upskilling //{" "}
             <span className="text-outline">Philosophy</span>
@@ -34,26 +35,27 @@ export function Stack() {
             </p>
             <p>
               I focus on building resilient systems that thrive under load,
-              leveraging modern paradigms while maintaining the brutalist
-              simplicity of efficient architecture.
+              leveraging modern paradigms while maintaining the simplicity of
+              efficient architecture.
             </p>
           </div>
 
           <aside className="mt-12 p-6 bg-surface-low rounded-xl border-l-2 border-primary">
             <p className="font-mono text-sm text-primary mb-2">
-              LAST_UPDATE_LOG:
+              CURRENTLY_AT:
             </p>
             <p className="font-mono text-xs text-muted-foreground">
-              Refactoring legacy modules into microservices architecture with
-              99.9% uptime targets.
+              Kinetiq &mdash; architecting global media monitoring infrastructure.
             </p>
           </aside>
-        </div>
+        </FadeIn>
 
         {/* Stack grid */}
         <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-4">
-          {STACK_ITEMS.map((item) => (
-            <StackCard key={item.label} icon={item.icon} label={item.label} />
+          {STACK_ITEMS.map((item, i) => (
+            <FadeIn key={item.label} delay={i * 0.07}>
+              <StackCard icon={item.icon} label={item.label} />
+            </FadeIn>
           ))}
         </div>
       </div>

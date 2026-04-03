@@ -1,10 +1,12 @@
 import { MaterialIcon } from "./MaterialIcon";
+import { FadeIn } from "./FadeIn";
 
 export function Footer() {
   return (
     <footer id="contact" className="bg-[hsl(0_0%_3%)] border-t border-border pt-24 pb-12 px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
+        <FadeIn>
+          <div className="mb-16">
           <h2 className="font-headline text-5xl font-bold mb-8">
             Get in Touch
           </h2>
@@ -35,7 +37,8 @@ export function Footer() {
               </span>
             </div>
           </address>
-        </div>
+          </div>
+        </FadeIn>
 
         <div className="pt-8 border-t border-border/50">
           <p className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground">

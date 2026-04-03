@@ -20,13 +20,14 @@ export interface ExperienceItem {
   role: string;
   period: string;
   description: string;
+  bullets: string[];
   current?: boolean;
 }
 
-export interface Interest {
-  icon: string;
-  title: string;
-  tagline: string;
+export interface EducationItem {
+  institution: string;
+  degree: string;
+  period: string;
 }
 
 export const NAV_LINKS: NavLink[] = [
@@ -53,18 +54,41 @@ export const EXPERIENCE: ExperienceItem[] = [
     description:
       "Architecting global data ingestion and media monitoring infrastructure.",
     current: true,
+    bullets: [
+      "Designed and built distributed media ingestion pipelines processing millions of OTT metadata records daily across global broadcast markets.",
+      "Reduced end-to-end media monitoring latency by migrating batch ETL jobs to an event-driven architecture using Python and message queuing.",
+      "Collaborated cross-functionally to define API contracts for downstream analytics services, improving inter-team delivery velocity.",
+    ],
   },
   {
     company: "Crytonix Remote Tech Works",
     role: "Software Engineer",
     period: "Sep 2022 – Sep 2025",
     description: "Scaling fintech platforms and automating compliance workflows.",
+    bullets: [
+      "Engineered high-concurrency .NET Core APIs for a mobile wallet platform serving 10,000+ daily active users with 99.9% uptime SLA.",
+      "Automated KYC identity verification using OCR integration and Identity Server, cutting manual processing errors by 35%.",
+      "Architected a utility payment gateway supporting 5,000+ daily transactions, including custom billing logic for regional grid operators.",
+    ],
   },
   {
     company: "iFour Technolab Pvt. Ltd.",
     role: "Junior Software Engineer",
     period: "Mar 2021 – Aug 2022",
     description: "Enterprise HRMS development and logistics optimization.",
+    bullets: [
+      "Developed a full-stack HRMS using Angular and .NET Core, streamlining leave and attendance workflows for 100+ enterprise users.",
+      "Built real-time shipment tracking APIs with .NET Core and SQL Server, improving logistics operations efficiency by 25%.",
+      "Delivered a C# + Selenium desktop automation suite for streaming content indexing, reducing manual cataloguing effort significantly.",
+    ],
+  },
+];
+
+export const EDUCATION: EducationItem[] = [
+  {
+    institution: "Gujarat Technological University",
+    degree: "B.E. in Information Technology",
+    period: "2017 – 2021",
   },
 ];
 
@@ -111,29 +135,5 @@ export const PROJECTS: Project[] = [
       "Developed a desktop automation suite using C# & Selenium to index streaming content into SQL Server for data analysis.",
     tags: ["C#", "Selenium", "SQL Server", ".NET"],
     sourceUrl: "https://github.com/ishansarvaiya/HotstarScraper",
-  },
-];
-
-export const INTERESTS: Interest[] = [
-  {
-    icon: "two_wheeler",
-    title: "Midnight Rides",
-    tagline: "Searching for clarity on empty tarmac.",
-  },
-  {
-    icon: "music_note",
-    title: "Ukulele Sessions",
-    tagline: "De-stressing through four-string melodies.",
-  },
-];
-
-export const INTEREST_IMAGES = [
-  {
-    src: "https://lh3.googleusercontent.com/aida-public/AB6AXuC0WxJcI9JhQxyq6w1YYogG-saImcZpMDXmA3bQpQed2CQJlkmARt6kRnx2MvptkiqFW8e9SrG_0MerfiowNZNMWeyU04WYIZ4oUEvRgVX__1siIbBzXNGb_UH7iV2cuHP5XuHh5Kz-QzPMDG4Qzb9gk62ognjbFS8ZTqAjrL49hpaQN9bhqkbyjKzuCQPY4VnxLqhOvHNb_r55Gd9aWjJfgurK2TIg_R_Zb7MMdktXsRbLxwPXfaO3P45SiYWl_NiLTiGfTQ1lTlQ",
-    alt: "Motorcycle at night",
-  },
-  {
-    src: "https://lh3.googleusercontent.com/aida-public/AB6AXuDE0FNqTepPInJEC3Gsx5dFoIVZtpP3MnCE8fysAieC8ULzfNeXmxTK8HWvBYlFxpDyIC-hETy_tcpD8FwKdel2jTWoVTypVvgBENKPELemhrX03CdLQXgteusf6wVj_RJY1nVkiIqDAHpiOe0StoWKxnhEEQ7Nl9pdVIRH_U-h7de_4dkPNP1df7f0kZ1DDpYCd1RvQrcrFaEC-YY-xdvc--85cEqHWQANgTuUHT_jUfx9h0mwU1DxvjweTOomg5iKeLsP9h5SoU4",
-    alt: "Ukulele close up",
   },
 ];

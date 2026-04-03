@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&amp;family=Space+Grotesk:wght@300;500;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#e2dfff",
+                    "on-surface-variant": "#b9cacb",
+                    "surface-bright": "#3a3939",
+                    "outline": "#849495",
+                    "inverse-on-surface": "#313030",
+                    "surface-tint": "#00dbe9",
+                    "surface-container-high": "#2a2a2a",
+                    "on-secondary-container": "#b3b1ff",
+                    "tertiary-fixed-dim": "#b9c8de",
+                    "surface-container-highest": "#353534",
+                    "on-primary": "#00363a",
+                    "surface": "#131313",
+                    "inverse-surface": "#e5e2e1",
+                    "on-primary-container": "#006970",
+                    "on-error-container": "#ffdad6",
+                    "primary-container": "#00f0ff",
+                    "on-tertiary-fixed": "#0d1c2d",
+                    "outline-variant": "#3b494b",
+                    "surface-container-low": "#1c1b1b",
+                    "background": "#131313",
+                    "secondary-container": "#3626ce",
+                    "on-tertiary-container": "#516073",
+                    "tertiary": "#f2f6ff",
+                    "error": "#ffb4ab",
+                    "on-tertiary-fixed-variant": "#39485a",
+                    "primary": "#dbfcff",
+                    "on-secondary-fixed-variant": "#3323cc",
+                    "on-tertiary": "#233143",
+                    "primary-fixed": "#7df4ff",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-surface": "#e5e2e1",
+                    "on-primary-fixed": "#002022",
+                    "primary-fixed-dim": "#00dbe9",
+                    "on-background": "#e5e2e1",
+                    "on-secondary": "#1d00a5",
+                    "on-primary-fixed-variant": "#004f54",
+                    "on-secondary-fixed": "#0f0069",
+                    "surface-variant": "#353534",
+                    "secondary": "#c3c0ff",
+                    "surface-container": "#201f1f",
+                    "surface-dim": "#131313",
+                    "inverse-primary": "#006970",
+                    "error-container": "#93000a",
+                    "secondary-fixed-dim": "#c3c0ff",
+                    "on-error": "#690005",
+                    "tertiary-container": "#ccdbf1",
+                    "tertiary-fixed": "#d4e4fa"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Space Grotesk"],
+                    "mono": ["JetBrains Mono"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #0e0e0e;
+            color: #e5e2e1;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(53, 53, 52, 0.1);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .neon-glow:hover {
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #00f0ff 0%, #3626ce 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0e0e0e;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2a2a2a;
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-primary-container selection:text-on-primary-fixed custom-scrollbar">
+<!-- Header Navigation -->
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl rounded-full px-6 py-3 bg-neutral-900/40 backdrop-blur-xl border border-white/10 shadow-[0_0_20px_rgba(0,240,255,0.08)] flex justify-between items-center z-50 transition-all duration-200">
+<div class="font-space-grotesk font-bold tracking-tighter text-cyan-400">
+            OBSIDIAN_ARCHITECT
+        </div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-space-grotesk tracking-tighter uppercase text-sm text-cyan-400 font-bold border-b border-cyan-400/50 pb-1" href="#projects">PROJECTS</a>
+<a class="font-space-grotesk tracking-tighter uppercase text-sm text-neutral-400 hover:text-white transition-colors duration-300" href="#stack">STACK</a>
+<a class="font-space-grotesk tracking-tighter uppercase text-sm text-neutral-400 hover:text-white transition-colors duration-300" href="#terminal">TERMINAL</a>
+<a class="font-space-grotesk tracking-tighter uppercase text-sm text-neutral-400 hover:text-white transition-colors duration-300" href="#contact">CONTACT</a>
+</div>
+<button class="bg-neutral-900/40 border border-white/10 px-4 py-1.5 rounded-full font-space-grotesk tracking-tighter uppercase text-sm text-cyan-400 hover:bg-white/5 transition-all duration-400 ease-in-out">
+            RESUME
+        </button>
+</nav>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex flex-col items-center justify-center pt-20 px-8 overflow-hidden bg-surface-container-lowest">
+<!-- Abstract Background Detail -->
+<div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-20" style="background-image: radial-gradient(circle at center, #00f0ff 0%, transparent 70%); filter: blur(120px);"></div>
+<div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10"></div>
+</div>
+<div class="relative z-10 text-center max-w-4xl">
+<p class="font-mono text-cyan-400 text-sm tracking-[0.3em] mb-6 uppercase">System_Active // Status_Ready</p>
+<h1 class="font-headline text-6xl md:text-8xl font-bold tracking-tighter mb-8 text-on-surface">
+                Ishan Sarvaiya<br/>
+<span class="text-gradient">Software Engineer</span>
+</h1>
+<p class="text-on-surface-variant max-w-xl mx-auto text-lg mb-12 font-light leading-relaxed">
+                Architecting digital ecosystems with a focus on high-performance infrastructure, cloud-native scalability, and the aesthetics of clean code.
+            </p>
+<div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+<a class="px-10 py-4 bg-gradient-to-r from-primary-container to-secondary-container rounded-xl text-on-primary-fixed font-bold tracking-tight hover:scale-105 transition-transform duration-300 flex items-center gap-2" href="#projects">
+                    EXPLORE WORK
+                    <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</a>
+<a class="px-10 py-4 border border-outline-variant/30 rounded-xl text-on-surface hover:bg-white/5 transition-all duration-300" href="#terminal">
+                    VIEW_ARCHITECTURE
+                </a>
+</div>
+</div>
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</section>
+<!-- Philosophy & Stack -->
+<section class="py-32 px-8 bg-surface" id="stack">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+<div class="lg:col-span-5">
+<h2 class="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-8">Continuous Upskilling // <span class="text-outline">Philosophy</span></h2>
+<div class="space-y-6 text-on-surface-variant text-lg">
+<p>Software is a living entity. My approach treats development as a craft of perpetual evolution, where each commit is an iteration toward absolute optimization.</p>
+<p>I focus on building resilient systems that thrive under load, leveraging modern paradigms while maintaining the brutalist simplicity of efficient architecture.</p>
+</div>
+<div class="mt-12 p-6 bg-surface-container-low rounded-xl border-l-2 border-primary-container">
+<p class="font-mono text-sm text-primary-container mb-2">LAST_UPDATE_LOG:</p>
+<p class="font-mono text-xs text-neutral-500">Refactoring legacy modules into microservices architecture with 99.9% uptime targets.</p>
+</div>
+</div>
+<div class="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-4">
+<!-- Stack Items -->
+<div class="p-8 bg-surface-container-low rounded-xl border border-outline-variant/10 group hover:border-primary-container/30 transition-all duration-500">
+<span class="material-symbols-outlined text-4xl text-outline group-hover:text-primary-container group-hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.6)] transition-all duration-300" data-icon="cloud">cloud</span>
+<h3 class="mt-4 font-mono text-sm uppercase tracking-widest text-on-surface">AWS / Cloud</h3>
+</div>
+<div class="p-8 bg-surface-container-low rounded-xl border border-outline-variant/10 group hover:border-primary-container/30 transition-all duration-500">
+<span class="material-symbols-outlined text-4xl text-outline group-hover:text-primary-container group-hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.6)] transition-all duration-300" data-icon="terminal">terminal</span>
+<h3 class="mt-4 font-mono text-sm uppercase tracking-widest text-on-surface">Rust / Go</h3>
+</div>
+<div class="p-8 bg-surface-container-low rounded-xl border border-outline-variant/10 group hover:border-primary-container/30 transition-all duration-500">
+<span class="material-symbols-outlined text-4xl text-outline group-hover:text-primary-container group-hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.6)] transition-all duration-300" data-icon="data_object">data_object</span>
+<h3 class="mt-4 font-mono text-sm uppercase tracking-widest text-on-surface">GraphQL</h3>
+</div>
+<div class="p-8 bg-surface-container-low rounded-xl border border-outline-variant/10 group hover:border-primary-container/30 transition-all duration-500">
+<span class="material-symbols-outlined text-4xl text-outline group-hover:text-primary-container group-hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.6)] transition-all duration-300" data-icon="database">database</span>
+<h3 class="mt-4 font-mono text-sm uppercase tracking-widest text-on-surface">Postgres</h3>
+</div>
+<div class="p-8 bg-surface-container-low rounded-xl border border-outline-variant/10 group hover:border-primary-container/30 transition-all duration-500">
+<span class="material-symbols-outlined text-4xl text-outline group-hover:text-primary-container group-hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.6)] transition-all duration-300" data-icon="javascript">javascript</span>
+<h3 class="mt-4 font-mono text-sm uppercase tracking-widest text-on-surface">TypeScript</h3>
+</div>
+<div class="p-8 bg-surface-container-low rounded-xl border border-outline-variant/10 group hover:border-primary-container/30 transition-all duration-500">
+<span class="material-symbols-outlined text-4xl text-outline group-hover:text-primary-container group-hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.6)] transition-all duration-300" data-icon="layers">layers</span>
+<h3 class="mt-4 font-mono text-sm uppercase tracking-widest text-on-surface">Kubernetes</h3>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects Grid -->
+<section class="py-32 px-8 bg-surface-container-lowest" id="projects">
+<div class="max-w-7xl mx-auto">
+<div class="flex justify-between items-end mb-20">
+<div>
+<p class="font-mono text-cyan-400 text-xs tracking-widest mb-4 uppercase">Selected_Artifacts</p>
+<h2 class="font-headline text-5xl font-bold tracking-tight">Recent Projects</h2>
+</div>
+<a class="hidden md:flex font-mono text-sm text-outline hover:text-cyan-400 transition-colors gap-2 items-center" href="#">
+                    VIEW_GITHUB_REPOS <span class="material-symbols-outlined text-sm">open_in_new</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<!-- Project Card 1 -->
+<div class="group relative bg-surface rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2">
+<div class="h-80 w-full overflow-hidden">
+<img alt="Cybersecurity Dashboard" class="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" data-alt="Futuristic cybersecurity interface with glowing data visualizations, neon grids, and binary code overlays in deep teal and black" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqVGmBfjOlfXol6Mh0ek-_stmFjBe3q05RI7IR6hXFGUFIjFmngxexsLD8UBuGJCEjz1Fz5FpChTyRNsCMzqFfBo7-iV9aMkuF8fIk4DE8d0Qd8YGUmDEBng22KASgsrDoFdplsKqzOSv15yJTtpY8c2BP346quVl45RTkKyGlPw-xyVUDO3WO1dCimfoW3EQFbtK6mmsQpMncd6OOJFioZAFp2vR8ZPu-vWio_2wO5py_G3ekh4qBRVxnDfMGSWK_OB73VQbVmE8"/>
+</div>
+<div class="p-10 bg-surface border-t border-white/5 relative">
+<div class="flex gap-2 mb-6">
+<span class="px-3 py-1 bg-surface-container-highest rounded text-[10px] font-mono text-cyan-400">RUST</span>
+<span class="px-3 py-1 bg-surface-container-highest rounded text-[10px] font-mono text-cyan-400">WASM</span>
+</div>
+<h3 class="font-headline text-3xl font-bold mb-4">Project_Aegis</h3>
+<p class="text-on-surface-variant font-light mb-8">A high-performance packet analysis engine capable of processing 10Gbps line-rate traffic using eBPF and Rust.</p>
+<div class="flex gap-6">
+<a class="font-mono text-xs uppercase tracking-widest text-cyan-400 flex items-center gap-2 hover:underline" href="#">
+<span class="material-symbols-outlined text-sm">code</span> SOURCE
+                            </a>
+<a class="font-mono text-xs uppercase tracking-widest text-cyan-400 flex items-center gap-2 hover:underline" href="#">
+<span class="material-symbols-outlined text-sm">visibility</span> LIVE_DEMO
+                            </a>
+</div>
+<!-- Hover Glow Effect -->
+<div class="absolute inset-0 border border-primary-container/0 group-hover:border-primary-container/40 transition-colors duration-500 rounded-3xl pointer-events-none shadow-[0_0_40px_rgba(0,240,255,0)] group-hover:shadow-[0_0_40px_rgba(0,240,255,0.1)]"></div>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="group relative bg-surface rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2">
+<div class="h-80 w-full overflow-hidden">
+<img alt="Neural Network Visualization" class="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" data-alt="Digital representation of complex neural networks, glowing nodes and connections against a dark blue cosmic background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtP5Ed0XnyJWNYdjhp2TJ2tyr7rACLWCvqIggOD2OUI1pwrvYG9XRm3dirQXdaIewK14wthTEvLSh6syirGUn8iMlj4raWkZh_R0cFxOym5nbybZh5kZlL_Ri5T8K7gaOF_lnhG7UXhOY0zQYSR9ug96V5REWVVgsGzj5Iw3OFN6fts6qkJ0Z2Ex-YQ8_T_o5s6cI_QQDKLuKCn-5S7FxGX_8BDUWDtbqh5fHg000akSKGSFLZ7yU8eIm3wgU04o3iyIRNvAtTN4g"/>
+</div>
+<div class="p-10 bg-surface border-t border-white/5 relative">
+<div class="flex gap-2 mb-6">
+<span class="px-3 py-1 bg-surface-container-highest rounded text-[10px] font-mono text-cyan-400">NODE.JS</span>
+<span class="px-3 py-1 bg-surface-container-highest rounded text-[10px] font-mono text-cyan-400">K8S</span>
+</div>
+<h3 class="font-headline text-3xl font-bold mb-4">Void_Orchestrator</h3>
+<p class="text-on-surface-variant font-light mb-8">Self-healing container orchestration layer for edge computing clusters with zero-latency failover protocols.</p>
+<div class="flex gap-6">
+<a class="font-mono text-xs uppercase tracking-widest text-cyan-400 flex items-center gap-2 hover:underline" href="#">
+<span class="material-symbols-outlined text-sm">code</span> SOURCE
+                            </a>
+<a class="font-mono text-xs uppercase tracking-widest text-cyan-400 flex items-center gap-2 hover:underline" href="#">
+<span class="material-symbols-outlined text-sm">visibility</span> LIVE_DEMO
+                            </a>
+</div>
+<div class="absolute inset-0 border border-primary-container/0 group-hover:border-primary-container/40 transition-colors duration-500 rounded-3xl pointer-events-none shadow-[0_0_40px_rgba(0,240,255,0)] group-hover:shadow-[0_0_40px_rgba(0,240,255,0.1)]"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- The Human Element (Interests) -->
+<section class="py-24 px-8 bg-surface overflow-hidden">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
+<div class="md:w-1/2">
+<h2 class="font-headline text-4xl font-bold mb-6">Off_Screen // Human_Element</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-8">When the terminal closes, the journey continues in the physical realm. Balance is the ultimate optimization.</p>
+<div class="grid grid-cols-2 gap-8">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 bg-surface-container-low rounded-lg flex items-center justify-center text-cyan-400">
+<span class="material-symbols-outlined" data-icon="two_wheeler">two_wheeler</span>
+</div>
+<div>
+<h4 class="font-mono text-sm uppercase text-on-surface mb-1">Midnight Rides</h4>
+<p class="text-xs text-outline italic">Searching for clarity on empty tarmac.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 bg-surface-container-low rounded-lg flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="music_note">music_note</span>
+</div>
+<div>
+<h4 class="font-mono text-sm uppercase text-on-surface mb-1">Ukulele Sessions</h4>
+<p class="text-xs text-outline italic">De-stressing through four-string melodies.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="md:w-1/2 grid grid-cols-2 gap-4">
+<img alt="Motorcycle at night" class="rounded-2xl h-64 w-full object-cover grayscale" data-alt="Minimalist shot of a sleek modern motorcycle parked under a single streetlamp at night, dramatic shadows and silver highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0WxJcI9JhQxyq6w1YYogG-saImcZpMDXmA3bQpQed2CQJlkmARt6kRnx2MvptkiqFW8e9SrG_0MerfiowNZNMWeyU04WYIZ4oUEvRgVX__1siIbBzXNGb_UH7iV2cuHP5XuHh5Kz-QzPMDG4Qzb9gk62ognjbFS8ZTqAjrL49hpaQN9bhqkbyjKzuCQPY4VnxLqhOvHNb_r55Gd9aWjJfgurK2TIg_R_Zb7MMdktXsRbLxwPXfaO3P45SiYWl_NiLTiGfTQ1lTlQ"/>
+<img alt="Ukulele close up" class="rounded-2xl h-64 w-full object-cover grayscale mt-8" data-alt="Close-up of a dark wood ukulele resting against a velvet sofa in a dimly lit, cozy room with warm amber lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE0FNqTepPInJEC3Gsx5dFoIVZtpP3MnCE8fysAieC8ULzfNeXmxTK8HWvBYlFxpDyIC-hETy_tcpD8FwKdel2jTWoVTypVvgBENKPELemhrX03CdLQXgteusf6wVj_RJY1nVkiIqDAHpiOe0StoWKxnhEEQ7Nl9pdVIRH_U-h7de_4dkPNP1df7f0kZ1DDpYCd1RvQrcrFaEC-YY-xdvc--85cEqHWQANgTuUHT_jUfx9h0mwU1DxvjweTOomg5iKeLsP9h5SoU4"/>
+</div>
+</div>
+</section>
+<!-- Footer & Contact -->
+<footer class="bg-neutral-950 border-t border-neutral-900 pt-24 pb-12 px-8" id="contact">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-24">
+<div>
+<h2 class="font-headline text-5xl font-bold mb-8">Initiate_Contact</h2>
+<p class="text-on-surface-variant text-lg max-w-md mb-12">Interested in collaborating on high-stakes architecture? Send an encrypted message below.</p>
+<div class="space-y-6">
+<div class="flex items-center gap-4 group cursor-pointer">
+<span class="material-symbols-outlined text-outline group-hover:text-cyan-400 transition-colors" data-icon="mail">mail</span>
+<span class="font-mono text-sm uppercase tracking-widest text-outline group-hover:text-white transition-colors">ishan@obsidian-arch.dev</span>
+</div>
+<div class="flex items-center gap-4 group cursor-pointer">
+<span class="material-symbols-outlined text-outline group-hover:text-cyan-400 transition-colors" data-icon="location_on">location_on</span>
+<span class="font-mono text-sm uppercase tracking-widest text-outline group-hover:text-white transition-colors">Distributed // Remote</span>
+</div>
+</div>
+</div>
+<form class="space-y-12">
+<div class="relative group">
+<input class="w-full bg-transparent border-0 border-b border-outline-variant py-4 px-0 focus:ring-0 focus:border-cyan-400 font-mono text-sm placeholder:text-neutral-700 transition-all duration-500" id="name" placeholder="IDENTIFY_YOURSELF" type="text"/>
+<div class="absolute bottom-0 left-0 h-[1px] bg-cyan-400 w-0 group-focus-within:w-full transition-all duration-700"></div>
+</div>
+<div class="relative group">
+<input class="w-full bg-transparent border-0 border-b border-outline-variant py-4 px-0 focus:ring-0 focus:border-cyan-400 font-mono text-sm placeholder:text-neutral-700 transition-all duration-500" id="email" placeholder="RETURN_CHANNEL_EMAIL" type="email"/>
+<div class="absolute bottom-0 left-0 h-[1px] bg-cyan-400 w-0 group-focus-within:w-full transition-all duration-700"></div>
+</div>
+<div class="relative group">
+<textarea class="w-full bg-transparent border-0 border-b border-outline-variant py-4 px-0 focus:ring-0 focus:border-cyan-400 font-mono text-sm placeholder:text-neutral-700 transition-all duration-500" id="message" placeholder="TRANSMISSION_DETAILS" rows="3"></textarea>
+<div class="absolute bottom-0 left-0 h-[1px] bg-cyan-400 w-0 group-focus-within:w-full transition-all duration-700"></div>
+</div>
+<button class="w-full md:w-auto px-12 py-4 border border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 font-mono text-sm uppercase tracking-[0.2em] transition-all duration-300" type="submit">
+                        SEND_PACKET
+                    </button>
+</form>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 pt-12 border-t border-neutral-900/50">
+<p class="font-mono text-[10px] tracking-widest uppercase text-neutral-500">
+                    © 2024 NOCTURNAL_ENGINEERING // SHIFT_VOID
+                </p>
+<div class="flex gap-8">
+<a class="font-mono text-[10px] tracking-widest uppercase text-neutral-500 hover:text-cyan-400 hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.6)] transition-all duration-500 cursor-pointer" href="#">GITHUB</a>
+<a class="font-mono text-[10px] tracking-widest uppercase text-neutral-500 hover:text-cyan-400 hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.6)] transition-all duration-500 cursor-pointer" href="#">LINKEDIN</a>
+<a class="font-mono text-[10px] tracking-widest uppercase text-neutral-500 hover:text-cyan-400 hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.6)] transition-all duration-500 cursor-pointer" href="#">SOURCE</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

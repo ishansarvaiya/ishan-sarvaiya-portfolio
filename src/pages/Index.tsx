@@ -3,6 +3,7 @@ import { Hero } from "@/components/portfolio/HeroSection";
 import { Stack } from "@/components/portfolio/Stack";
 import { Projects } from "@/components/portfolio/Projects";
 import { ExperienceSection } from "@/components/portfolio/ExperienceSection";
+import { EducationSection } from "@/components/portfolio/EducationSection";
 import { Footer } from "@/components/portfolio/FooterSection";
 
 const Index = () => {
@@ -14,6 +15,7 @@ const Index = () => {
         <Stack />
         <Projects />
         <ExperienceSection />
+        <EducationSection />
       </main>
       <Footer />
     </div>
