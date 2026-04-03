@@ -138,3 +138,31 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--primary));
 }
+
+/* ── Load Balancer Widget animations ────────────────────────────────────────
+   .lb-pulse  — radial ring that expands and fades (speed controlled inline)
+   .lb-fire   — shake + scale burst for the overload 🔥 emoji
+   ─────────────────────────────────────────────────────────────────────────── */
+@keyframes lb-pulse-ring {
+  0%   { box-shadow: 0 0 0 0px currentColor; opacity: 0.7; }
+  70%  { box-shadow: 0 0 0 10px currentColor; opacity: 0;   }
+  100% { box-shadow: 0 0 0 0px currentColor;  opacity: 0;   }
+}
+
+@keyframes lb-fire-shake {
+  0%,100% { transform: translateX(0)    scale(1);   }
+  15%      { transform: translateX(-4px) scale(1.15); }
+  30%      { transform: translateX(4px)  scale(1.2);  }
+  45%      { transform: translateX(-3px) scale(1.1);  }
+  60%      { transform: translateX(3px)  scale(1.18); }
+  75%      { transform: translateX(-2px) scale(1.12); }
+}
+
+.lb-pulse {
+  animation: lb-pulse-ring var(--lb-pulse-duration, 1.8s) ease-out infinite;
+}
+
+.lb-fire {
+  animation: lb-fire-shake 0.55s ease-in-out infinite;
+  display: inline-block;
+}

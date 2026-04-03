@@ -34,6 +34,7 @@ export const NAV_LINKS: NavLink[] = [
   { label: "PROJECTS", href: "#projects" },
   { label: "STACK", href: "#stack" },
   { label: "EXPERIENCE", href: "#experience" },
+  { label: "PLAYGROUND", href: "#lb-widget" },
   { label: "UNPLUGGED", href: "#unplugged" },
   { label: "CONTACT", href: "#contact" },
 ];
