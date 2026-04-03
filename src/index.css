@@ -75,6 +75,53 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ── True Dark theme override ───────────────────────────────────────────────
+   Activated by <html data-theme="true-dark"> via ThemeContext.
+   Swaps to pure black + muted amber neon — a late-night incandescent palette.
+   ─────────────────────────────────────────────────────────────────────────── */
+[data-theme="true-dark"] {
+  --background:        0 0%  0%;
+  --foreground:        30 3% 83%;
+
+  --card:              0 0%  4%;
+  --card-foreground:   30 3% 83%;
+
+  --popover:           0 0%  4%;
+  --popover-foreground:30 3% 83%;
+
+  --primary:           38 60% 55%;
+  --primary-foreground:38 100% 6%;
+
+  --secondary:         270 35% 48%;
+  --secondary-foreground: 270 100% 90%;
+
+  --muted:             0 0%  8%;
+  --muted-foreground:  0 0% 48%;
+
+  --accent:            38 60% 55%;
+  --accent-foreground: 38 100% 6%;
+
+  --border:            0 0%  12%;
+  --input:             0 0%  12%;
+  --ring:              38 60% 55%;
+
+  --neon:              38 60% 55%;
+  --surface-low:       0 0%  3%;
+  --surface-mid:       0 0%  5%;
+  --surface-high:      0 0%  8%;
+  --outline:           0 0% 38%;
+}
+
+[data-theme="true-dark"] ::-webkit-scrollbar-track {
+  background: hsl(0 0% 0%);
+}
+[data-theme="true-dark"] ::-webkit-scrollbar-thumb {
+  background: hsl(0 0% 12%);
+}
+[data-theme="true-dark"] ::-webkit-scrollbar-thumb:hover {
+  background: hsl(38 60% 55%);
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }

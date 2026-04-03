@@ -2,8 +2,10 @@ import { Navbar } from "@/components/portfolio/Navbar";
 import { Hero } from "@/components/portfolio/HeroSection";
 import { Stack } from "@/components/portfolio/Stack";
 import { Projects } from "@/components/portfolio/Projects";
+import { UpskillingTimeline } from "@/components/portfolio/UpskillingTimeline";
 import { ExperienceSection } from "@/components/portfolio/ExperienceSection";
 import { EducationSection } from "@/components/portfolio/EducationSection";
+import { UnpluggedSection } from "@/components/portfolio/UnpluggedSection";
 import { Footer } from "@/components/portfolio/FooterSection";
 
 const Index = () => {
@@ -14,8 +16,10 @@ const Index = () => {
         <Hero />
         <Stack />
         <Projects />
+        <UpskillingTimeline />
         <ExperienceSection />
         <EducationSection />
+        <UnpluggedSection />
       </main>
       <Footer />
     </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { NAV_LINKS } from "@/data/portfolio";
+import { DarkModeToggle } from "./DarkModeToggle";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -24,17 +25,22 @@ export function Navbar() {
         ))}
       </div>
 
-      {/* Mobile toggle */}
-      <button
-        className="md:hidden text-primary"
-        onClick={() => setMobileOpen(!mobileOpen)}
-        aria-expanded={mobileOpen}
-        aria-label="Toggle navigation menu"
-      >
-        <span className="material-symbols-outlined" aria-hidden="true">
-          {mobileOpen ? "close" : "menu"}
-        </span>
-      </button>
+      {/* Right side: dark mode toggle + mobile hamburger */}
+      <div className="flex items-center gap-4">
+        <DarkModeToggle />
+
+        {/* Mobile toggle */}
+        <button
+          className="md:hidden text-primary"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-expanded={mobileOpen}
+          aria-label="Toggle navigation menu"
+        >
+          <span className="material-symbols-outlined" aria-hidden="true">
+            {mobileOpen ? "close" : "menu"}
+          </span>
+        </button>
+      </div>
 
       {/* Mobile menu */}
       <AnimatePresence>
