@@ -1,11 +1,13 @@
 import { Navbar } from "@/components/portfolio/Navbar";
 import { Hero } from "@/components/portfolio/HeroSection";
-import { Stack } from "@/components/portfolio/Stack";
-import { Projects } from "@/components/portfolio/Projects";
-import { UpskillingTimeline } from "@/components/portfolio/UpskillingTimeline";
-import { LoadBalancerWidget } from "@/components/portfolio/LoadBalancerWidget";
+import { ChooseYourPath } from "@/components/portfolio/ChooseYourPath";
+import { StackArchitecture } from "@/components/portfolio/StackArchitecture";
+import { CaseStudies } from "@/components/portfolio/CaseStudies";
 import { ExperienceSection } from "@/components/portfolio/ExperienceSection";
+import { CertificationsSection } from "@/components/portfolio/CertificationsSection";
+import { SocialProofSection } from "@/components/portfolio/SocialProofSection";
 import { EducationSection } from "@/components/portfolio/EducationSection";
+import { LoadBalancerWidget } from "@/components/portfolio/LoadBalancerWidget";
 import { UnpluggedSection } from "@/components/portfolio/UnpluggedSection";
 import { Footer } from "@/components/portfolio/FooterSection";
 
@@ -15,12 +17,14 @@ const Index = () => {
       <Navbar />
       <main>
         <Hero />
-        <Stack />
-        <Projects />
-        <UpskillingTimeline />
-        <LoadBalancerWidget />
+        <ChooseYourPath />
+        <StackArchitecture />
+        <CaseStudies />
         <ExperienceSection />
+        <CertificationsSection />
+        <SocialProofSection />
         <EducationSection />
+        <LoadBalancerWidget />
         <UnpluggedSection />
       </main>
       <Footer />

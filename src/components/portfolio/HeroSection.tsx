@@ -1,5 +1,9 @@
 import { motion, type Variants } from "framer-motion";
 import { MaterialIcon } from "./MaterialIcon";
+import { HERO_METRICS } from "@/data/portfolio";
+import { useResumeUrl } from "@/context/SiteConfigContext";
+import { ProfileAvatar } from "./ProfileAvatar";
+import { trackEvent } from "@/lib/analytics";
 
 const container: Variants = {
   hidden: {},
@@ -12,14 +16,15 @@ const item: Variants = {
 };
 
 export function Hero() {
+  const resumeUrl = useResumeUrl();
+
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center pt-20 px-8 overflow-hidden">
-      {/* Ambient background glow — fixed layer so it never repaints on scroll */}
+    <section className="relative min-h-screen flex flex-col items-center justify-center pt-24 px-8 overflow-hidden">
       <div
         className="fixed inset-0 pointer-events-none z-0"
         aria-hidden="true"
-        style={{ willChange: "transform" }}
       >
+        <GridBg />
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.12]"
           style={{
@@ -36,47 +41,107 @@ export function Hero() {
         initial="hidden"
         animate="show"
       >
+        <motion.div variants={item}>
+          <ProfileAvatar />
+        </motion.div>
+
         <motion.p
           variants={item}
-          className="font-mono text-primary text-sm tracking-[0.3em] mb-6 uppercase"
+          className="font-mono text-primary text-xs md:text-sm tracking-[0.25em] mb-6 uppercase"
         >
-          Open to senior engineering roles &middot; Remote
+          Microsoft Stack · Enterprise · Cloud-Native
         </motion.p>
 
         <motion.h1
           variants={item}
-          className="font-headline text-6xl md:text-8xl font-bold tracking-tighter mb-8"
+          className="font-headline text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4"
         >
           Ishan Sarvaiya
-          <span className="block text-gradient">Software Engineer</span>
         </motion.h1>
 
         <motion.p
           variants={item}
-          className="text-muted-foreground max-w-xl mx-auto text-lg mb-12 font-light leading-relaxed"
+          className="font-headline text-2xl md:text-3xl font-bold tracking-tight text-gradient mb-8"
         >
-          Architecting high-concurrency systems for Media Intelligence and
-          Fintech. Specialized in .NET&nbsp;8, Distributed Messaging, and Data
-          Observability.
+          Enterprise .NET &amp; Cloud Engineer
         </motion.p>
 
-        <motion.div variants={item} className="flex justify-center">
+        <motion.p
+          variants={item}
+          className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg mb-10 font-light leading-relaxed"
+        >
+          I design and ship production APIs, Angular/Blazor applications, and Azure
+          infrastructure for fintech and data-intensive platforms — 10,000+ DAU
+          reliability, event-driven ingestion at scale, and clean architecture by
+          default.
+        </motion.p>
+
+        <motion.p
+          variants={item}
+          className="font-mono text-[10px] md:text-xs text-muted-foreground/80 tracking-widest uppercase mb-8"
+        >
+          Open to senior engineering roles · Select freelance engagements · Remote
+        </motion.p>
+
+        <motion.div
+          variants={item}
+          className="flex flex-col sm:flex-row justify-center gap-4 mb-12"
+        >
           <a
-            href="#projects"
-            className="px-10 py-4 bg-gradient-to-r from-primary to-secondary rounded-xl text-primary-foreground font-bold tracking-tight hover:scale-105 transition-transform duration-300 inline-flex items-center gap-2"
+            href="#path"
+            className="px-8 py-3.5 bg-gradient-to-r from-primary to-secondary rounded-xl text-primary-foreground font-bold tracking-tight hover:scale-105 transition-transform duration-300 inline-flex items-center justify-center gap-2"
           >
-            EXPLORE WORK
-            <MaterialIcon name="arrow_forward" className="text-[20px]" />
+            Choose Your Path
+            <MaterialIcon name="arrow_downward" className="text-[18px]" />
           </a>
+          <a
+            href={resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackEvent("resume_download")}
+            className="px-8 py-3.5 rounded-xl border border-border font-mono text-sm tracking-wide text-muted-foreground hover:text-foreground hover:border-primary/40 transition-all inline-flex items-center justify-center gap-2"
+          >
+            <MaterialIcon name="download" className="text-[18px]" />
+            Download Resume
+          </a>
+        </motion.div>
+
+        <motion.div
+          variants={item}
+          className="flex flex-wrap justify-center gap-3"
+        >
+          {HERO_METRICS.map((metric) => (
+            <span
+              key={metric}
+              className="px-3 py-1.5 rounded-full font-mono text-[10px] md:text-xs tracking-wide text-muted-foreground bg-surface-low border border-border/30"
+            >
+              {metric}
+            </span>
+          ))}
         </motion.div>
       </motion.div>
 
       <div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40 z-10"
         aria-hidden="true"
       >
         <MaterialIcon name="expand_more" />
       </div>
     </section>
+  );
+}
+
+function GridBg() {
+  return (
+    <div
+      className="absolute inset-0 opacity-[0.04]"
+      style={{
+        backgroundImage: `
+          linear-gradient(hsl(var(--border)) 1px, transparent 1px),
+          linear-gradient(90deg, hsl(var(--border)) 1px, transparent 1px)
+        `,
+        backgroundSize: "48px 48px",
+      }}
+    />
   );
 }

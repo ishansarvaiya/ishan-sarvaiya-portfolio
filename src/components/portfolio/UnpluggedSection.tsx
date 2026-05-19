@@ -17,9 +17,9 @@ export function UnpluggedSection() {
           </p>
         </FadeIn>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
           {HOBBIES.map((hobby, index) => (
-            <FadeIn key={index} delay={index * 0.06}>
+            <FadeIn key={hobby.title} delay={index * 0.06}>
               <article
                 className="group relative p-6 rounded-2xl border bg-card overflow-hidden transition-all duration-300 hover:border-opacity-50 h-full flex flex-col"
                 style={{ borderColor: hobby.accent + "22" }}

@@ -126,19 +126,18 @@ export function LoadBalancerWidget() {
   const isHeavy    = trafficState === "heavy";
 
   return (
-    <section id="lb-widget" className="py-32 px-8 bg-surface-mid">
+    <section id="playground" className="py-32 px-8 bg-surface-mid">
       <div className="max-w-5xl mx-auto">
         <FadeIn>
           <p className="font-mono text-primary text-sm tracking-[0.3em] uppercase mb-4">
-            INTERACTIVE
+            Technical Playground
           </p>
           <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            Load Balancer{" "}
-            <span className="text-outline">// Stress Test</span>
+            Load balancer stress test
           </h2>
           <p className="text-muted-foreground mb-14 max-w-xl text-base">
-            Click fast enough and watch the system buckle. A gentle demo of
-            what happens when traffic outpaces infrastructure.
+            Click fast enough and watch the system buckle — a hands-on demo of
+            what happens when traffic outpaces infrastructure capacity.
           </p>
         </FadeIn>
 

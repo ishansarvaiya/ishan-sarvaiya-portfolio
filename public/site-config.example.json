@@ -1,0 +1,16 @@
+{
+  "resumeUrl": "https://github.com/ishansarvaiya/resume/raw/main/ishan-sarvaiya-resume.pdf",
+  "linkedinUrl": "https://linkedin.com/in/ishansarvaiya",
+  "githubUrl": "https://github.com/ishansarvaiya",
+  "contactEmail": "ishansarvaiya1@gmail.com",
+  "calendlyUrl": "https://calendly.com/your-link/30min",
+  "analyticsId": "ishansarvaiya.in",
+  "certifications": [
+    {
+      "name": "AZ-204: Developing Solutions for Microsoft Azure",
+      "issuer": "Microsoft",
+      "year": "2024",
+      "credentialUrl": "https://learn.microsoft.com/en-us/credentials/"
+    }
+  ]
+}

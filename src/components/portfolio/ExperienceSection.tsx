@@ -8,11 +8,15 @@ export function ExperienceSection() {
         <FadeIn>
           <header className="mb-20">
             <p className="font-mono text-primary text-xs tracking-widest mb-4 uppercase">
-              Career_Log
+              Career Timeline
             </p>
             <h2 className="font-headline text-5xl font-bold tracking-tight">
               Experience
             </h2>
+            <p className="text-muted-foreground mt-4 max-w-xl font-light">
+              Four years shipping production systems across fintech, media intelligence,
+              and enterprise — with measurable outcomes at every stage.
+            </p>
           </header>
         </FadeIn>
 
