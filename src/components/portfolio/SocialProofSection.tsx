@@ -27,7 +27,7 @@ export function SocialProofSection() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackEvent("linkedin_click")}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-to-r from-primary to-secondary text-primary-foreground font-bold text-sm tracking-tight hover:scale-[1.02] transition-transform"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-primary text-primary-foreground font-bold text-sm tracking-tight hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-colors"
           >
             View LinkedIn Recommendations
             <MaterialIcon name="open_in_new" className="text-[18px]" />
@@ -35,7 +35,7 @@ export function SocialProofSection() {
         </FadeIn>
 
         <FadeIn delay={0.15}>
-          <div className="mt-14 flex flex-wrap justify-center gap-8 items-center opacity-50">
+          <div className="mt-14 flex flex-wrap justify-center gap-8 items-center">
             {COMPANIES.map((company) => (
               <span
                 key={company}
