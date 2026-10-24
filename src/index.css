@@ -18,7 +18,8 @@
     --primary: 183 100% 47%;
     --primary-foreground: 183 100% 7%;
 
-    /* Retained only until every bg-gradient-to-r consumer is migrated to the flat accent. */
+    /* No longer used for the gradient-button pattern (all flattened to --primary).
+       Kept as the semantic token backing shadcn's "secondary" button/badge variant. */
     --secondary: 250 73% 48%;
     --secondary-foreground: 250 100% 90%;
 

@@ -12,10 +12,10 @@ const INTENT_OPTIONS = [
 ] as const;
 
 const linkClass =
-  "inline-flex items-center gap-2.5 px-5 py-3 rounded-xl border border-border bg-card text-foreground font-mono text-sm tracking-wide hover:border-primary/40 hover:text-primary transition-all duration-200 w-fit";
+  "inline-flex items-center gap-2.5 px-5 py-3 rounded-xl border border-border bg-card text-foreground font-mono text-sm tracking-wide hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-all duration-200 w-fit";
 
 const inputClass =
-  "w-full rounded-lg border border-border bg-card px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/50 transition-colors";
+  "w-full rounded-xl border border-border bg-card px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/50 transition-colors";
 
 export function Footer() {
   const { resumeUrl, githubUrl, linkedinUrl, contactEmail, calendlyUrl } =
@@ -51,7 +51,7 @@ export function Footer() {
   return (
     <footer
       id="contact"
-      className="bg-[hsl(0_0%_3%)] border-t border-border pt-24 pb-12 px-8"
+      className="bg-background border-t border-border pt-24 pb-12 px-8"
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28">
@@ -85,7 +85,7 @@ export function Footer() {
                 <div>
                   <label
                     htmlFor="contact-name"
-                    className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground block mb-1.5"
+                    className="font-mono text-xs tracking-widest uppercase text-muted-foreground block mb-1.5"
                   >
                     Name
                   </label>
@@ -103,7 +103,7 @@ export function Footer() {
                 <div>
                   <label
                     htmlFor="contact-email"
-                    className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground block mb-1.5"
+                    className="font-mono text-xs tracking-widest uppercase text-muted-foreground block mb-1.5"
                   >
                     Email
                   </label>
@@ -123,7 +123,7 @@ export function Footer() {
               <div>
                 <label
                   htmlFor="contact-intent"
-                  className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground block mb-1.5"
+                  className="font-mono text-xs tracking-widest uppercase text-muted-foreground block mb-1.5"
                 >
                   Intent
                 </label>
@@ -144,7 +144,7 @@ export function Footer() {
               <div>
                 <label
                   htmlFor="contact-message"
-                  className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground block mb-1.5"
+                  className="font-mono text-xs tracking-widest uppercase text-muted-foreground block mb-1.5"
                 >
                   Message
                 </label>
@@ -162,7 +162,7 @@ export function Footer() {
               <button
                 type="submit"
                 disabled={sent}
-                className="w-full sm:w-auto px-8 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-primary-foreground font-bold text-sm tracking-wide hover:scale-[1.02] active:scale-100 disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="w-full sm:w-auto px-8 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm tracking-wide hover:bg-primary/90 disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 {sent ? "✓ Opening Email Client…" : "Send Message →"}
               </button>
@@ -177,15 +177,15 @@ export function Footer() {
         </div>
 
         <div className="mt-20 pt-8 border-t border-border/40 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-          <p className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground">
+          <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">
             Ishan Sarvaiya · Enterprise .NET &amp; Azure · ishansarvaiya.in
           </p>
-          <p className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground">
+          <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">
             &copy; {new Date().getFullYear()}
           </p>
           <a
             href={`mailto:${contactEmail}`}
-            className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground hover:text-primary transition-colors"
+            className="font-mono text-xs tracking-widest uppercase text-muted-foreground hover:text-primary transition-colors"
           >
             {contactEmail}
           </a>
