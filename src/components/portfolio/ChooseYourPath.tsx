@@ -39,14 +39,14 @@ export function ChooseYourPath() {
     {
       id: "hire",
       title: "For Hiring Teams",
-      subtitle: "Resume-ready proof of enterprise delivery",
+      subtitle: "Proof of enterprise delivery",
       body: "Production systems across .NET, Azure, Angular, Python, and AI tooling. Built with clean architecture, observability, and operational reliability.",
       bullets: [
         "Senior Software Engineer · .NET 8 / C# / ASP.NET Core",
-        "Fintech & enterprise domains · distributed systems",
+        "Fintech and enterprise domains, distributed systems",
         "Azure App Services, Functions, SQL, CI/CD pipelines",
       ],
-      trust: "Based in India · Remote-first · Senior IC & lead-track roles",
+      trust: "Based in India · Remote-first · Senior and lead roles",
       ctas: [
         { label: "Download Resume", href: resumeUrl, primary: true, external: true, event: "resume_download" },
         { label: "View Experience", href: "#experience", primary: false, external: false, event: "path_hire_click" },

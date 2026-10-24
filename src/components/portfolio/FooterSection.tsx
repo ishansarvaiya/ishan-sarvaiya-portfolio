@@ -137,7 +137,7 @@ export function Footer() {
                   rows={5}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Brief context — role, project scope, or technical challenge…"
+                  placeholder="A little context: the role, project scope, or technical challenge"
                   className={`${inputClass} resize-none`}
                 />
               </div>
