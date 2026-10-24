@@ -61,6 +61,11 @@ export default {
 				'surface-mid': 'hsl(var(--surface-mid))',
 				'surface-high': 'hsl(var(--surface-high))',
 				outline: 'hsl(var(--outline))',
+				domain: {
+					fintech: 'hsl(var(--domain-fintech))',
+					enterprise: 'hsl(var(--domain-enterprise))',
+					utilities: 'hsl(var(--domain-utilities))',
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

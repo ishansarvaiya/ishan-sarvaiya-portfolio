@@ -42,6 +42,13 @@
     --surface-mid: 0 0% 9%;
     --surface-high: 0 0% 9%;
     --outline: 0 0% 40%;
+
+    /* The one sanctioned categorical palette, for case-study domain tags only —
+       functional (the filter bar relies on quick color recognition), so kept
+       distinct from the single UI accent rather than folded into neutral. */
+    --domain-fintech: 210 70% 60%;
+    --domain-enterprise: 250 55% 68%;
+    --domain-utilities: 35 65% 55%;
   }
 }
 

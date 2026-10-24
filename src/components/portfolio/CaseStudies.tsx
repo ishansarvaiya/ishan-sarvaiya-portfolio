@@ -14,10 +14,10 @@ import {
 import { cn } from "@/lib/utils";
 
 const DOMAIN_COLORS: Record<CaseStudy["domain"], string> = {
-  Fintech: "text-[hsl(210_100%_60%)] border-[hsl(210_100%_50%/0.3)]",
+  Fintech: "text-domain-fintech border-domain-fintech/30",
   Media: "text-primary border-primary/30",
-  Enterprise: "text-[hsl(250_73%_70%)] border-[hsl(250_73%_60%/0.3)]",
-  Utilities: "text-[hsl(35_80%_55%)] border-[hsl(35_80%_55%/0.3)]",
+  Enterprise: "text-domain-enterprise border-domain-enterprise/30",
+  Utilities: "text-domain-utilities border-domain-utilities/30",
 };
 
 export function CaseStudies() {
@@ -92,7 +92,7 @@ function FilterBar({
           type="button"
           onClick={() => setFilter(domain)}
           className={cn(
-            "px-4 py-1.5 rounded-full font-mono text-xs uppercase tracking-wider border transition-colors",
+            "px-4 py-1.5 rounded-full font-mono text-xs uppercase tracking-wider border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             filter === domain
               ? "bg-primary/15 border-primary/50 text-primary"
               : "border-border text-muted-foreground hover:text-foreground hover:border-primary/30",
@@ -117,7 +117,7 @@ function CaseStudyCard({
   return (
     <article
       className={cn(
-        "relative bg-card rounded-2xl border border-border/20 overflow-hidden transition-all duration-300 hover:border-primary/30",
+        "relative bg-card rounded-xl border border-border transition-colors duration-300 hover:border-primary/30",
         study.featured && !compact && "border-primary/20",
       )}
     >
@@ -140,13 +140,13 @@ function CaseStudyCardInner({
       <div className="flex flex-wrap items-center gap-2 mb-4">
         <span
           className={cn(
-            "px-2.5 py-0.5 rounded font-mono text-[10px] uppercase tracking-wider border",
+            "px-2.5 py-0.5 rounded font-mono text-xs uppercase tracking-wider border",
             DOMAIN_COLORS[study.domain],
           )}
         >
           {study.domain}
         </span>
-        <span className="font-mono text-[10px] text-muted-foreground">
+        <span className="font-mono text-xs text-muted-foreground">
           {study.timeline}
         </span>
       </div>
@@ -157,7 +157,7 @@ function CaseStudyCardInner({
       <p className="text-primary font-mono text-sm mb-4">{study.tagline}</p>
 
       <Collapsible open={open} onOpenChange={setOpen}>
-        <CollapsibleTrigger className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors">
+        <CollapsibleTrigger className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md transition-colors">
           <MaterialIcon
             name={open ? "expand_less" : "expand_more"}
             className="text-base"
@@ -173,13 +173,13 @@ function CaseStudyCardInner({
 
           {study.azureMetrics && study.azureMetrics.length > 0 && (
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-[hsl(210_100%_60%)] mb-2">
+              <p className="font-mono text-xs uppercase tracking-widest text-primary mb-2">
                 Azure Metrics
               </p>
               <ul className="space-y-1">
                 {study.azureMetrics.map((m) => (
                   <li key={m} className="text-sm text-muted-foreground flex gap-2">
-                    <span className="text-[hsl(210_100%_60%)]">›</span>
+                    <span className="text-primary">›</span>
                     {m}
                   </li>
                 ))}
@@ -196,7 +196,7 @@ function CaseStudyCardInner({
           href={study.sourceUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-primary hover:underline"
+          className="mt-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md"
         >
           <MaterialIcon name="code" className="text-sm" />
           Source
@@ -209,14 +209,14 @@ function CaseStudyCardInner({
 function MicrosoftStackTags({ stack }: { stack: string[] }) {
   return (
     <div>
-      <p className="font-mono text-[10px] uppercase tracking-widest text-primary mb-3">
+      <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">
         Microsoft Stack Highlight
       </p>
       <div className="flex flex-wrap gap-2">
         {stack.map((tech) => (
           <span
             key={tech}
-            className="px-2.5 py-1 bg-surface-high rounded font-mono text-[10px] text-primary border border-primary/20"
+            className="px-2.5 py-1 bg-surface-high rounded font-mono text-xs text-primary border border-primary/20"
           >
             {tech}
           </span>
@@ -237,7 +237,7 @@ function StarBlock({
 }) {
   return (
     <div>
-      <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
+      <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-2">
         {label}
       </p>
       {content && (
