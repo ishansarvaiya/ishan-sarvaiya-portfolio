@@ -144,13 +144,13 @@ export function LoadBalancerWidget() {
         {/* ── Diagram ──────────────────────────────────────────────────────── */}
         <FadeIn delay={0.08}>
           <div
-            className="relative rounded-2xl border border-border/40 bg-[hsl(0_0%_4%)] p-8 md:p-12 overflow-hidden select-none"
+            className="relative rounded-xl border border-border bg-background p-8 md:p-12 overflow-hidden select-none"
             aria-label="Architecture stress test diagram"
           >
             {/* CPS badge */}
             <div className="absolute top-4 right-4 flex items-center gap-2">
               <span
-                className="font-mono text-[10px] tracking-widest uppercase px-3 py-1 rounded-full border"
+                className="font-mono text-xs tracking-widest uppercase px-3 py-1 rounded-full border"
                 style={{
                   color: nodeColor,
                   borderColor: nodeColor + "44",
@@ -171,10 +171,10 @@ export function LoadBalancerWidget() {
                   onClick={handleSend}
                   disabled={locked}
                   aria-label="Send traffic packet"
-                  className="relative group w-20 h-20 md:w-24 md:h-24 rounded-2xl border-2 flex flex-col items-center justify-center gap-1 font-mono text-[9px] tracking-widest uppercase transition-all duration-200 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="relative group w-24 h-24 md:w-28 md:h-28 rounded-xl border-2 flex flex-col items-center justify-center gap-1 font-mono text-xs tracking-widest uppercase transition-all duration-200 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   style={{
-                    borderColor: locked ? "hsl(184 8% 18%)" : nodeColor + "66",
-                    backgroundColor: locked ? "hsl(0 0% 6%)" : nodeColor + "08",
+                    borderColor: locked ? "hsl(var(--border))" : nodeColor + "66",
+                    backgroundColor: locked ? "hsl(var(--surface-low))" : nodeColor + "08",
                     boxShadow: locked
                       ? "none"
                       : `0 0 18px ${nodeColor}22`,
@@ -183,19 +183,19 @@ export function LoadBalancerWidget() {
                 >
                   <span className="text-2xl">📡</span>
                   <span
-                    className="text-[8px] tracking-widest"
-                    style={{ color: locked ? "hsl(0 0% 35%)" : nodeColor }}
+                    className="text-xs tracking-widest"
+                    style={{ color: locked ? "hsl(var(--muted-foreground))" : nodeColor }}
                   >
                     SEND
                   </span>
                   {/* ripple on click */}
                   <span
-                    className="absolute inset-0 rounded-2xl pointer-events-none group-active:animate-ping opacity-0 group-active:opacity-20"
+                    className="absolute inset-0 rounded-xl pointer-events-none group-active:animate-ping opacity-0 group-active:opacity-20"
                     style={{ backgroundColor: nodeColor }}
                     aria-hidden="true"
                   />
                 </button>
-                <p className="font-mono text-[9px] tracking-widest text-muted-foreground uppercase">
+                <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
                   Client
                 </p>
               </div>
@@ -242,7 +242,7 @@ export function LoadBalancerWidget() {
               {/* ── Load Balancer node ──────────────────────────────────── */}
               <div className="flex flex-col items-center gap-3 shrink-0">
                 <div
-                  className="relative w-20 h-20 md:w-24 md:h-24 rounded-2xl border-2 flex flex-col items-center justify-center gap-1"
+                  className="relative w-24 h-24 md:w-28 md:h-28 rounded-xl border-2 flex flex-col items-center justify-center gap-1"
                   style={{
                     borderColor: nodeColor + "66",
                     backgroundColor: nodeColor + "08",
@@ -263,7 +263,7 @@ export function LoadBalancerWidget() {
                       <span className="text-2xl">⚖️</span>
                       {/* Pulsing ring */}
                       <span
-                        className="absolute inset-0 rounded-2xl lb-pulse pointer-events-none"
+                        className="absolute inset-0 rounded-xl lb-pulse pointer-events-none"
                         style={{
                           boxShadow: `0 0 0 0 ${nodeColor}`,
                           animationDuration: isHeavy ? "0.6s" : "1.8s",
@@ -274,12 +274,12 @@ export function LoadBalancerWidget() {
                   )}
 
                   {isHeavy && !isOverload && (
-                    <span className="text-[7px] font-mono tracking-widest" style={{ color: nodeColor }}>
+                    <span className="text-xs font-mono tracking-widest" style={{ color: nodeColor }}>
                       SCALING
                     </span>
                   )}
                 </div>
-                <p className="font-mono text-[9px] tracking-widest text-muted-foreground uppercase">
+                <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
                   Load Balancer
                 </p>
               </div>
@@ -306,7 +306,7 @@ export function LoadBalancerWidget() {
                     return (
                       <div
                         key={i}
-                        className="w-16 h-5 rounded border flex items-center justify-center transition-all duration-200"
+                        className="w-20 h-6 rounded border flex items-center justify-center transition-all duration-200"
                         style={{
                           borderColor: isActive
                             ? nodeColor + "99"
@@ -320,14 +320,14 @@ export function LoadBalancerWidget() {
                         }}
                         aria-label={`Server ${i + 1}${isActive ? " — active" : ""}`}
                       >
-                        <span className="text-[9px] font-mono tracking-widest" style={{ color: nodeColor + "cc" }}>
+                        <span className="text-xs font-mono tracking-widest" style={{ color: nodeColor + "cc" }}>
                           SRV-{i + 1}
                         </span>
                       </div>
                     );
                   })}
                 </div>
-                <p className="font-mono text-[9px] tracking-widest text-muted-foreground uppercase">
+                <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
                   Servers
                 </p>
               </div>
@@ -344,7 +344,7 @@ export function LoadBalancerWidget() {
                     💥 Architecture scaled successfully… but my Azure bill just doubled. Please stop.
                   </p>
                   {countdown > 0 && (
-                    <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+                    <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
                       Recovery in {countdown}s
                     </p>
                   )}
@@ -359,12 +359,12 @@ export function LoadBalancerWidget() {
                 </p>
               )}
               {trafficState === "low" && cps > 0 && (
-                <p className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground">
+                <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">
                   ✓ All systems nominal
                 </p>
               )}
               {cps === 0 && !locked && (
-                <p className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground">
+                <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">
                   Click SEND to start sending packets
                 </p>
               )}
@@ -381,12 +381,12 @@ export function LoadBalancerWidget() {
               ).map(({ state, label, color }) => (
                 <span
                   key={state}
-                  className="flex items-center gap-2 font-mono text-[9px] tracking-widest uppercase"
-                  style={{ color: trafficState === state ? color : "hsl(0 0% 35%)" }}
+                  className="flex items-center gap-2 font-mono text-xs tracking-widest uppercase"
+                  style={{ color: trafficState === state ? color : "hsl(var(--muted-foreground))" }}
                 >
                   <span
                     className="inline-block w-2 h-2 rounded-full"
-                    style={{ backgroundColor: trafficState === state ? color : "hsl(0 0% 22%)" }}
+                    style={{ backgroundColor: trafficState === state ? color : "hsl(var(--border))" }}
                   />
                   {label}
                 </span>
