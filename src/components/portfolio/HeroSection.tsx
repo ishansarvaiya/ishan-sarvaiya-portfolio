@@ -40,7 +40,7 @@ export function Hero() {
           variants={revealItem}
           className="text-headline text-muted-foreground mt-3"
         >
-          Backend, Cloud &amp; AI Engineer
+          Software Engineer
         </motion.p>
 
         <motion.p
