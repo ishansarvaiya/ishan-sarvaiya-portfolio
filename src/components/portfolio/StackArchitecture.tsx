@@ -23,7 +23,7 @@ export function StackArchitecture() {
           id="stack-title"
           eyebrow="Microsoft Stack"
           title="Stack, organized like production architecture"
-          lead="Depth over decoration — each layer maps to systems I've shipped, not tutorials I've completed."
+          lead="Depth over decoration. Every layer maps to systems I've shipped, not tutorials I've completed."
         />
       </FadeIn>
 
@@ -96,8 +96,9 @@ export function StackArchitecture() {
         <aside className="mx-auto mt-12 max-w-2xl text-center">
           <p className="text-eyebrow text-primary">Currently at</p>
           <p className="mt-2 text-muted-foreground text-pretty">
-            Kinetiq — architecting global media monitoring and distributed ingestion
-            infrastructure.
+            Kinetiq, architecting global media monitoring and distributed ingestion,
+            and now adding speech-to-text, Prometheus and Grafana monitoring, and
+            Ansible automation.
           </p>
         </aside>
       </FadeIn>

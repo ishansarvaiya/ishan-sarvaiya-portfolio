@@ -48,17 +48,16 @@ export function Hero() {
           variants={revealItem}
           className="text-lead text-muted-foreground mx-auto mt-8 max-w-2xl text-pretty"
         >
-          I design and ship production APIs, Angular/Blazor applications, and Azure
-          infrastructure for fintech and data-intensive platforms — 10,000+ DAU
-          reliability, event-driven ingestion at scale, and clean architecture by
-          default.
+          I build production APIs, Angular and Blazor apps, and Azure infrastructure
+          for fintech and data-heavy platforms. Reliable for 10,000+ daily users,
+          event-driven at scale, and clean by design.
         </motion.p>
 
         <motion.p
           variants={revealItem}
           className="text-sm text-muted-foreground mt-6"
         >
-          Open to senior engineering roles · Select freelance engagements · Remote
+          Open to senior engineering roles and select freelance work · Remote
         </motion.p>
 
         <motion.div

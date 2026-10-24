@@ -107,9 +107,9 @@ export const NAV_LINKS: NavLink[] = [
 export const CERTIFICATIONS: Certification[] = [];
 
 export const HERO_METRICS = [
-  "4+ Years Production Delivery",
-  "10K+ DAU Platforms",
-  "99.9% Transaction Reliability",
+  "4+ years in production",
+  "10K+ daily active users",
+  "99.9% transaction reliability",
   ".NET 8 · Azure · Angular",
 ];
 
@@ -119,7 +119,7 @@ export const STACK_LAYERS: StackLayer[] = [
   {
     id: "core",
     title: "Core Engine",
-    subtitle: "Backend & data — where business rules and performance are decided.",
+    subtitle: "Backend and data, where business rules and performance are decided.",
     icon: "memory",
     technologies: [
       { name: "C# / .NET 8+", capability: "High-concurrency APIs, MediatR/CQRS, channels for backpressure", level: "Primary" },
@@ -136,7 +136,7 @@ export const STACK_LAYERS: StackLayer[] = [
   {
     id: "interface",
     title: "Interface",
-    subtitle: "Presentation layers built for maintainability and API contract alignment.",
+    subtitle: "Interfaces built to last, and kept in step with the API contract.",
     icon: "web",
     technologies: [
       { name: "Angular (Enterprise SPAs)", capability: "Modular apps, lazy routes, enterprise forms & auth flows", level: "Primary" },
@@ -150,7 +150,7 @@ export const STACK_LAYERS: StackLayer[] = [
   {
     id: "cloud",
     title: "Cloud Infrastructure",
-    subtitle: "Deployable, observable, cost-aware infrastructure on Azure.",
+    subtitle: "Deployable, observable, automated, and cost-aware infrastructure, mainly on Azure.",
     icon: "cloud",
     technologies: [
       { name: "Azure App Services", capability: "API hosting, deployment slots, autoscale, managed identity", level: "Primary" },
@@ -160,6 +160,8 @@ export const STACK_LAYERS: StackLayer[] = [
       { name: "Azure Service Bus / Front Door", capability: "Messaging, edge routing, DDoS mitigation, global entry", level: "Production" },
       { name: "Application Insights / OpenTelemetry", capability: "Distributed tracing, metrics, alerting, log correlation", level: "Production" },
       { name: "Azure DevOps / GitHub Actions", capability: "CI/CD pipelines, environment promotion, PR checks", level: "Production" },
+      { name: "Prometheus / Grafana", capability: "Metrics collection, dashboards, and alerting for service health", level: "Supporting" },
+      { name: "Ansible", capability: "Repeatable server configuration and deployment automation", level: "Supporting" },
       { name: "Docker / Kubernetes (AKS)", capability: "Containerized services, HPA, Helm deployments", level: "Supporting" },
       { name: "AWS (EC2, S3)", capability: "Cross-cloud deployments and hybrid integrations where required", level: "Supporting" },
     ],
@@ -167,13 +169,15 @@ export const STACK_LAYERS: StackLayer[] = [
   {
     id: "integration",
     title: "Integration & Messaging",
-    subtitle: "Async decoupling, search, payments, and polyglot workers.",
+    subtitle: "Messaging, search, payments, and Python workers that move data reliably.",
     icon: "hub",
     technologies: [
       { name: "RabbitMQ / Azure Service Bus", capability: "Async decoupling, DLQ, ordering, poison-message handling", level: "Production" },
       { name: "Elasticsearch", capability: "Full-text search, ILM tiers, ingest optimization", level: "Production" },
       { name: "Redis", capability: "Caching, rate limiting, sliding-window counters", level: "Production" },
-      { name: "Python (asyncio / workers)", capability: "Crawlers, ETL, ingestion pipelines, anti-bot resilience", level: "Production" },
+      { name: "Python (asyncio / workers)", capability: "Async workers, ETL, and ingestion pipelines at scale", level: "Production" },
+      { name: "Web Scraping / Data Collection", capability: "Crawlers, structured extraction, and anti-bot resilience", level: "Production" },
+      { name: "Speech-to-Text", capability: "Transcribing audio into searchable, structured text", level: "Supporting" },
       { name: "Payment Gateway Integration", capability: "Wallet transactions, utility billing, idempotent settlements", level: "Production" },
       { name: "OCR / KYC Pipelines", capability: "Document capture, identity verification, compliance audit trails", level: "Production" },
       { name: "Selenium / C# Automation", capability: "Web and desktop automation for indexing and QA workflows", level: "Supporting" },
@@ -210,7 +214,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       "AKS HPA: 2 → 20 replicas driven by CPU and queue-depth metrics",
     ],
     microsoftStack: [".NET 8 API Gateway", "Azure Functions", "Azure Front Door", "PostgreSQL", "Service Bus"],
-    tags: ["Python", "RabbitMQ", "Elasticsearch", ".NET 8"],
+    tags: ["Python", "RabbitMQ", "Elasticsearch", ".NET 8", "Data Scraping", "Speech-to-Text", "Ansible", "Prometheus", "Grafana"],
     featured: true,
   },
   {
@@ -457,12 +461,13 @@ export const EXPERIENCE: ExperienceItem[] = [
     role: "Software Engineer",
     period: "Oct 2025 – Present",
     description:
-      "Architecting global data ingestion and media monitoring infrastructure.",
+      "Architecting global data ingestion, media monitoring, and speech-to-text infrastructure.",
     current: true,
     bullets: [
-      "Designed and built distributed media ingestion pipelines processing millions of OTT metadata records daily across global broadcast markets.",
-      "Reduced end-to-end media monitoring latency by migrating batch ETL jobs to an event-driven architecture using Python and message queuing.",
-      "Collaborated cross-functionally to define API contracts for downstream analytics services, improving inter-team delivery velocity.",
+      "Built distributed ingestion pipelines that process millions of OTT metadata records daily across global broadcast markets.",
+      "Cut end-to-end monitoring latency by moving batch ETL to an event-driven architecture on Python and message queues.",
+      "Defined API contracts with downstream analytics teams, speeding up delivery across teams.",
+      "Expanding the platform with speech-to-text processing, Python data scraping, Ansible automation, and Prometheus and Grafana monitoring.",
     ],
   },
   {
@@ -471,9 +476,9 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "Sep 2022 – Sep 2025",
     description: "Scaling fintech platforms and automating compliance workflows.",
     bullets: [
-      "Engineered high-concurrency .NET Core APIs for a mobile wallet platform serving 10,000+ daily active users with 99.9% uptime SLA.",
-      "Automated KYC identity verification using OCR integration and Identity Server, cutting manual processing errors by 35%.",
-      "Architected a utility payment gateway supporting 5,000+ daily transactions, including custom billing logic for regional grid operators.",
+      "Engineered high-concurrency .NET Core APIs for a mobile wallet serving 10,000+ daily active users at a 99.9% uptime SLA.",
+      "Automated KYC verification with OCR and Identity Server, cutting manual processing errors by 35%.",
+      "Architected a utility payment gateway handling 5,000+ daily transactions, with custom billing logic for regional grid operators.",
     ],
   },
   {
@@ -482,9 +487,9 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "Mar 2021 – Aug 2022",
     description: "Enterprise HRMS development and logistics optimization.",
     bullets: [
-      "Developed a full-stack HRMS using Angular and .NET Core, streamlining leave and attendance workflows for 100+ enterprise users.",
-      "Built real-time shipment tracking APIs with .NET Core and SQL Server, improving logistics operations efficiency by 25%.",
-      "Delivered a C# + Selenium desktop automation suite for streaming content indexing, reducing manual cataloguing effort significantly.",
+      "Built a full-stack HRMS with Angular and .NET Core that streamlined leave and attendance for 100+ enterprise users.",
+      "Delivered real-time shipment tracking APIs on .NET Core and SQL Server, improving logistics efficiency by 25%.",
+      "Created a C# and Selenium desktop automation suite for indexing streaming content, significantly reducing manual cataloguing.",
     ],
   },
 ];

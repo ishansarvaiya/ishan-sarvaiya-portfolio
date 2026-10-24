@@ -58,8 +58,8 @@ export function Footer() {
             <p className="text-eyebrow text-primary mb-3">Contact</p>
             <h2 className="text-title text-balance">Start a conversation</h2>
             <p className="text-lead mt-5 max-w-md text-muted-foreground text-pretty">
-              Hiring inquiry, project scope, or architecture review — send a brief
-              and I&apos;ll respond within 48 hours.
+              Hiring inquiry, project scope, or architecture review. Send a brief
+              and I&apos;ll reply within 48 hours.
             </p>
             <FooterLinks
               resumeUrl={resumeUrl}

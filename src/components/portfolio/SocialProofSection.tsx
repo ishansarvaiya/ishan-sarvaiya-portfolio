@@ -16,7 +16,7 @@ export function SocialProofSection() {
           id="proof-title"
           eyebrow="Trusted Delivery"
           title="Recommendations on LinkedIn"
-          lead="Peer and client feedback from production engagements — view full recommendations on my LinkedIn profile."
+          lead="Feedback from colleagues and clients on real production work. Read the full recommendations on LinkedIn."
           className="mb-8"
         />
         <div className="text-center">

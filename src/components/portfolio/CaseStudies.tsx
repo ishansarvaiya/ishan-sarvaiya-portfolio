@@ -47,7 +47,7 @@ export function CaseStudies() {
           id="work-title"
           eyebrow="Production Proof"
           title="Case Studies"
-          lead="Enterprise delivery framed as STAR-M: Situation, Task, Action, Result, and Microsoft Stack highlights."
+          lead="Enterprise delivery in STAR-M form: Situation, Task, Action, Result, and the Microsoft stack behind it."
         />
       </FadeIn>
 

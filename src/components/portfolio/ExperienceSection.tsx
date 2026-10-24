@@ -10,7 +10,7 @@ export function ExperienceSection() {
           id="experience-title"
           eyebrow="Career Timeline"
           title="Experience"
-          lead="Four years shipping production systems across fintech, media intelligence, and enterprise — with measurable outcomes at every stage."
+          lead="Four years shipping production systems across fintech, media intelligence, and enterprise, with measurable outcomes at every stage."
         />
       </FadeIn>
 

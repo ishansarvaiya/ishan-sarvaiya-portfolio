@@ -40,7 +40,7 @@ export function ChooseYourPath() {
       id: "hire",
       title: "For Hiring Teams",
       subtitle: "Resume-ready proof of enterprise delivery",
-      body: "Production-grade systems on the Microsoft stack — ASP.NET Web API, EF Core, Angular, and Azure — with clean architecture, observability, and operational reliability.",
+      body: "Production systems on the Microsoft stack: ASP.NET Web API, EF Core, Angular, and Azure. Built with clean architecture, observability, and operational reliability.",
       bullets: [
         "Senior Software Engineer · .NET 8 / C# / ASP.NET Core",
         "Fintech & enterprise domains · distributed systems",
@@ -57,11 +57,12 @@ export function ChooseYourPath() {
       id: "build",
       title: "For Founders & Product Teams",
       subtitle: "Scoped builds, not open-ended dev hours",
-      body: "MVPs, API backends, admin portals, and Azure foundations — typically 4–12 week engagements with clear milestones, documented architecture, and maintainable handoff.",
+      body: "MVPs, API backends, admin portals, and Azure foundations. Typically 4–12 week engagements with clear milestones, documented architecture, and a clean handoff.",
       bullets: [
         "MVP backends (.NET 8 Web API) + Angular or Blazor UI",
         "Azure setup: App Service, SQL, Key Vault, CI/CD",
         "Integrations: payments, KYC/OCR, messaging pipelines",
+        "Data and automation: Python pipelines, scraping, monitoring",
       ],
       trust: "Architecture review → full build → production handoff",
       ctas: buildCtas,
@@ -75,7 +76,7 @@ export function ChooseYourPath() {
           id="path-title"
           eyebrow="Start Here"
           title="Two ways to evaluate my work"
-          lead="Whether you're filling a senior role or scoping a product build, pick the path that gets you to the right proof in under 60 seconds."
+          lead="Hiring for a senior role or scoping a product build? Pick the path that gets you to the right proof in under a minute."
         />
       </FadeIn>
 
