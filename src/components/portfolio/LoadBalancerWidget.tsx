@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { motion } from "framer-motion";
 import { FadeIn } from "./FadeIn";
+import { Section, SectionHeader } from "./Primitives";
+import { press } from "@/lib/motion";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -7,7 +10,6 @@ type TrafficState = "low" | "heavy" | "overload";
 
 interface Packet {
   id: number;
-  /** 0 → 1, drives left% via CSS transition */
   phase: "travel" | "done";
   lane: number; // vertical jitter lane (0-4) so packets don't stack exactly
 }
@@ -125,276 +127,206 @@ export function LoadBalancerWidget() {
   const isOverload = trafficState === "overload";
   const isHeavy    = trafficState === "heavy";
 
-  return (
-    <section id="playground" className="py-32 px-8 bg-surface-mid">
-      <div className="max-w-5xl mx-auto">
-        <FadeIn>
-          <p className="font-mono text-primary text-sm tracking-[0.3em] uppercase mb-4">
-            Technical Playground
-          </p>
-          <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            Load balancer stress test
-          </h2>
-          <p className="text-muted-foreground mb-14 max-w-xl text-base">
-            Click fast enough and watch the system buckle — a hands-on demo of
-            what happens when traffic outpaces infrastructure capacity.
-          </p>
-        </FadeIn>
+  const dashed = {
+    background: `repeating-linear-gradient(90deg, ${nodeColor}66 0px, ${nodeColor}66 6px, transparent 6px, transparent 14px)`,
+  };
+  const nodeBox =
+    "relative flex size-16 shrink-0 flex-col items-center justify-center gap-0.5 rounded-2xl border-2 md:size-28";
+  const caption = "text-xs font-medium text-muted-foreground";
 
-        {/* ── Diagram ──────────────────────────────────────────────────────── */}
-        <FadeIn delay={0.08}>
-          <div
-            className="relative rounded-xl border border-border bg-background p-8 md:p-12 overflow-hidden select-none"
-            aria-label="Architecture stress test diagram"
-          >
-            {/* CPS badge */}
-            <div className="absolute top-4 right-4 flex items-center gap-2">
-              <span
-                className="font-mono text-xs tracking-widest uppercase px-3 py-1 rounded-full border"
+  return (
+    <Section id="playground" width="default" labelledBy="playground-title">
+      <FadeIn>
+        <SectionHeader
+          id="playground-title"
+          eyebrow="Technical Playground"
+          title="Load balancer stress test"
+          lead="Click fast enough and watch the system buckle — a hands-on demo of what happens when traffic outpaces infrastructure capacity."
+        />
+      </FadeIn>
+
+      <FadeIn delay={0.06}>
+        <div
+          className="relative select-none overflow-hidden rounded-[2rem] bg-card p-5 md:p-12"
+          role="group"
+          aria-label="Architecture stress test diagram"
+        >
+          <div className="mb-6 flex justify-end md:mb-0 md:absolute md:right-5 md:top-5">
+            <span
+              className="rounded-full px-3 py-1 text-xs font-semibold tabular-nums"
+              style={{ color: nodeColor, backgroundColor: nodeColor + "1a" }}
+            >
+              {cps} CPS
+            </span>
+          </div>
+
+          <div className="flex items-center justify-between gap-2 md:gap-8">
+            {/* Client */}
+            <div className="flex shrink-0 flex-col items-center gap-3">
+              <motion.button
+                {...press}
+                type="button"
+                onClick={handleSend}
+                disabled={locked}
+                aria-label="Send traffic packet"
+                className={`${nodeBox} disabled:cursor-not-allowed disabled:opacity-40`}
                 style={{
-                  color: nodeColor,
-                  borderColor: nodeColor + "44",
-                  backgroundColor: nodeColor + "10",
-                  transition: "all 0.3s ease",
+                  borderColor: locked ? "hsl(var(--border))" : nodeColor + "88",
+                  backgroundColor: locked ? "hsl(var(--surface-high))" : nodeColor + "12",
                 }}
               >
-                {cps} CPS
-              </span>
+                <span className="text-xl md:text-2xl" aria-hidden="true">📡</span>
+                <span
+                  className="text-[0.6875rem] font-semibold md:text-xs"
+                  style={{ color: locked ? "hsl(var(--muted-foreground))" : nodeColor }}
+                >
+                  SEND
+                </span>
+              </motion.button>
+              <p className={caption}>Client</p>
             </div>
 
-            {/* Main diagram row */}
-            <div className="flex items-center justify-between gap-4 md:gap-8">
-
-              {/* ── Source: Send Traffic button ─────────────────────────── */}
-              <div className="flex flex-col items-center gap-3 shrink-0">
-                <button
-                  onClick={handleSend}
-                  disabled={locked}
-                  aria-label="Send traffic packet"
-                  className="relative group w-24 h-24 md:w-28 md:h-28 rounded-xl border-2 flex flex-col items-center justify-center gap-1 font-mono text-xs tracking-widest uppercase transition-all duration-200 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  style={{
-                    borderColor: locked ? "hsl(var(--border))" : nodeColor + "66",
-                    backgroundColor: locked ? "hsl(var(--surface-low))" : nodeColor + "08",
-                    boxShadow: locked
-                      ? "none"
-                      : `0 0 18px ${nodeColor}22`,
-                    transition: "all 0.3s ease",
-                  }}
-                >
-                  <span className="text-2xl">📡</span>
-                  <span
-                    className="text-xs tracking-widest"
-                    style={{ color: locked ? "hsl(var(--muted-foreground))" : nodeColor }}
+            {/* Packet lane: packets move with transform only, clipped to the lane. */}
+            <div className="relative h-16 min-w-0 flex-1 overflow-hidden md:h-20" aria-hidden="true">
+              <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2" style={dashed} />
+              {packets.map((pkt) => {
+                const laneOffset = (pkt.lane - Math.floor(LANES / 2)) * 7;
+                return (
+                  <motion.span
+                    key={pkt.id}
+                    className="pointer-events-none absolute inset-x-0 h-2.5"
+                    style={{ top: `calc(50% + ${laneOffset}px - 5px)` }}
+                    initial={{ x: "-100%", opacity: 1 }}
+                    animate={{ x: "0%", opacity: pkt.phase === "done" ? 0 : 1 }}
+                    transition={{
+                      x: { duration: PACKET_TRAVEL_MS / 1000, ease: [0.4, 0, 0.6, 1] },
+                      opacity: { duration: 0.3 },
+                    }}
                   >
-                    SEND
-                  </span>
-                  {/* ripple on click */}
-                  <span
-                    className="absolute inset-0 rounded-xl pointer-events-none group-active:animate-ping opacity-0 group-active:opacity-20"
-                    style={{ backgroundColor: nodeColor }}
-                    aria-hidden="true"
-                  />
-                </button>
-                <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
-                  Client
-                </p>
-              </div>
-
-              {/* ── Track (packet travel lane) ──────────────────────────── */}
-              <div
-                className="relative flex-1 h-20"
-                aria-hidden="true"
-              >
-                {/* Dashed path line */}
-                <div
-                  className="absolute top-1/2 left-0 right-0 h-px -translate-y-1/2"
-                  style={{
-                    background: `repeating-linear-gradient(90deg, ${nodeColor}55 0px, ${nodeColor}55 6px, transparent 6px, transparent 14px)`,
-                    transition: "background 0.4s ease",
-                  }}
-                />
-
-                {/* Packets */}
-                {packets.map((pkt) => {
-                  const laneOffset = (pkt.lane - Math.floor(LANES / 2)) * 7;
-                  return (
                     <span
-                      key={pkt.id}
-                      aria-hidden="true"
-                      className="absolute w-2.5 h-2.5 rounded-full pointer-events-none"
-                      style={{
-                        top: `calc(50% + ${laneOffset}px)`,
-                        left: pkt.phase === "travel" ? "98%" : "2%",
-                        transform: "translate(-50%, -50%)",
-                        backgroundColor: nodeColor,
-                        boxShadow: `0 0 8px 2px ${nodeColor}88`,
-                        opacity: pkt.phase === "done" ? 0 : 1,
-                        transition:
-                          pkt.phase === "travel"
-                            ? `left ${PACKET_TRAVEL_MS}ms cubic-bezier(0.4,0,0.6,1)`
-                            : "opacity 0.3s ease",
-                      }}
+                      className="absolute right-0 size-2.5 rounded-full"
+                      style={{ backgroundColor: nodeColor }}
                     />
+                  </motion.span>
+                );
+              })}
+            </div>
+
+            {/* Load balancer */}
+            <div className="flex shrink-0 flex-col items-center gap-3">
+              <div
+                className={nodeBox}
+                style={{ borderColor: nodeColor + "88", backgroundColor: nodeColor + "12" }}
+              >
+                {isOverload ? (
+                  <span className="lb-fire text-2xl md:text-3xl" role="img" aria-label="System overloaded">
+                    🔥
+                  </span>
+                ) : (
+                  <>
+                    <span className="text-xl md:text-2xl" aria-hidden="true">⚖️</span>
+                    <span
+                      className="lb-pulse pointer-events-none absolute inset-0 rounded-2xl border-2"
+                      style={{
+                        borderColor: nodeColor,
+                        animationDuration: isHeavy ? "0.6s" : "1.8s",
+                      }}
+                      aria-hidden="true"
+                    />
+                  </>
+                )}
+                {isHeavy && !isOverload && (
+                  <span className="text-[0.6875rem] font-semibold md:text-xs" style={{ color: nodeColor }}>
+                    SCALING
+                  </span>
+                )}
+              </div>
+              <p className={caption}>Load Balancer</p>
+            </div>
+
+            <div className="relative h-16 min-w-0 flex-1 md:h-20" aria-hidden="true">
+              <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2" style={dashed} />
+            </div>
+
+            {/* Servers */}
+            <div className="flex shrink-0 flex-col items-center gap-3">
+              <div className="flex flex-col gap-2">
+                {Array.from({ length: SERVER_COUNT }).map((_, i) => {
+                  const isActive = activeServer === i && !locked && cps > 0;
+                  return (
+                    <div
+                      key={i}
+                      className="flex h-6 w-14 items-center justify-center rounded-lg border md:w-20"
+                      style={{
+                        borderColor: isActive ? nodeColor + "bb" : nodeColor + "33",
+                        backgroundColor: isActive ? nodeColor + "26" : nodeColor + "0d",
+                      }}
+                      aria-label={`Server ${i + 1}${isActive ? " — active" : ""}`}
+                    >
+                      <span className="text-[0.6875rem] font-semibold" style={{ color: nodeColor }}>
+                        SRV-{i + 1}
+                      </span>
+                    </div>
                   );
                 })}
               </div>
-
-              {/* ── Load Balancer node ──────────────────────────────────── */}
-              <div className="flex flex-col items-center gap-3 shrink-0">
-                <div
-                  className="relative w-24 h-24 md:w-28 md:h-28 rounded-xl border-2 flex flex-col items-center justify-center gap-1"
-                  style={{
-                    borderColor: nodeColor + "66",
-                    backgroundColor: nodeColor + "08",
-                    boxShadow: `0 0 20px ${nodeColor}28`,
-                    transition: "all 0.3s ease",
-                  }}
-                >
-                  {isOverload ? (
-                    <span
-                      className="text-3xl lb-fire"
-                      role="img"
-                      aria-label="System overloaded"
-                    >
-                      🔥
-                    </span>
-                  ) : (
-                    <>
-                      <span className="text-2xl">⚖️</span>
-                      {/* Pulsing ring */}
-                      <span
-                        className="absolute inset-0 rounded-xl lb-pulse pointer-events-none"
-                        style={{
-                          boxShadow: `0 0 0 0 ${nodeColor}`,
-                          animationDuration: isHeavy ? "0.6s" : "1.8s",
-                        }}
-                        aria-hidden="true"
-                      />
-                    </>
-                  )}
-
-                  {isHeavy && !isOverload && (
-                    <span className="text-xs font-mono tracking-widest" style={{ color: nodeColor }}>
-                      SCALING
-                    </span>
-                  )}
-                </div>
-                <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
-                  Load Balancer
-                </p>
-              </div>
-
-              {/* ── Second track ─────────────────────────────────────────── */}
-              <div
-                className="relative flex-1 h-20"
-                aria-hidden="true"
-              >
-                <div
-                  className="absolute top-1/2 left-0 right-0 h-px -translate-y-1/2"
-                  style={{
-                    background: `repeating-linear-gradient(90deg, ${nodeColor}55 0px, ${nodeColor}55 6px, transparent 6px, transparent 14px)`,
-                    transition: "background 0.4s ease",
-                  }}
-                />
-              </div>
-
-              {/* ── Servers cluster ─────────────────────────────────────── */}
-              <div className="flex flex-col items-center gap-3 shrink-0">
-                <div className="flex flex-col gap-2">
-                  {Array.from({ length: SERVER_COUNT }).map((_, i) => {
-                    const isActive = activeServer === i && !locked && cps > 0;
-                    return (
-                      <div
-                        key={i}
-                        className="w-20 h-6 rounded border flex items-center justify-center transition-all duration-200"
-                        style={{
-                          borderColor: isActive
-                            ? nodeColor + "99"
-                            : nodeColor + "25",
-                          backgroundColor: isActive
-                            ? nodeColor + "18"
-                            : nodeColor + "05",
-                          boxShadow: isActive
-                            ? `0 0 10px ${nodeColor}44`
-                            : "none",
-                        }}
-                        aria-label={`Server ${i + 1}${isActive ? " — active" : ""}`}
-                      >
-                        <span className="text-xs font-mono tracking-widest" style={{ color: nodeColor + "cc" }}>
-                          SRV-{i + 1}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-                <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
-                  Servers
-                </p>
-              </div>
-            </div>
-
-            {/* ── Status bar ───────────────────────────────────────────────── */}
-            <div className="mt-10 min-h-[3rem] flex flex-col items-center gap-2 text-center">
-              {isOverload && (
-                <>
-                  <p
-                    className="font-mono text-sm font-semibold tracking-wide animate-pulse"
-                    style={{ color: "hsl(0 80% 65%)" }}
-                  >
-                    💥 Architecture scaled successfully… but my Azure bill just doubled. Please stop.
-                  </p>
-                  {countdown > 0 && (
-                    <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
-                      Recovery in {countdown}s
-                    </p>
-                  )}
-                </>
-              )}
-              {isHeavy && !isOverload && (
-                <p
-                  className="font-mono text-xs tracking-widest uppercase animate-pulse"
-                  style={{ color: "hsl(38 90% 60%)" }}
-                >
-                  ⚠ Scaling instances…
-                </p>
-              )}
-              {trafficState === "low" && cps > 0 && (
-                <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">
-                  ✓ All systems nominal
-                </p>
-              )}
-              {cps === 0 && !locked && (
-                <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">
-                  Click SEND to start sending packets
-                </p>
-              )}
-            </div>
-
-            {/* ── Traffic state legend ─────────────────────────────────────── */}
-            <div className="mt-8 flex flex-wrap justify-center gap-4 border-t border-border/30 pt-6">
-              {(
-                [
-                  { state: "low",      label: "Low  0–3 CPS",    color: STATE_COLORS.low },
-                  { state: "heavy",    label: "Heavy 4–7 CPS",   color: STATE_COLORS.heavy },
-                  { state: "overload", label: "Overload 8+ CPS", color: STATE_COLORS.overload },
-                ] as const
-              ).map(({ state, label, color }) => (
-                <span
-                  key={state}
-                  className="flex items-center gap-2 font-mono text-xs tracking-widest uppercase"
-                  style={{ color: trafficState === state ? color : "hsl(var(--muted-foreground))" }}
-                >
-                  <span
-                    className="inline-block w-2 h-2 rounded-full"
-                    style={{ backgroundColor: trafficState === state ? color : "hsl(var(--border))" }}
-                  />
-                  {label}
-                </span>
-              ))}
+              <p className={caption}>Servers</p>
             </div>
           </div>
-        </FadeIn>
-      </div>
-    </section>
+
+          {/* Status */}
+          <div
+            role="status"
+            aria-live="polite"
+            className="mt-10 flex min-h-12 flex-col items-center gap-2 text-center"
+          >
+            {isOverload && (
+              <>
+                <p className="font-semibold text-pretty" style={{ color: "hsl(var(--destructive))" }}>
+                  💥 Architecture scaled successfully… but my Azure bill just doubled. Please stop.
+                </p>
+                {countdown > 0 && (
+                  <p className="text-sm text-muted-foreground">Recovery in {countdown}s</p>
+                )}
+              </>
+            )}
+            {isHeavy && !isOverload && (
+              <p className="text-sm font-medium text-muted-foreground">⚠ Scaling instances…</p>
+            )}
+            {trafficState === "low" && cps > 0 && (
+              <p className="text-sm text-muted-foreground">✓ All systems nominal</p>
+            )}
+            {cps === 0 && !locked && (
+              <p className="text-sm text-muted-foreground">Click SEND to start sending packets</p>
+            )}
+          </div>
+
+          {/* Legend */}
+          <ul className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 border-t border-border pt-6">
+            {(
+              [
+                { state: "low", label: "Low  0–3 CPS", color: STATE_COLORS.low },
+                { state: "heavy", label: "Heavy 4–7 CPS", color: STATE_COLORS.heavy },
+                { state: "overload", label: "Overload 8+ CPS", color: STATE_COLORS.overload },
+              ] as const
+            ).map(({ state, label, color }) => (
+              <li
+                key={state}
+                className={`flex items-center gap-2 text-sm ${
+                  trafficState === state ? "font-semibold text-foreground" : "text-muted-foreground"
+                }`}
+              >
+                <span
+                  className="inline-block size-2 rounded-full"
+                  style={{ backgroundColor: trafficState === state ? color : "hsl(var(--border))" }}
+                  aria-hidden="true"
+                />
+                {label}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </FadeIn>
+    </Section>
   );
 }
