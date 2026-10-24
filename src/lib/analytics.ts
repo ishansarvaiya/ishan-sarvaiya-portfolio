@@ -5,6 +5,10 @@ export type AnalyticsEvent =
   | "calendly_click"
   | "linkedin_click";
 
+/**
+ * Fires an analytics event. Always dispatches a `portfolio-analytics` DOM event
+ * (so any listener can pick it up) and forwards to Plausible when it is loaded.
+ */
 export function trackEvent(event: AnalyticsEvent, props?: Record<string, string>) {
   if (typeof window === "undefined") return;
 

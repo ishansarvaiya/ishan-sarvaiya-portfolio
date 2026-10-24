@@ -19,8 +19,13 @@ const DOMAIN_COLORS: Record<CaseStudy["domain"], string> = {
   Utilities: "text-domain-utilities",
 };
 
+// Set as an inline style so Framer can correct the radius while the card scales.
 const CARD_RADIUS = 28;
 
+/**
+ * Filterable grid of case studies. Opening a card expands it into a dialog via a
+ * shared `layoutId`, so the sheet grows from the card and returns to it on close.
+ */
 export function CaseStudies() {
   const [filter, setFilter] = useState<string>("All");
   const [selectedId, setSelectedId] = useState<string | null>(null);

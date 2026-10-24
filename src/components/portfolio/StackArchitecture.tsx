@@ -30,6 +30,7 @@ export function StackArchitecture() {
                   value={layer.id}
                   className="relative min-h-10 rounded-full px-4 text-[0.9375rem] focus-visible:ring-0 focus-visible:ring-offset-0 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
                 >
+                  {/* Shared layoutId lets one pill slide between triggers. */}
                   {activeTab === layer.id && (
                     <motion.span
                       layoutId="stack-tab"

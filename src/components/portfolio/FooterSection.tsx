@@ -28,6 +28,8 @@ export function Footer() {
   const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
 
+  // There is no backend: the form builds a mailto: link and hands off to the
+  // visitor's mail app. The success message links the address as a fallback.
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!name.trim() || !email.trim() || !message.trim()) return;
