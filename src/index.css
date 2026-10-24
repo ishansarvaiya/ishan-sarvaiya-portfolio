@@ -2,145 +2,205 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Design tokens. Light is the default; dark follows the OS. Token names are
+   shared with shadcn so existing components keep working. */
 @layer base {
   :root {
-    /* Page canvas */
-    --background: 0 0% 5%;
-    --foreground: 0 0% 93%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 11%;
 
-    /* Card/popover: surface level 2 (elevated above section surfaces) */
-    --card: 0 0% 11%;
-    --card-foreground: 0 0% 93%;
+    --card: 240 5% 96%;
+    --card-foreground: 0 0% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 11%;
 
-    --popover: 0 0% 11%;
-    --popover-foreground: 0 0% 93%;
+    --primary: 211 100% 45%;
+    --primary-foreground: 0 0% 100%;
 
-    --primary: 183 100% 47%;
-    --primary-foreground: 183 100% 7%;
+    --secondary: 240 5% 93%;
+    --secondary-foreground: 0 0% 11%;
 
-    /* No longer used for the gradient-button pattern (all flattened to --primary).
-       Kept as the semantic token backing shadcn's "secondary" button/badge variant. */
-    --secondary: 250 73% 48%;
-    --secondary-foreground: 250 100% 90%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 2% 40%;
 
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 65%;
+    --accent: 211 100% 45%;
+    --accent-foreground: 0 0% 100%;
 
-    --accent: 183 100% 47%;
-    --accent-foreground: 183 100% 7%;
-
-    --destructive: 0 84% 60%;
+    --destructive: 3 100% 44%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 183 100% 47%;
+    --border: 240 3% 85%;
+    --input: 240 3% 80%;
+    --ring: 211 100% 45%;
 
-    --radius: 0.625rem;
+    --radius: 1.125rem;
 
-    /* Surface level 1: section backgrounds distinct from the page canvas. */
-    --surface-low: 0 0% 9%;
-    --surface-mid: 0 0% 9%;
-    --surface-high: 0 0% 9%;
-    --outline: 0 0% 40%;
+    /* Section surfaces: alternate between canvas and a quiet grey. */
+    --surface-low: 240 5% 96%;
+    --surface-mid: 240 5% 96%;
+    --surface-high: 240 5% 93%;
+    --outline: 240 2% 40%;
 
-    /* The one sanctioned categorical palette, for case-study domain tags only —
-       functional (the filter bar relies on quick color recognition), so kept
-       distinct from the single UI accent rather than folded into neutral. */
-    --domain-fintech: 210 70% 60%;
-    --domain-enterprise: 250 55% 68%;
-    --domain-utilities: 35 65% 55%;
+    /* Materials: translucent bars and sheets. */
+    --material: 0 0% 100%;
+    --material-alpha: 0.72;
+
+    /* Categorical tags for case-study domains only. */
+    --domain-fintech: 211 90% 38%;
+    --domain-enterprise: 260 50% 46%;
+    --domain-utilities: 28 90% 32%;
+
+    /* Motion: critically damped spring approximations for CSS fallbacks. */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+    color-scheme: light;
   }
-}
 
-@layer base {
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: 0 0% 0%;
+      --foreground: 240 5% 96%;
+
+      --card: 240 3% 11%;
+      --card-foreground: 240 5% 96%;
+      --popover: 240 3% 11%;
+      --popover-foreground: 240 5% 96%;
+
+      --primary: 208 100% 60%;
+      --primary-foreground: 0 0% 0%;
+
+      --secondary: 240 3% 17%;
+      --secondary-foreground: 240 5% 96%;
+
+      --muted: 240 3% 11%;
+      --muted-foreground: 240 2% 64%;
+
+      --accent: 208 100% 60%;
+      --accent-foreground: 0 0% 0%;
+
+      --destructive: 3 100% 62%;
+      --destructive-foreground: 0 0% 0%;
+
+      --border: 240 3% 22%;
+      --input: 240 3% 28%;
+      --ring: 208 100% 60%;
+
+      --surface-low: 240 3% 7%;
+      --surface-mid: 240 3% 7%;
+      --surface-high: 240 3% 11%;
+      --outline: 240 2% 64%;
+
+      --material: 240 3% 11%;
+
+      --domain-fintech: 210 90% 68%;
+      --domain-enterprise: 260 80% 78%;
+      --domain-utilities: 35 90% 62%;
+
+      color-scheme: dark;
+    }
+  }
+
+  /* Increased contrast: stronger edges and text, no tinted greys. */
+  @media (prefers-contrast: more) {
+    :root {
+      --border: 0 0% 25%;
+      --input: 0 0% 20%;
+      --muted-foreground: 0 0% 20%;
+      --outline: 0 0% 20%;
+    }
+  }
+  @media (prefers-contrast: more) and (prefers-color-scheme: dark) {
+    :root {
+      --border: 0 0% 75%;
+      --input: 0 0% 80%;
+      --muted-foreground: 0 0% 85%;
+      --outline: 0 0% 85%;
+    }
+  }
+
+  /* Reduced transparency: materials become opaque. */
+  @media (prefers-reduced-transparency: reduce) {
+    :root {
+      --material-alpha: 1;
+    }
+  }
+
   * {
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.47;
+    letter-spacing: -0.011em;
+    text-rendering: optimizeLegibility;
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.28);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 }
 
 @layer utilities {
+  /* Type scale: fluid via clamp(), tight leading, negative tracking. */
+  .text-display {
+    font-size: clamp(2.75rem, 1.6rem + 5.6vw, 6rem);
+    line-height: 1.03;
+    letter-spacing: -0.035em;
+    font-weight: 700;
+  }
+  .text-title {
+    font-size: clamp(2rem, 1.35rem + 3vw, 3.5rem);
+    line-height: 1.07;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+  .text-headline {
+    font-size: clamp(1.375rem, 1.1rem + 1.2vw, 2rem);
+    line-height: 1.15;
+    letter-spacing: -0.022em;
+    font-weight: 600;
+  }
+  .text-lead {
+    font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+    line-height: 1.38;
+    letter-spacing: -0.018em;
+  }
+  .text-eyebrow {
+    font-size: 0.8125rem;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    font-weight: 600;
+  }
+
+  /* Translucent material for floating layers only (nav, sheets). */
   .glass-panel {
-    @apply bg-card/70 backdrop-blur-xl border border-border;
+    background: hsl(var(--material) / var(--material-alpha));
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    border: 1px solid hsl(var(--border));
   }
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-/* ── True Dark theme override ───────────────────────────────────────────────
-   Activated by <html data-theme="true-dark"> via ThemeContext.
-   Swaps to pure black + muted amber neon — a late-night incandescent palette.
-   ─────────────────────────────────────────────────────────────────────────── */
-[data-theme="true-dark"] {
-  --background:        0 0%  0%;
-  --foreground:        30 3% 83%;
-
-  --card:              0 0%  4%;
-  --card-foreground:   30 3% 83%;
-
-  --popover:           0 0%  4%;
-  --popover-foreground:30 3% 83%;
-
-  --primary:           38 60% 55%;
-  --primary-foreground:38 100% 6%;
-
-  --secondary:         270 35% 48%;
-  --secondary-foreground: 270 100% 90%;
-
-  --muted:             0 0%  8%;
-  --muted-foreground:  0 0% 48%;
-
-  --accent:            38 60% 55%;
-  --accent-foreground: 38 100% 6%;
-
-  --border:            0 0%  12%;
-  --input:             0 0%  12%;
-  --ring:              38 60% 55%;
-
-  --neon:              38 60% 55%;
-  --surface-low:       0 0%  3%;
-  --surface-mid:       0 0%  5%;
-  --surface-high:      0 0%  8%;
-  --outline:           0 0% 38%;
-}
-
-[data-theme="true-dark"] ::-webkit-scrollbar-track {
-  background: hsl(0 0% 0%);
-}
-[data-theme="true-dark"] ::-webkit-scrollbar-thumb {
-  background: hsl(0 0% 12%);
-}
-[data-theme="true-dark"] ::-webkit-scrollbar-thumb:hover {
-  background: hsl(38 60% 55%);
-}
-
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-track {
-  background: hsl(0 0% 5%);
-}
-
-::-webkit-scrollbar-thumb {
-  background: hsl(0 0% 17%);
-  border-radius: 2px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary));
-}
-
-/* ── Load Balancer Widget animations ────────────────────────────────────────
-   .lb-pulse  — radial ring that expands and fades (speed controlled inline)
-   .lb-fire   — shake + scale burst for the overload 🔥 emoji
-   ─────────────────────────────────────────────────────────────────────────── */
+/* Load Balancer widget animations (reworked in a later step). */
 @keyframes lb-pulse-ring {
   0%   { box-shadow: 0 0 0 0px currentColor; opacity: 0.7; }
   70%  { box-shadow: 0 0 0 10px currentColor; opacity: 0;   }
