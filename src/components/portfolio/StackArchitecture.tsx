@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 const LEVEL_STYLES = {
   Primary: "text-primary border-primary/30 bg-primary/10",
   Production: "text-foreground border-border bg-surface-high",
-  Supporting: "text-muted-foreground border-border/50 bg-surface-low",
+  Supporting: "text-muted-foreground border-border bg-surface-low",
 } as const;
 
 export function StackArchitecture() {
@@ -53,14 +53,10 @@ export function StackArchitecture() {
                   {layer.subtitle}
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {layer.technologies.map((tech, i) => (
+                  {layer.technologies.map((tech) => (
                     <div
                       key={tech.name}
-                      className={cn(
-                        "p-5 rounded-xl border border-border/20 bg-card transition-colors hover:border-primary/30",
-                        "animate-in fade-in duration-300",
-                      )}
-                      style={{ animationDelay: `${i * 50}ms` }}
+                      className="p-5 rounded-xl border border-border bg-card transition-colors hover:border-primary/30"
                     >
                       <TechHeader name={tech.name} level={tech.level} />
                       <p className="text-sm text-muted-foreground leading-relaxed mt-2">
@@ -100,7 +96,7 @@ function TechHeader({
       <h3 className="font-headline font-semibold text-base">{name}</h3>
       <span
         className={cn(
-          "shrink-0 px-2 py-0.5 rounded font-mono text-[10px] uppercase tracking-wider border",
+          "shrink-0 px-2 py-0.5 rounded font-mono text-xs uppercase tracking-wider border",
           LEVEL_STYLES[level],
         )}
       >
