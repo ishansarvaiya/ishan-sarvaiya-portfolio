@@ -21,8 +21,8 @@ export function StackArchitecture() {
       <FadeIn>
         <SectionHeader
           id="stack-title"
-          eyebrow="Microsoft Stack"
-          title="Stack, organized like production architecture"
+          eyebrow="Technology"
+          title="Stack, organized by layer"
           lead="Depth over decoration. Every layer maps to systems I've shipped, not tutorials I've completed."
         />
       </FadeIn>

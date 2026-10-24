@@ -110,7 +110,7 @@ export const HERO_METRICS = [
   "4+ years in production",
   "10K+ daily active users",
   "99.9% transaction reliability",
-  ".NET 8 · Azure · Angular",
+  ".NET 8 · Azure · Python · AI",
 ];
 
 // ─── Stack Layers ─────────────────────────────────────────────────────────────
@@ -182,6 +182,19 @@ export const STACK_LAYERS: StackLayer[] = [
       { name: "OCR / KYC Pipelines", capability: "Document capture, identity verification, compliance audit trails", level: "Production" },
       { name: "Selenium / C# Automation", capability: "Web and desktop automation for indexing and QA workflows", level: "Supporting" },
       { name: "Git / GitHub", capability: "Branching, PR reviews, CI integration, open-source contributions", level: "Production" },
+    ],
+  },
+  {
+    id: "ai",
+    title: "AI & Agents",
+    subtitle: "LLM-powered features and agentic workflows, built and shipped like any other service.",
+    icon: "psychology",
+    technologies: [
+      { name: "LLM APIs", capability: "Integrating hosted models into services with streaming, structured output, retries, and cost control", level: "Production" },
+      { name: "Claude / Anthropic API", capability: "Messages API, tool use, and long-context workflows", level: "Production" },
+      { name: "Prompt Engineering", capability: "Reliable prompts, evaluation, and guardrails for production use", level: "Production" },
+      { name: "AI Agents / Tool Use", capability: "Multi-step agents that call APIs and tools, with checks where it matters", level: "Production" },
+      { name: "AI-Assisted Development", capability: "Claude Code and agentic dev tooling for faster, reviewed delivery", level: "Production" },
     ],
   },
 ];

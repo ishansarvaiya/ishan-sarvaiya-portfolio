@@ -47,7 +47,7 @@ export function CaseStudies() {
           id="work-title"
           eyebrow="Production Proof"
           title="Case Studies"
-          lead="Enterprise delivery in STAR-M form: Situation, Task, Action, Result, and the Microsoft stack behind it."
+          lead="Enterprise delivery in STAR-M form: Situation, Task, Action, Result, and the stack behind it."
         />
       </FadeIn>
 
@@ -260,7 +260,7 @@ function CaseStudyDetail({ study }: { study: CaseStudy }) {
 
         <div>
           <h4 className="text-eyebrow mb-3 text-muted-foreground">
-            Microsoft Stack Highlight
+            Stack Highlights
           </h4>
           <ul className="flex flex-wrap gap-2">
             {study.microsoftStack.map((tech) => (

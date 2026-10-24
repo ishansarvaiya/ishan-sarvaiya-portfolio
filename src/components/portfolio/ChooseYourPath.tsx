@@ -40,7 +40,7 @@ export function ChooseYourPath() {
       id: "hire",
       title: "For Hiring Teams",
       subtitle: "Resume-ready proof of enterprise delivery",
-      body: "Production systems on the Microsoft stack: ASP.NET Web API, EF Core, Angular, and Azure. Built with clean architecture, observability, and operational reliability.",
+      body: "Production systems across .NET, Azure, Angular, Python, and AI tooling. Built with clean architecture, observability, and operational reliability.",
       bullets: [
         "Senior Software Engineer · .NET 8 / C# / ASP.NET Core",
         "Fintech & enterprise domains · distributed systems",

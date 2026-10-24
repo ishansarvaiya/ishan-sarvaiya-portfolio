@@ -160,7 +160,7 @@ export function Footer() {
         </div>
 
         <div className="mt-24 flex flex-col items-start justify-between gap-3 border-t border-border pt-6 text-sm text-muted-foreground sm:flex-row sm:items-center">
-          <p>Ishan Sarvaiya · Enterprise .NET &amp; Azure · ishansarvaiya.in</p>
+          <p>Ishan Sarvaiya · Backend, Cloud &amp; AI · ishansarvaiya.in</p>
           <p>&copy; {new Date().getFullYear()}</p>
           <a
             href={`mailto:${contactEmail}`}
