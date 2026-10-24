@@ -199,35 +199,3 @@
     border: 1px solid hsl(var(--border));
   }
 }
-
-/* Load Balancer widget: transform and opacity only. */
-@keyframes lb-pulse-ring {
-  0%   { transform: scale(1);    opacity: 0.55; }
-  100% { transform: scale(1.22); opacity: 0;    }
-}
-
-@keyframes lb-fire-shake {
-  0%,100% { transform: translateX(0)    scale(1);   }
-  15%      { transform: translateX(-4px) scale(1.15); }
-  30%      { transform: translateX(4px)  scale(1.2);  }
-  45%      { transform: translateX(-3px) scale(1.1);  }
-  60%      { transform: translateX(3px)  scale(1.18); }
-  75%      { transform: translateX(-2px) scale(1.12); }
-}
-
-.lb-pulse {
-  animation: lb-pulse-ring 1.8s ease-out infinite;
-}
-
-.lb-fire {
-  animation: lb-fire-shake 0.55s ease-in-out infinite;
-  display: inline-block;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .lb-pulse,
-  .lb-fire,
-  .animate-pulse {
-    animation: none;
-  }
-}
