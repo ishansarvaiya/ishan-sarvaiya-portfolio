@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronRight, Code2, X } from "lucide-react";
@@ -24,6 +24,12 @@ const CARD_RADIUS = 28;
 export function CaseStudies() {
   const [filter, setFilter] = useState<string>("All");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  // Radix can't see the card button as a trigger, so remember it to restore focus.
+  const lastOpenedRef = useRef<string | null>(null);
+  const openStudy = (id: string) => {
+    lastOpenedRef.current = id;
+    setSelectedId(id);
+  };
 
   const filtered =
     filter === "All"
@@ -54,7 +60,7 @@ export function CaseStudies() {
           {featured.map((study, i) => (
             <li key={study.id}>
               <FadeIn delay={i * 0.06}>
-                <CaseStudyCard study={study} onOpen={setSelectedId} />
+                <CaseStudyCard study={study} onOpen={openStudy} />
               </FadeIn>
             </li>
           ))}
@@ -66,7 +72,7 @@ export function CaseStudies() {
           {rest.map((study, i) => (
             <li key={study.id}>
               <FadeIn delay={(i % 2) * 0.06} className="h-full">
-                <CaseStudyCard study={study} onOpen={setSelectedId} compact />
+                <CaseStudyCard study={study} onOpen={openStudy} compact />
               </FadeIn>
             </li>
           ))}
@@ -89,7 +95,14 @@ export function CaseStudies() {
                   transition={springSnappy}
                 />
               </Dialog.Overlay>
-              <Dialog.Content asChild forceMount>
+              <Dialog.Content
+                asChild
+                forceMount
+                onCloseAutoFocus={(e) => {
+                  e.preventDefault();
+                  document.getElementById(`case-trigger-${lastOpenedRef.current}`)?.focus();
+                }}
+              >
                 <motion.div
                   layoutId={`case-${selected.id}`}
                   transition={springSheet}
@@ -176,6 +189,7 @@ function CaseStudyCard({
         {/* The stretched button makes the whole card the hit target. */}
         <button
           type="button"
+          id={`case-trigger-${study.id}`}
           onClick={() => onOpen(study.id)}
           aria-haspopup="dialog"
           className="inline-flex min-h-11 items-center gap-1 rounded-full text-[0.9375rem] font-medium text-primary after:absolute after:inset-0 after:rounded-[28px] after:content-['']"
