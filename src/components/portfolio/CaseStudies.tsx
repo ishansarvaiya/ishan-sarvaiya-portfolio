@@ -1,27 +1,29 @@
 import { useState } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronRight, Code2, X } from "lucide-react";
 import {
   CASE_STUDIES,
   CASE_STUDY_DOMAINS,
   type CaseStudy,
 } from "@/data/portfolio";
-import { MaterialIcon } from "./MaterialIcon";
 import { FadeIn } from "./FadeIn";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+import { Section, SectionHeader } from "./Primitives";
 import { cn } from "@/lib/utils";
+import { press, springSheet, springSnappy } from "@/lib/motion";
 
 const DOMAIN_COLORS: Record<CaseStudy["domain"], string> = {
-  Fintech: "text-domain-fintech border-domain-fintech/30",
-  Media: "text-primary border-primary/30",
-  Enterprise: "text-domain-enterprise border-domain-enterprise/30",
-  Utilities: "text-domain-utilities border-domain-utilities/30",
+  Fintech: "text-domain-fintech",
+  Media: "text-primary",
+  Enterprise: "text-domain-enterprise",
+  Utilities: "text-domain-utilities",
 };
+
+const CARD_RADIUS = 28;
 
 export function CaseStudies() {
   const [filter, setFilter] = useState<string>("All");
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const filtered =
     filter === "All"
@@ -30,50 +32,78 @@ export function CaseStudies() {
 
   const featured = filtered.filter((cs) => cs.featured);
   const rest = filtered.filter((cs) => !cs.featured);
+  const selected = CASE_STUDIES.find((cs) => cs.id === selectedId) ?? null;
 
   return (
-    <section id="work" className="py-32 px-8">
-      <div className="max-w-7xl mx-auto">
-        <FadeIn>
-          <header className="mb-10">
-            <p className="font-mono text-primary text-xs tracking-[0.3em] uppercase mb-4">
-              Production Proof
-            </p>
-            <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-4">
-              Case Studies
-            </h2>
-            <p className="text-muted-foreground max-w-2xl text-lg font-light">
-              Enterprise delivery framed as STAR-M: Situation, Task, Action, Result,
-              and Microsoft Stack highlights.
-            </p>
-          </header>
-        </FadeIn>
+    <Section id="work" width="wide" labelledBy="work-title">
+      <FadeIn>
+        <SectionHeader
+          id="work-title"
+          eyebrow="Production Proof"
+          title="Case Studies"
+          lead="Enterprise delivery framed as STAR-M: Situation, Task, Action, Result, and Microsoft Stack highlights."
+        />
+      </FadeIn>
 
-        <FadeIn delay={0.05}>
-          <FilterBar filter={filter} setFilter={setFilter} />
-        </FadeIn>
+      <FadeIn delay={0.05}>
+        <FilterBar filter={filter} setFilter={setFilter} />
+      </FadeIn>
 
-        {featured.length > 0 && (
-          <div className="grid grid-cols-1 gap-6">
-            {featured.map((study, i) => (
-              <FadeIn key={study.id} delay={i * 0.08}>
-                <CaseStudyCard study={study} />
+      {featured.length > 0 && (
+        <ul className="grid grid-cols-1 gap-5">
+          {featured.map((study, i) => (
+            <li key={study.id}>
+              <FadeIn delay={i * 0.06}>
+                <CaseStudyCard study={study} onOpen={setSelectedId} />
               </FadeIn>
-            ))}
-          </div>
-        )}
+            </li>
+          ))}
+        </ul>
+      )}
 
-        {rest.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            {rest.map((study, i) => (
-              <FadeIn key={study.id} delay={i * 0.06}>
-                <CaseStudyCard study={study} compact />
+      {rest.length > 0 && (
+        <ul className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+          {rest.map((study, i) => (
+            <li key={study.id}>
+              <FadeIn delay={(i % 2) * 0.06} className="h-full">
+                <CaseStudyCard study={study} onOpen={setSelectedId} compact />
               </FadeIn>
-            ))}
-          </div>
-        )}
-      </div>
-    </section>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <Dialog.Root
+        open={selected !== null}
+        onOpenChange={(open) => !open && setSelectedId(null)}
+      >
+        <AnimatePresence>
+          {selected && (
+            <Dialog.Portal forceMount>
+              <Dialog.Overlay asChild forceMount>
+                <motion.div
+                  className="fixed inset-0 z-[60] bg-black/40"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={springSnappy}
+                />
+              </Dialog.Overlay>
+              <Dialog.Content asChild forceMount>
+                <motion.div
+                  layoutId={`case-${selected.id}`}
+                  transition={springSheet}
+                  style={{ borderRadius: CARD_RADIUS }}
+                  className="fixed inset-x-3 top-[max(0.75rem,5svh)] z-[61] mx-auto max-h-[90svh] max-w-3xl overflow-y-auto overscroll-contain bg-card"
+                >
+                  <CaseStudyDetail study={selected} />
+                </motion.div>
+              </Dialog.Content>
+            </Dialog.Portal>
+          )}
+        </AnimatePresence>
+      </Dialog.Root>
+    </Section>
   );
 }
 
@@ -85,21 +115,27 @@ function FilterBar({
   setFilter: (v: string) => void;
 }) {
   return (
-    <div className="flex flex-wrap gap-2 mb-12">
+    <div
+      role="group"
+      aria-label="Filter case studies by domain"
+      className="mb-10 flex flex-wrap justify-center gap-2"
+    >
       {CASE_STUDY_DOMAINS.map((domain) => (
-        <button
+        <motion.button
+          {...press}
           key={domain}
           type="button"
           onClick={() => setFilter(domain)}
+          aria-pressed={filter === domain}
           className={cn(
-            "px-4 py-1.5 rounded-full font-mono text-xs uppercase tracking-wider border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+            "min-h-11 rounded-full px-5 text-[0.9375rem] font-medium tracking-tight transition-colors duration-200",
             filter === domain
-              ? "bg-primary/15 border-primary/50 text-primary"
-              : "border-border text-muted-foreground hover:text-foreground hover:border-primary/30",
+              ? "bg-foreground text-background"
+              : "bg-secondary text-secondary-foreground hover:bg-secondary/70",
           )}
         >
           {domain}
-        </button>
+        </motion.button>
       ))}
     </div>
   );
@@ -107,122 +143,136 @@ function FilterBar({
 
 function CaseStudyCard({
   study,
+  onOpen,
   compact = false,
 }: {
   study: CaseStudy;
+  onOpen: (id: string) => void;
   compact?: boolean;
 }) {
-  const [open, setOpen] = useState(false);
-
   return (
-    <article
+    <motion.article
+      layoutId={`case-${study.id}`}
+      whileHover={{ scale: 1.01 }}
+      whileTap={{ scale: 0.985 }}
+      transition={springSheet}
+      style={{ borderRadius: CARD_RADIUS }}
       className={cn(
-        "relative bg-card rounded-xl border border-border transition-colors duration-300 hover:border-primary/30",
-        study.featured && !compact && "border-primary/20",
+        "relative flex h-full flex-col bg-card p-7 md:p-9",
+        !compact && "md:p-12",
       )}
     >
-      <CaseStudyCardInner study={study} open={open} setOpen={setOpen} />
-    </article>
-  );
-}
-
-function CaseStudyCardInner({
-  study,
-  open,
-  setOpen,
-}: {
-  study: CaseStudy;
-  open: boolean;
-  setOpen: (v: boolean) => void;
-}) {
-  return (
-    <div className="p-6 md:p-8">
-      <div className="flex flex-wrap items-center gap-2 mb-4">
-        <span
-          className={cn(
-            "px-2.5 py-0.5 rounded font-mono text-xs uppercase tracking-wider border",
-            DOMAIN_COLORS[study.domain],
-          )}
-        >
+      <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+        <span className={cn("font-semibold", DOMAIN_COLORS[study.domain])}>
           {study.domain}
         </span>
-        <span className="font-mono text-xs text-muted-foreground">
-          {study.timeline}
-        </span>
+        <span className="text-muted-foreground">{study.timeline}</span>
       </div>
 
-      <h3 className="font-headline text-xl md:text-2xl font-bold mb-2">
-        {study.title}
-      </h3>
-      <p className="text-primary font-mono text-sm mb-4">{study.tagline}</p>
+      <h3 className={compact ? "text-headline" : "text-title"}>{study.title}</h3>
+      <p className="mt-3 text-muted-foreground text-pretty">{study.tagline}</p>
 
-      <Collapsible open={open} onOpenChange={setOpen}>
-        <CollapsibleTrigger className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md transition-colors">
-          <MaterialIcon
-            name={open ? "expand_less" : "expand_more"}
-            className="text-base"
-          />
-          {open ? "Collapse STAR-M" : "View STAR-M Breakdown"}
-        </CollapsibleTrigger>
-
-        <CollapsibleContent className="mt-6 space-y-5">
-          <StarBlock label="Situation" content={study.situation} />
-          <StarBlock label="Task" content={study.task} />
-          <StarBlock label="Action" bullets={study.actions} />
-          <StarBlock label="Result" bullets={study.results} />
-
-          {study.azureMetrics && study.azureMetrics.length > 0 && (
-            <div>
-              <p className="font-mono text-xs uppercase tracking-widest text-primary mb-2">
-                Azure Metrics
-              </p>
-              <ul className="space-y-1">
-                {study.azureMetrics.map((m) => (
-                  <li key={m} className="text-sm text-muted-foreground flex gap-2">
-                    <span className="text-primary">›</span>
-                    {m}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          <MicrosoftStackTags stack={study.microsoftStack} />
-        </CollapsibleContent>
-      </Collapsible>
-
-      {study.sourceUrl && (
-        <a
-          href={study.sourceUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md"
+      <div className="mt-8 flex flex-1 items-end justify-between gap-4">
+        {/* The stretched button makes the whole card the hit target. */}
+        <button
+          type="button"
+          onClick={() => onOpen(study.id)}
+          aria-haspopup="dialog"
+          className="inline-flex min-h-11 items-center gap-1 rounded-full text-[0.9375rem] font-medium text-primary after:absolute after:inset-0 after:rounded-[28px] after:content-['']"
         >
-          <MaterialIcon name="code" className="text-sm" />
-          Source
-        </a>
-      )}
-    </div>
+          View STAR-M Breakdown
+          <ChevronRight size={16} aria-hidden="true" />
+          <span className="sr-only"> for {study.title}</span>
+        </button>
+
+        {study.sourceUrl && (
+          <a
+            href={study.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative z-10 inline-flex min-h-11 items-center gap-1.5 rounded-full px-2 text-[0.9375rem] font-medium text-muted-foreground hover:text-foreground"
+          >
+            <Code2 size={16} aria-hidden="true" />
+            Source
+            <span className="sr-only"> for {study.title}</span>
+          </a>
+        )}
+      </div>
+    </motion.article>
   );
 }
 
-function MicrosoftStackTags({ stack }: { stack: string[] }) {
+function CaseStudyDetail({ study }: { study: CaseStudy }) {
   return (
-    <div>
-      <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">
-        Microsoft Stack Highlight
-      </p>
-      <div className="flex flex-wrap gap-2">
-        {stack.map((tech) => (
-          <span
-            key={tech}
-            className="px-2.5 py-1 bg-surface-high rounded font-mono text-xs text-primary border border-primary/20"
-          >
-            {tech}
-          </span>
-        ))}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, transition: { ...springSnappy, delay: 0.1 } }}
+      exit={{ opacity: 0, transition: { duration: 0.08 } }}
+      className="p-7 md:p-12"
+    >
+      <Dialog.Close asChild>
+        <motion.button
+          {...press}
+          type="button"
+          aria-label="Close case study"
+          className="absolute right-4 top-4 inline-flex size-11 items-center justify-center rounded-full bg-secondary text-secondary-foreground"
+        >
+          <X size={18} aria-hidden="true" />
+        </motion.button>
+      </Dialog.Close>
+
+      <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 pr-12 text-sm">
+        <span className={cn("font-semibold", DOMAIN_COLORS[study.domain])}>
+          {study.domain}
+        </span>
+        <span className="text-muted-foreground">{study.timeline}</span>
       </div>
-    </div>
+
+      <Dialog.Title className="text-title text-balance">{study.title}</Dialog.Title>
+      <Dialog.Description className="mt-3 text-lead text-muted-foreground text-pretty">
+        {study.tagline}
+      </Dialog.Description>
+
+      <div className="mt-10 space-y-8">
+        <StarBlock label="Role" content={study.role} />
+        <StarBlock label="Situation" content={study.situation} />
+        <StarBlock label="Task" content={study.task} />
+        <StarBlock label="Action" bullets={study.actions} />
+        <StarBlock label="Result" bullets={study.results} />
+
+        {study.azureMetrics && study.azureMetrics.length > 0 && (
+          <StarBlock label="Azure Metrics" bullets={study.azureMetrics} />
+        )}
+
+        <div>
+          <h4 className="text-eyebrow mb-3 text-muted-foreground">
+            Microsoft Stack Highlight
+          </h4>
+          <ul className="flex flex-wrap gap-2">
+            {study.microsoftStack.map((tech) => (
+              <li
+                key={tech}
+                className="rounded-full bg-secondary px-3.5 py-1.5 text-sm text-secondary-foreground"
+              >
+                {tech}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {study.sourceUrl && (
+          <a
+            href={study.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-11 items-center gap-2 font-medium text-primary hover:opacity-80"
+          >
+            <Code2 size={16} aria-hidden="true" />
+            Source
+          </a>
+        )}
+      </div>
+    </motion.div>
   );
 }
 
@@ -237,20 +287,12 @@ function StarBlock({
 }) {
   return (
     <div>
-      <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-2">
-        {label}
-      </p>
-      {content && (
-        <p className="text-sm text-muted-foreground leading-relaxed">{content}</p>
-      )}
+      <h4 className="text-eyebrow mb-2 text-muted-foreground">{label}</h4>
+      {content && <p className="text-pretty">{content}</p>}
       {bullets && (
-        <ul className="space-y-1.5">
+        <ul className="space-y-2">
           {bullets.map((b) => (
-            <li
-              key={b}
-              className="text-sm text-muted-foreground flex gap-2 leading-relaxed"
-            >
-              <span className="text-primary shrink-0">›</span>
+            <li key={b} className="text-pretty">
               {b}
             </li>
           ))}
