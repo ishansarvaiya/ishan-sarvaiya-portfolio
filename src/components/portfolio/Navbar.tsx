@@ -7,12 +7,38 @@ import { trackEvent } from "@/lib/analytics";
 import { press, springSnappy } from "@/lib/motion";
 
 const linkClass =
-  "inline-flex min-h-11 items-center rounded-full px-3 text-[0.8125rem] text-foreground/80 hover:text-foreground transition-colors duration-200";
+  "inline-flex min-h-11 items-center rounded-full px-3 text-[0.8125rem] text-foreground/80 hover:text-foreground";
+
+/** Tracks which section is under the nav so its link can be marked current. */
+function useActiveSection(ids: string[]) {
+  const [active, setActive] = useState<string | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        }
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, [ids]);
+
+  return active;
+}
+
+const SECTION_IDS = NAV_LINKS.map((l) => l.href.slice(1));
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const { resumeUrl, githubUrl } = useSiteConfig();
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const active = useActiveSection(SECTION_IDS);
 
   useEffect(() => {
     if (!open) return;
@@ -43,7 +69,12 @@ export function Navbar() {
 
           <div className="hidden md:flex items-center">
             {NAV_LINKS.map((link) => (
-              <a key={link.href} href={link.href} className={linkClass}>
+              <a
+                key={link.href}
+                href={link.href}
+                aria-current={active === link.href.slice(1) ? "location" : undefined}
+                className={`${linkClass} aria-[current=location]:font-semibold aria-[current=location]:text-foreground`}
+              >
                 {link.label}
               </a>
             ))}

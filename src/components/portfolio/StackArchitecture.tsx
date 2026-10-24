@@ -4,14 +4,7 @@ import { STACK_LAYERS } from "@/data/portfolio";
 import { FadeIn } from "./FadeIn";
 import { Section, SectionHeader } from "./Primitives";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { cn } from "@/lib/utils";
 import { spring } from "@/lib/motion";
-
-const LEVEL_STYLES = {
-  Primary: "text-primary font-semibold",
-  Production: "text-foreground",
-  Supporting: "text-muted-foreground",
-} as const;
 
 export function StackArchitecture() {
   const [activeTab, setActiveTab] = useState(STACK_LAYERS[0].id);
@@ -35,7 +28,7 @@ export function StackArchitecture() {
                 <TabsTrigger
                   key={layer.id}
                   value={layer.id}
-                  className="relative min-h-10 rounded-full px-4 text-[0.9375rem] transition-colors focus-visible:ring-0 focus-visible:ring-offset-0 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+                  className="relative min-h-10 rounded-full px-4 text-[0.9375rem] focus-visible:ring-0 focus-visible:ring-offset-0 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
                 >
                   {activeTab === layer.id && (
                     <motion.span
@@ -67,19 +60,9 @@ export function StackArchitecture() {
                 <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   {layer.technologies.map((tech) => (
                     <li key={tech.name} className="rounded-3xl bg-background p-6">
-                      <div className="flex items-start justify-between gap-3">
-                        <h3 className="text-[1.0625rem] font-semibold tracking-tight">
-                          {tech.name}
-                        </h3>
-                        <span
-                          className={cn(
-                            "shrink-0 text-xs",
-                            LEVEL_STYLES[tech.level],
-                          )}
-                        >
-                          {tech.level}
-                        </span>
-                      </div>
+                      <h3 className="text-[1.0625rem] font-semibold tracking-tight">
+                        {tech.name}
+                      </h3>
                       <p className="mt-2 text-[0.9375rem] text-muted-foreground">
                         {tech.capability}
                       </p>

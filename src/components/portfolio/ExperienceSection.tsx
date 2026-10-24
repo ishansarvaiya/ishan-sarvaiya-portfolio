@@ -1,8 +1,12 @@
 import { EXPERIENCE } from "@/data/portfolio";
 import { FadeIn } from "./FadeIn";
-import { Section, SectionHeader } from "./Primitives";
+import { ExternalLink } from "lucide-react";
+import { Section, SectionHeader, ButtonLink } from "./Primitives";
+import { useSiteConfig } from "@/context/SiteConfigContext";
+import { trackEvent } from "@/lib/analytics";
 
 export function ExperienceSection() {
+  const { linkedinUrl } = useSiteConfig();
   return (
     <Section id="experience" tone="grey" labelledBy="experience-title">
       <FadeIn>
@@ -42,6 +46,24 @@ export function ExperienceSection() {
           </li>
         ))}
       </ol>
+
+      <FadeIn>
+        <p className="mt-12 text-center text-muted-foreground">
+          Colleagues and clients have shared feedback on LinkedIn.
+        </p>
+        <div className="mt-2 text-center">
+          <ButtonLink
+            href={linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="link"
+            onClick={() => trackEvent("linkedin_click")}
+          >
+            Read recommendations
+            <ExternalLink size={14} aria-hidden="true" />
+          </ButtonLink>
+        </div>
+      </FadeIn>
     </Section>
   );
 }

@@ -47,7 +47,7 @@ export function Footer() {
     setEmail("");
     setMessage("");
     setIntent("hire");
-    setTimeout(() => setSent(false), 5000);
+    setTimeout(() => setSent(false), 12000);
   }
 
   return (
@@ -151,9 +151,17 @@ export function Footer() {
                 {sent ? "✓ Opening Email Client…" : "Send Message →"}
               </motion.button>
 
-              <p role="status" aria-live="polite" className="text-sm text-primary">
-                {sent &&
-                  "Your default email client should open with the message pre-filled."}
+              <p role="status" aria-live="polite" className="text-sm text-muted-foreground">
+                {sent && (
+                  <>
+                    Your email app should open with the message filled in. If it
+                    doesn&apos;t, write to{" "}
+                    <a href={`mailto:${contactEmail}`} className="text-primary underline underline-offset-4">
+                      {contactEmail}
+                    </a>
+                    .
+                  </>
+                )}
               </p>
             </form>
           </FadeIn>

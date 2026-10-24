@@ -27,6 +27,8 @@ export interface CaseStudy {
   title: string;
   tagline: string;
   domain: "Fintech" | "Media" | "Enterprise" | "Utilities";
+  /** Headline figure shown on the card. */
+  metric: { value: string; label: string };
   role: string;
   timeline: string;
   situation: string;
@@ -200,6 +202,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     title: "Media Ingestion Engine",
     tagline: "Distributed pipelines processing millions of OTT metadata records daily.",
     domain: "Media",
+    metric: { value: "40%", label: "faster search at peak ingest" },
     role: "Software Engineer",
     timeline: "Oct 2025 – Present · Kinetiq",
     situation:
@@ -228,6 +231,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     title: "Mobile Wallet Backend",
     tagline: "High-concurrency .NET APIs on Azure for 10,000+ DAU with 99.9% reliability.",
     domain: "Fintech",
+    metric: { value: "10K+", label: "daily active users" },
     role: "Backend Engineer",
     timeline: "2022 – 2025 · Crytonix",
     situation:
@@ -257,6 +261,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     title: "KYC Management System",
     tagline: "Automated identity verification that cut manual processing errors by 35%.",
     domain: "Fintech",
+    metric: { value: "35%", label: "fewer manual processing errors" },
     role: "Full-Stack Engineer",
     timeline: "2023 – 2024 · Crytonix",
     situation:
@@ -280,6 +285,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     title: "Utility Payment Gateway",
     tagline: "Custom billing logic handling 5,000+ daily transactions across regional grids.",
     domain: "Utilities",
+    metric: { value: "5,000+", label: "daily transactions" },
     role: "API Architect",
     timeline: "2023 – 2024 · Crytonix",
     situation:
@@ -307,6 +313,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     title: "Enterprise HRMS",
     tagline: "A full-stack Angular and .NET platform for 100+ enterprise users.",
     domain: "Enterprise",
+    metric: { value: "100+", label: "enterprise users" },
     role: "Full-Stack Engineer",
     timeline: "2021 – 2022 · iFour Technolab",
     situation:
@@ -330,6 +337,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     title: "Logistics Tracking APIs",
     tagline: "Real-time shipment APIs that improved delivery operations efficiency by 25%.",
     domain: "Enterprise",
+    metric: { value: "25%", label: "better delivery operations efficiency" },
     role: "Backend Engineer",
     timeline: "2021 – 2022 · iFour Technolab",
     situation:
@@ -353,6 +361,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     title: "Streaming Content Automation",
     tagline: "A C# and Selenium desktop suite that indexes catalog data into SQL Server.",
     domain: "Enterprise",
+    metric: { value: "Open source", label: "published on GitHub" },
     role: "Developer",
     timeline: "2021 – 2022 · iFour Technolab",
     situation:

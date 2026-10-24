@@ -1,30 +1,34 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, Download } from "lucide-react";
 import { useResumeUrl } from "@/context/SiteConfigContext";
-import { ProfileAvatar } from "./ProfileAvatar";
 import { ButtonLink } from "./Primitives";
 import { trackEvent } from "@/lib/analytics";
 import { revealContainer, revealItem } from "@/lib/motion";
 
 export function Hero() {
   const resumeUrl = useResumeUrl();
+  const ref = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
+  // As the hero scrolls away it recedes slightly: transform and opacity only.
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const opacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
 
   return (
     <section
+      ref={ref}
       aria-labelledby="hero-title"
       className="flex min-h-[100svh] flex-col items-center justify-center px-6 pb-16 pt-28"
     >
+      <motion.div style={reduceMotion ? undefined : { opacity, scale }}>
       <motion.div
         className="mx-auto max-w-4xl text-center"
         variants={revealContainer}
         initial="hidden"
         animate="show"
       >
-        <motion.div variants={revealItem}>
-          <ProfileAvatar />
-        </motion.div>
-
-        <motion.p variants={revealItem} className="text-eyebrow text-primary mt-8">
+        <motion.p variants={revealItem} className="text-eyebrow text-primary">
           .NET · Azure · Python · AI
         </motion.p>
 
@@ -81,6 +85,7 @@ export function Hero() {
           </ButtonLink>
         </motion.div>
 
+      </motion.div>
       </motion.div>
     </section>
   );

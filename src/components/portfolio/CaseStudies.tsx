@@ -45,7 +45,7 @@ export function CaseStudies() {
           id="work-title"
           eyebrow="Production Proof"
           title="Case Studies"
-          lead="Enterprise delivery in STAR-M form: Situation, Task, Action, Result, and the stack behind it."
+          lead="Selected work, from the problem to the outcome."
         />
       </FadeIn>
 
@@ -125,7 +125,7 @@ function FilterBar({
           onClick={() => setFilter(domain)}
           aria-pressed={filter === domain}
           className={cn(
-            "min-h-11 rounded-full px-5 text-[0.9375rem] font-medium tracking-tight transition-colors duration-200",
+            "min-h-11 rounded-full px-5 text-[0.9375rem] font-medium tracking-tight",
             filter === domain
               ? "bg-foreground text-background"
               : "bg-secondary text-secondary-foreground hover:bg-secondary/70",
@@ -154,15 +154,29 @@ function CaseStudyCard({
       style={{ borderRadius: CARD_RADIUS }}
       className="relative flex h-full flex-col bg-card p-7 md:p-9"
     >
-      <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+      <div className="mb-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
         <span className={cn("font-semibold", DOMAIN_COLORS[study.domain])}>
           {study.domain}
         </span>
         <span className="text-muted-foreground">{study.timeline}</span>
       </div>
 
-      <h3 className="text-headline">{study.title}</h3>
-      <p className="mt-3 text-muted-foreground text-pretty">{study.tagline}</p>
+      <p className="text-title mt-2 leading-none tabular-nums">{study.metric.value}</p>
+      <p className="mt-2 text-sm text-muted-foreground">{study.metric.label}</p>
+
+      <h3 className="text-headline mt-8">{study.title}</h3>
+      <p className="mt-2 text-muted-foreground text-pretty">{study.tagline}</p>
+
+      <ul aria-label="Technologies" className="mt-5 flex flex-wrap gap-2">
+        {study.tags.slice(0, 3).map((tag) => (
+          <li
+            key={tag}
+            className="rounded-full bg-background px-3 py-1 text-xs text-muted-foreground"
+          >
+            {tag}
+          </li>
+        ))}
+      </ul>
 
       <div className="mt-8 flex flex-1 items-end justify-between gap-4">
         {/* The stretched button makes the whole card the hit target. */}
@@ -173,7 +187,7 @@ function CaseStudyCard({
           aria-haspopup="dialog"
           className="inline-flex min-h-11 items-center gap-1 rounded-full text-[0.9375rem] font-medium text-primary after:absolute after:inset-0 after:rounded-[28px] after:content-['']"
         >
-          View STAR-M Breakdown
+          View details
           <ChevronRight size={16} aria-hidden="true" />
           <span className="sr-only"> for {study.title}</span>
         </button>
@@ -228,13 +242,13 @@ function CaseStudyDetail({ study }: { study: CaseStudy }) {
 
       <div className="mt-10 space-y-8">
         <StarBlock label="Role" content={study.role} />
-        <StarBlock label="Situation" content={study.situation} />
-        <StarBlock label="Task" content={study.task} />
-        <StarBlock label="Action" bullets={study.actions} />
-        <StarBlock label="Result" bullets={study.results} />
+        <StarBlock label="The challenge" content={study.situation} />
+        <StarBlock label="The goal" content={study.task} />
+        <StarBlock label="What I did" bullets={study.actions} />
+        <StarBlock label="The outcome" bullets={study.results} />
 
         {study.azureMetrics && study.azureMetrics.length > 0 && (
-          <StarBlock label="Azure Metrics" bullets={study.azureMetrics} />
+          <StarBlock label="Azure metrics" bullets={study.azureMetrics} />
         )}
 
         <div>
