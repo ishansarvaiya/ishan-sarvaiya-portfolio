@@ -4,23 +4,26 @@
 
 @layer base {
   :root {
+    /* Page canvas */
     --background: 0 0% 5%;
-    --foreground: 30 3% 89%;
+    --foreground: 0 0% 93%;
 
-    --card: 0 0% 7%;
-    --card-foreground: 30 3% 89%;
+    /* Card/popover: surface level 2 (elevated above section surfaces) */
+    --card: 0 0% 11%;
+    --card-foreground: 0 0% 93%;
 
-    --popover: 0 0% 7%;
-    --popover-foreground: 30 3% 89%;
+    --popover: 0 0% 11%;
+    --popover-foreground: 0 0% 93%;
 
     --primary: 183 100% 47%;
     --primary-foreground: 183 100% 7%;
 
+    /* Retained only until every bg-gradient-to-r consumer is migrated to the flat accent. */
     --secondary: 250 73% 48%;
     --secondary-foreground: 250 100% 90%;
 
     --muted: 0 0% 12%;
-    --muted-foreground: 186 10% 68%;
+    --muted-foreground: 0 0% 65%;
 
     --accent: 183 100% 47%;
     --accent-foreground: 183 100% 7%;
@@ -28,17 +31,20 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 185 8% 18%;
-    --input: 185 8% 18%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
     --ring: 183 100% 47%;
 
-    --radius: 0.75rem;
+    --radius: 0.625rem;
 
+    /* Retained only until .neon-glow's last consumer (ChooseYourPath) is migrated. */
     --neon: 183 100% 50%;
-    --surface-low: 0 0% 11%;
-    --surface-mid: 0 0% 13%;
-    --surface-high: 0 0% 17%;
-    --outline: 184 8% 55%;
+
+    /* Surface level 1: section backgrounds distinct from the page canvas. */
+    --surface-low: 0 0% 9%;
+    --surface-mid: 0 0% 9%;
+    --surface-high: 0 0% 9%;
+    --outline: 0 0% 40%;
   }
 }
 
