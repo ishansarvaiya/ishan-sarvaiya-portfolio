@@ -41,10 +41,7 @@ export function UnpluggedSection() {
                 </span>
 
                 {/* Title */}
-                <h3
-                  className="font-headline font-semibold text-base mb-2 transition-colors duration-200"
-                  style={{ color: "hsl(30 3% 89%)" }}
-                >
+                <h3 className="font-headline font-semibold text-base text-foreground mb-2 transition-colors duration-200">
                   {hobby.title}
                 </h3>
 
