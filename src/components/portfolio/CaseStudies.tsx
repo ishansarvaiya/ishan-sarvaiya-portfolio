@@ -36,8 +36,6 @@ export function CaseStudies() {
       ? CASE_STUDIES
       : CASE_STUDIES.filter((cs) => cs.domain === filter);
 
-  const featured = filtered.filter((cs) => cs.featured);
-  const rest = filtered.filter((cs) => !cs.featured);
   const selected = CASE_STUDIES.find((cs) => cs.id === selectedId) ?? null;
 
   return (
@@ -55,29 +53,15 @@ export function CaseStudies() {
         <FilterBar filter={filter} setFilter={setFilter} />
       </FadeIn>
 
-      {featured.length > 0 && (
-        <ul className="grid grid-cols-1 gap-5">
-          {featured.map((study, i) => (
-            <li key={study.id}>
-              <FadeIn delay={i * 0.06}>
-                <CaseStudyCard study={study} onOpen={openStudy} />
-              </FadeIn>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {rest.length > 0 && (
-        <ul className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-          {rest.map((study, i) => (
-            <li key={study.id}>
-              <FadeIn delay={(i % 2) * 0.06} className="h-full">
-                <CaseStudyCard study={study} onOpen={openStudy} compact />
-              </FadeIn>
-            </li>
-          ))}
-        </ul>
-      )}
+      <ul className="grid grid-cols-1 gap-5 md:grid-cols-2">
+        {filtered.map((study, i) => (
+          <li key={study.id}>
+            <FadeIn delay={(i % 2) * 0.06} className="h-full">
+              <CaseStudyCard study={study} onOpen={openStudy} />
+            </FadeIn>
+          </li>
+        ))}
+      </ul>
 
       <Dialog.Root
         open={selected !== null}
@@ -157,11 +141,9 @@ function FilterBar({
 function CaseStudyCard({
   study,
   onOpen,
-  compact = false,
 }: {
   study: CaseStudy;
   onOpen: (id: string) => void;
-  compact?: boolean;
 }) {
   return (
     <motion.article
@@ -170,10 +152,7 @@ function CaseStudyCard({
       whileTap={{ scale: 0.985 }}
       transition={springSheet}
       style={{ borderRadius: CARD_RADIUS }}
-      className={cn(
-        "relative flex h-full flex-col bg-card p-7 md:p-9",
-        !compact && "md:p-12",
-      )}
+      className="relative flex h-full flex-col bg-card p-7 md:p-9"
     >
       <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
         <span className={cn("font-semibold", DOMAIN_COLORS[study.domain])}>
@@ -182,7 +161,7 @@ function CaseStudyCard({
         <span className="text-muted-foreground">{study.timeline}</span>
       </div>
 
-      <h3 className={compact ? "text-headline" : "text-title"}>{study.title}</h3>
+      <h3 className="text-headline">{study.title}</h3>
       <p className="mt-3 text-muted-foreground text-pretty">{study.tagline}</p>
 
       <div className="mt-8 flex flex-1 items-end justify-between gap-4">
