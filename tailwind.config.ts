@@ -57,7 +57,6 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				neon: 'hsl(var(--neon))',
 				'surface-low': 'hsl(var(--surface-low))',
 				'surface-mid': 'hsl(var(--surface-mid))',
 				'surface-high': 'hsl(var(--surface-high))',

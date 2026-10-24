@@ -42,8 +42,8 @@ export function ChooseYourPath() {
     {
       id: "hire",
       icon: "work",
-      accent: "border-[hsl(210_100%_50%/0.4)] hover:border-[hsl(210_100%_50%/0.7)]",
-      iconColor: "text-[hsl(210_100%_60%)]",
+      accent: "border-border hover:border-foreground/30",
+      iconColor: "text-foreground",
       title: "For Hiring Teams",
       subtitle: "Resume-ready proof of enterprise delivery",
       body: "Production-grade systems on the Microsoft stack — ASP.NET Web API, EF Core, Angular, and Azure — with clean architecture, observability, and operational reliability.",
@@ -108,10 +108,10 @@ export function ChooseYourPath() {
 function PathCard({ path }: { path: PathConfig }) {
   return (
     <article
-      className={`flex flex-col h-full p-8 rounded-2xl bg-card border ${path.accent} transition-all duration-300 hover:-translate-y-1 neon-glow`}
+      className={`flex flex-col h-full p-8 rounded-xl bg-card border ${path.accent} transition-all duration-300 hover:-translate-y-1`}
     >
       <MaterialIcon name={path.icon} className={`text-3xl mb-5 ${path.iconColor}`} />
-      <p className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground mb-2">
+      <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground mb-2">
         {path.subtitle}
       </p>
       <h3 className="font-headline text-2xl font-bold mb-4">{path.title}</h3>
@@ -124,7 +124,7 @@ function PathCard({ path }: { path: PathConfig }) {
           </li>
         ))}
       </ul>
-      <p className="font-mono text-[10px] text-muted-foreground/70 mb-5">{path.trust}</p>
+      <p className="font-mono text-xs text-muted-foreground mb-5">{path.trust}</p>
       <PathCtas ctas={path.ctas} />
     </article>
   );
@@ -142,8 +142,8 @@ function PathCtas({ ctas }: { ctas: Cta[] }) {
           onClick={() => cta.event && trackEvent(cta.event)}
           className={
             cta.primary
-              ? "px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary to-secondary text-primary-foreground font-mono text-xs tracking-wide font-semibold hover:scale-[1.02] transition-transform"
-              : "px-5 py-2.5 rounded-xl border border-border font-mono text-xs tracking-wide text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors"
+              ? "px-5 py-2.5 rounded-xl bg-primary text-primary-foreground font-mono text-xs tracking-wide font-semibold hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-colors"
+              : "px-5 py-2.5 rounded-xl border border-border font-mono text-xs tracking-wide text-muted-foreground hover:text-foreground hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-colors"
           }
         >
           {cta.label}
