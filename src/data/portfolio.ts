@@ -106,13 +106,6 @@ export const NAV_LINKS: NavLink[] = [
 /** Add entries here or in public/site-config.json → certifications */
 export const CERTIFICATIONS: Certification[] = [];
 
-export const HERO_METRICS = [
-  "4+ years in production",
-  "10K+ daily active users",
-  "99.9% transaction reliability",
-  ".NET 8 · Azure · Python · AI",
-];
-
 // ─── Stack Layers ─────────────────────────────────────────────────────────────
 
 export const STACK_LAYERS: StackLayer[] = [

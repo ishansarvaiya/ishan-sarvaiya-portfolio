@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Download } from "lucide-react";
-import { HERO_METRICS } from "@/data/portfolio";
 import { useResumeUrl } from "@/context/SiteConfigContext";
 import { ProfileAvatar } from "./ProfileAvatar";
 import { ButtonLink } from "./Primitives";
@@ -82,17 +81,6 @@ export function Hero() {
           </ButtonLink>
         </motion.div>
 
-        <motion.ul
-          variants={revealItem}
-          aria-label="Highlights"
-          className="mt-16 grid grid-cols-2 gap-x-6 gap-y-4 text-sm text-muted-foreground sm:grid-cols-4"
-        >
-          {HERO_METRICS.map((metric) => (
-            <li key={metric} className="text-balance">
-              {metric}
-            </li>
-          ))}
-        </motion.ul>
       </motion.div>
     </section>
   );
