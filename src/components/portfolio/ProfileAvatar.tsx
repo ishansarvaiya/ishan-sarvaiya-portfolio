@@ -9,12 +9,17 @@ export function ProfileAvatar({ className }: { className?: string }) {
   const isFallback = src === "/avatar.svg";
 
   return (
-    <div className={cn("mx-auto mb-8", className)}>
+    <div className={cn("mx-auto", className)}>
+      {/* Above the fold: eager, fixed box so nothing shifts when it loads. */}
       <img
         src={src}
         alt="Ishan Sarvaiya"
+        width={112}
+        height={112}
+        decoding="async"
+        fetchPriority="high"
         className={cn(
-          "w-28 h-28 md:w-32 md:h-32 rounded-full object-cover border-2 border-primary/40 shadow-[0_0_40px_hsl(var(--primary)/0.15)]",
+          "size-24 md:size-28 rounded-full object-cover border border-border",
           isFallback && "bg-surface-low p-4 object-contain",
         )}
         onError={() => {

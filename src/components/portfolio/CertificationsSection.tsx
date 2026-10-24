@@ -1,7 +1,10 @@
+import { BadgeCheck } from "lucide-react";
+import { motion } from "framer-motion";
 import { CERTIFICATIONS, type Certification } from "@/data/portfolio";
 import { useSiteConfig } from "@/context/SiteConfigContext";
 import { FadeIn } from "./FadeIn";
-import { MaterialIcon } from "./MaterialIcon";
+import { Section, SectionHeader } from "./Primitives";
+import { pressCard } from "@/lib/motion";
 
 export function CertificationsSection() {
   const { certifications: remoteCerts } = useSiteConfig();
@@ -10,55 +13,58 @@ export function CertificationsSection() {
   if (certs.length === 0) return null;
 
   return (
-    <section id="certifications" className="py-16 px-8">
-      <div className="max-w-5xl mx-auto">
-        <FadeIn>
-          <p className="font-mono text-primary text-xs tracking-[0.3em] uppercase mb-4 text-center">
-            Credentials
-          </p>
-          <h2 className="font-headline text-2xl md:text-3xl font-bold tracking-tight mb-10 text-center">
-            Certifications
-          </h2>
-        </FadeIn>
+    <Section id="certifications" labelledBy="certifications-title">
+      <FadeIn>
+        <SectionHeader
+          id="certifications-title"
+          eyebrow="Credentials"
+          title="Certifications"
+        />
+      </FadeIn>
 
-        <div className="flex flex-wrap justify-center gap-4">
-          {certs.map((cert, i) => (
-            <FadeIn key={cert.name + cert.issuer} delay={i * 0.05}>
+      <ul className="flex flex-wrap justify-center gap-4">
+        {certs.map((cert, i) => (
+          <li key={cert.name + cert.issuer}>
+            <FadeIn delay={i * 0.05}>
               <CertCard cert={cert} />
             </FadeIn>
-          ))}
-        </div>
-      </div>
-    </section>
+          </li>
+        ))}
+      </ul>
+    </Section>
   );
 }
 
 function CertCard({ cert }: { cert: Certification }) {
   const inner = (
-    <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors">
-      <MaterialIcon name="verified" className="text-primary text-xl shrink-0" />
-      <div className="text-left">
-        <p className="font-headline font-semibold text-sm">{cert.name}</p>
-        <p className="font-mono text-xs text-muted-foreground">
+    <>
+      <BadgeCheck className="shrink-0 text-primary" size={22} aria-hidden="true" />
+      <span className="text-left">
+        <span className="block text-[0.9375rem] font-semibold tracking-tight">
+          {cert.name}
+        </span>
+        <span className="block text-sm text-muted-foreground">
           {cert.issuer}
           {cert.year ? ` · ${cert.year}` : ""}
-        </p>
-      </div>
-    </div>
+        </span>
+      </span>
+    </>
   );
+  const classes = "flex items-center gap-3 rounded-2xl bg-card px-5 py-4";
 
   if (cert.credentialUrl) {
     return (
-      <a
+      <motion.a
+        {...pressCard}
         href={cert.credentialUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="block rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className={classes}
       >
         {inner}
-      </a>
+      </motion.a>
     );
   }
 
-  return inner;
+  return <div className={classes}>{inner}</div>;
 }

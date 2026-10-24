@@ -1,130 +1,141 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Download, Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/data/portfolio";
 import { useSiteConfig } from "@/context/SiteConfigContext";
 import { trackEvent } from "@/lib/analytics";
-import { Download } from "lucide-react";
+import { press, springSnappy } from "@/lib/motion";
+
+const linkClass =
+  "inline-flex min-h-11 items-center rounded-full px-3 text-[0.8125rem] text-foreground/80 hover:text-foreground transition-colors duration-200";
 
 export function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const { resumeUrl, githubUrl } = useSiteConfig();
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
-  return (
-    <nav
-      className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 rounded-full px-4 md:px-6 py-3 glass-panel flex justify-between items-center transition-all duration-200 relative"
-      role="navigation"
-      aria-label="Main navigation"
-    >
-      <a
-        href="#"
-        className="font-headline font-bold text-sm tracking-tight shrink-0 hidden sm:block hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md transition-colors"
-      >
-        IS<span className="text-primary">.</span>
-      </a>
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
-      <NavLinks />
-
-      <NavActions
-        resumeUrl={resumeUrl}
-        githubUrl={githubUrl}
-        mobileOpen={mobileOpen}
-        setMobileOpen={setMobileOpen}
-      />
-    </nav>
-  );
-}
-
-function NavLinks() {
-  return (
-    <div className="hidden md:flex gap-6 lg:gap-8 items-center">
-      {NAV_LINKS.map((link) => (
-        <a
-          key={link.href}
-          href={link.href}
-          className="font-headline tracking-tighter uppercase text-sm text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md px-0.5 transition-colors duration-300"
-        >
-          {link.label}
-        </a>
-      ))}
-    </div>
-  );
-}
-
-function NavActions({
-  resumeUrl,
-  githubUrl,
-  mobileOpen,
-  setMobileOpen,
-}: {
-  resumeUrl: string;
-  githubUrl: string;
-  mobileOpen: boolean;
-  setMobileOpen: (v: boolean) => void;
-}) {
   return (
     <>
-      <div className="flex items-center gap-2 md:gap-3">
-        <a
-          href={resumeUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => trackEvent("resume_download")}
-          className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-primary border border-transparent hover:border-primary/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-colors"
-          aria-label="Download resume"
-        >
-          <Download size={14} />
-          Resume
-        </a>
-        <a
-          href={githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:inline-flex font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md transition-colors px-2"
-        >
-          GitHub
-        </a>
-        <button
-          className="md:hidden w-11 h-11 flex items-center justify-center rounded-xl text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-colors"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-expanded={mobileOpen}
-          aria-label="Toggle navigation menu"
-        >
-          <span className="material-symbols-outlined" aria-hidden="true">
-            {mobileOpen ? "close" : "menu"}
-          </span>
-        </button>
-      </div>
-
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            key="mobile-menu"
-            initial={{ opacity: 0, y: -8, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.97 }}
-            transition={{ duration: 0.18, ease: "easeOut" }}
-            className="absolute top-full left-0 right-0 mt-2 p-6 glass-panel rounded-xl flex flex-col gap-4 md:hidden origin-top"
+      <nav
+        aria-label="Main navigation"
+        className="glass-panel fixed inset-x-0 top-0 z-50 border-x-0 border-t-0"
+      >
+        <div className="mx-auto flex h-12 max-w-6xl items-center justify-between px-4 md:px-6">
+          <a
+            href="#"
+            aria-label="Ishan Sarvaiya, back to top"
+            className="inline-flex min-h-11 items-center rounded-full px-2 text-[0.9375rem] font-semibold tracking-tight"
           >
+            IS<span className="text-primary">.</span>
+          </a>
+
+          <div className="hidden md:flex items-center">
             {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="font-headline tracking-tighter uppercase text-sm text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md py-1 transition-colors"
-              >
+              <a key={link.href} href={link.href} className={linkClass}>
                 {link.label}
               </a>
             ))}
+          </div>
+
+          <div className="flex items-center">
             <a
               href={resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackEvent("resume_download")}
-              className="font-mono text-xs uppercase tracking-wider text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md py-1"
+              aria-label="Download resume"
+              className={`${linkClass} hidden lg:inline-flex gap-1.5`}
             >
-              Download Resume
+              <Download size={14} aria-hidden="true" />
+              Resume
             </a>
-          </motion.div>
+            <a
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${linkClass} hidden md:inline-flex`}
+            >
+              GitHub
+            </a>
+            <motion.button
+              {...press}
+              ref={toggleRef}
+              type="button"
+              className="md:hidden inline-flex size-11 items-center justify-center rounded-full"
+              onClick={() => setOpen((v) => !v)}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+            >
+              {open ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+            </motion.button>
+          </div>
+        </div>
+      </nav>
+
+      <AnimatePresence>
+        {open && (
+          <>
+            <motion.div
+              key="scrim"
+              aria-hidden="true"
+              className="fixed inset-0 z-40 md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setOpen(false)}
+            />
+            <motion.div
+              key="sheet"
+              id="mobile-menu"
+              className="glass-panel fixed inset-x-3 top-14 z-50 rounded-3xl p-3 md:hidden"
+              style={{ transformOrigin: "top right" }}
+              initial={{ opacity: 0, scale: 0.95, y: -6 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -6 }}
+              transition={springSnappy}
+            >
+              <ul className="flex flex-col">
+                {NAV_LINKS.map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className="flex min-h-12 items-center rounded-2xl px-4 text-[1.375rem] font-semibold tracking-tight"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+                <li>
+                  <a
+                    href={resumeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => {
+                      trackEvent("resume_download");
+                      setOpen(false);
+                    }}
+                    className="flex min-h-12 items-center rounded-2xl px-4 text-[1.375rem] font-semibold tracking-tight text-primary"
+                  >
+                    Download Resume
+                  </a>
+                </li>
+              </ul>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

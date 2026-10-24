@@ -1,107 +1,106 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { STACK_LAYERS } from "@/data/portfolio";
-import { MaterialIcon } from "./MaterialIcon";
 import { FadeIn } from "./FadeIn";
+import { Section, SectionHeader } from "./Primitives";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+import { spring } from "@/lib/motion";
 
 const LEVEL_STYLES = {
-  Primary: "text-primary border-primary/30 bg-primary/10",
-  Production: "text-foreground border-border bg-surface-high",
-  Supporting: "text-muted-foreground border-border bg-surface-low",
+  Primary: "text-primary font-semibold",
+  Production: "text-foreground",
+  Supporting: "text-muted-foreground",
 } as const;
 
 export function StackArchitecture() {
   const [activeTab, setActiveTab] = useState(STACK_LAYERS[0].id);
 
   return (
-    <section id="stack" className="py-32 px-8 bg-surface-mid">
-      <div className="max-w-7xl mx-auto">
-        <FadeIn>
-          <header className="mb-12 text-center md:text-left">
-            <p className="font-mono text-primary text-xs tracking-[0.3em] uppercase mb-4">
-              Microsoft Stack
-            </p>
-            <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-4">
-              Stack, organized like production architecture
-            </h2>
-            <p className="text-muted-foreground max-w-2xl text-lg font-light">
-              Depth over decoration — each layer maps to systems I&apos;ve shipped,
-              not tutorials I&apos;ve completed.
-            </p>
-          </header>
-        </FadeIn>
+    <Section id="stack" tone="grey" labelledBy="stack-title">
+      <FadeIn>
+        <SectionHeader
+          id="stack-title"
+          eyebrow="Microsoft Stack"
+          title="Stack, organized like production architecture"
+          lead="Depth over decoration — each layer maps to systems I've shipped, not tutorials I've completed."
+        />
+      </FadeIn>
 
-        <FadeIn delay={0.1}>
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="w-full flex flex-wrap h-auto gap-2 bg-surface-low p-2 mb-8">
+      <FadeIn delay={0.06}>
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <div className="-mx-6 mb-10 overflow-x-auto px-6 [scrollbar-width:none] md:mx-0 md:overflow-visible md:px-0">
+            <TabsList className="mx-auto flex h-auto w-max gap-1 rounded-full bg-secondary p-1">
               {STACK_LAYERS.map((layer) => (
                 <TabsTrigger
                   key={layer.id}
                   value={layer.id}
-                  className="font-mono text-xs uppercase tracking-wider data-[state=active]:bg-primary/15 data-[state=active]:text-primary"
+                  className="relative min-h-10 rounded-full px-4 text-[0.9375rem] transition-colors focus-visible:ring-0 focus-visible:ring-offset-0 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
                 >
-                  <MaterialIcon name={layer.icon} className="text-base mr-1.5" />
-                  {layer.title}
+                  {activeTab === layer.id && (
+                    <motion.span
+                      layoutId="stack-tab"
+                      className="absolute inset-0 rounded-full bg-background shadow-sm"
+                      transition={spring}
+                    />
+                  )}
+                  <span className="relative">{layer.title}</span>
                 </TabsTrigger>
               ))}
             </TabsList>
+          </div>
 
-            {STACK_LAYERS.map((layer) => (
-              <TabsContent key={layer.id} value={layer.id} className="mt-0">
-                <p className="font-mono text-sm text-muted-foreground mb-6 border-l-2 border-primary pl-4">
+          {STACK_LAYERS.map((layer) => (
+            <TabsContent
+              key={layer.id}
+              value={layer.id}
+              className="mt-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+            >
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={spring}
+              >
+                <p className="text-lead mx-auto mb-8 max-w-2xl text-center text-muted-foreground text-balance">
                   {layer.subtitle}
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   {layer.technologies.map((tech) => (
-                    <div
-                      key={tech.name}
-                      className="p-5 rounded-xl border border-border bg-card transition-colors hover:border-primary/30"
-                    >
-                      <TechHeader name={tech.name} level={tech.level} />
-                      <p className="text-sm text-muted-foreground leading-relaxed mt-2">
+                    <li key={tech.name} className="rounded-3xl bg-background p-6">
+                      <div className="flex items-start justify-between gap-3">
+                        <h3 className="text-[1.0625rem] font-semibold tracking-tight">
+                          {tech.name}
+                        </h3>
+                        <span
+                          className={cn(
+                            "shrink-0 text-xs",
+                            LEVEL_STYLES[tech.level],
+                          )}
+                        >
+                          {tech.level}
+                        </span>
+                      </div>
+                      <p className="mt-2 text-[0.9375rem] text-muted-foreground">
                         {tech.capability}
                       </p>
-                    </div>
+                    </li>
                   ))}
-                </div>
-              </TabsContent>
-            ))}
-          </Tabs>
-        </FadeIn>
+                </ul>
+              </motion.div>
+            </TabsContent>
+          ))}
+        </Tabs>
+      </FadeIn>
 
-        <FadeIn delay={0.2}>
-          <aside className="mt-12 p-6 bg-surface-low rounded-xl border-l-2 border-primary">
-            <p className="font-mono text-sm text-primary mb-2">CURRENTLY_AT:</p>
-            <p className="font-mono text-xs text-muted-foreground">
-              Kinetiq — architecting global media monitoring and distributed ingestion
-              infrastructure.
-            </p>
-          </aside>
-        </FadeIn>
-      </div>
-    </section>
-  );
-}
-
-function TechHeader({
-  name,
-  level,
-}: {
-  name: string;
-  level: keyof typeof LEVEL_STYLES;
-}) {
-  return (
-    <div className="flex items-start justify-between gap-3">
-      <h3 className="font-headline font-semibold text-base">{name}</h3>
-      <span
-        className={cn(
-          "shrink-0 px-2 py-0.5 rounded font-mono text-xs uppercase tracking-wider border",
-          LEVEL_STYLES[level],
-        )}
-      >
-        {level}
-      </span>
-    </div>
+      <FadeIn delay={0.1}>
+        <aside className="mx-auto mt-12 max-w-2xl text-center">
+          <p className="text-eyebrow text-primary">Currently at</p>
+          <p className="mt-2 text-muted-foreground text-pretty">
+            Kinetiq — architecting global media monitoring and distributed ingestion
+            infrastructure.
+          </p>
+        </aside>
+      </FadeIn>
+    </Section>
   );
 }

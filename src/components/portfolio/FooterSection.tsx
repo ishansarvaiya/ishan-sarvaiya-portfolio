@@ -1,6 +1,9 @@
 import { useState, type FormEvent } from "react";
 import { Github, Download, Linkedin } from "lucide-react";
+import { motion } from "framer-motion";
 import { FadeIn } from "./FadeIn";
+import { ButtonLink } from "./Primitives";
+import { press } from "@/lib/motion";
 import { useSiteConfig } from "@/context/SiteConfigContext";
 import { trackEvent } from "@/lib/analytics";
 import { Calendar } from "lucide-react";
@@ -11,11 +14,10 @@ const INTENT_OPTIONS = [
   { value: "other", label: "Other" },
 ] as const;
 
-const linkClass =
-  "inline-flex items-center gap-2.5 px-5 py-3 rounded-xl border border-border bg-card text-foreground font-mono text-sm tracking-wide hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-all duration-200 w-fit";
-
 const inputClass =
-  "w-full rounded-xl border border-border bg-card px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/50 transition-colors";
+  "w-full min-h-12 rounded-2xl border border-input bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground";
+
+const labelClass = "mb-1.5 block text-sm font-medium";
 
 export function Footer() {
   const { resumeUrl, githubUrl, linkedinUrl, contactEmail, calendlyUrl } =
@@ -49,20 +51,13 @@ export function Footer() {
   }
 
   return (
-    <footer
-      id="contact"
-      className="bg-background border-t border-border pt-24 pb-12 px-8"
-    >
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28">
+    <footer id="contact" className="border-t border-border px-6 pb-10 pt-[clamp(5rem,12vw,9rem)]">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-24">
           <FadeIn direction="left">
-            <p className="font-mono text-primary text-sm tracking-[0.3em] uppercase mb-6">
-              Contact
-            </p>
-            <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-6">
-              Start a conversation
-            </h2>
-            <p className="text-muted-foreground text-base max-w-sm leading-relaxed mb-10">
+            <p className="text-eyebrow text-primary mb-3">Contact</p>
+            <h2 className="text-title text-balance">Start a conversation</h2>
+            <p className="text-lead mt-5 max-w-md text-muted-foreground text-pretty">
               Hiring inquiry, project scope, or architecture review — send a brief
               and I&apos;ll respond within 48 hours.
             </p>
@@ -74,19 +69,16 @@ export function Footer() {
             />
           </FadeIn>
 
-          <FadeIn delay={0.1}>
+          <FadeIn delay={0.06}>
             <form
               onSubmit={handleSubmit}
               noValidate
               aria-label="Contact form"
               className="space-y-4"
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                  <label
-                    htmlFor="contact-name"
-                    className="font-mono text-xs tracking-widest uppercase text-muted-foreground block mb-1.5"
-                  >
+                  <label htmlFor="contact-name" className={labelClass}>
                     Name
                   </label>
                   <input
@@ -101,10 +93,7 @@ export function Footer() {
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="contact-email"
-                    className="font-mono text-xs tracking-widest uppercase text-muted-foreground block mb-1.5"
-                  >
+                  <label htmlFor="contact-email" className={labelClass}>
                     Email
                   </label>
                   <input
@@ -121,10 +110,7 @@ export function Footer() {
               </div>
 
               <div>
-                <label
-                  htmlFor="contact-intent"
-                  className="font-mono text-xs tracking-widest uppercase text-muted-foreground block mb-1.5"
-                >
+                <label htmlFor="contact-intent" className={labelClass}>
                   Intent
                 </label>
                 <select
@@ -142,10 +128,7 @@ export function Footer() {
               </div>
 
               <div>
-                <label
-                  htmlFor="contact-message"
-                  className="font-mono text-xs tracking-widest uppercase text-muted-foreground block mb-1.5"
-                >
+                <label htmlFor="contact-message" className={labelClass}>
                   Message
                 </label>
                 <textarea
@@ -159,33 +142,29 @@ export function Footer() {
                 />
               </div>
 
-              <button
+              <motion.button
+                {...press}
                 type="submit"
                 disabled={sent}
-                className="w-full sm:w-auto px-8 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm tracking-wide hover:bg-primary/90 disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-primary px-8 text-[0.9375rem] font-medium tracking-tight text-primary-foreground hover:opacity-90 disabled:opacity-60 sm:w-auto"
               >
                 {sent ? "✓ Opening Email Client…" : "Send Message →"}
-              </button>
+              </motion.button>
 
-              {sent && (
-                <p className="font-mono text-xs text-primary mt-2">
-                  Your default email client should open with the message pre-filled.
-                </p>
-              )}
+              <p role="status" aria-live="polite" className="text-sm text-primary">
+                {sent &&
+                  "Your default email client should open with the message pre-filled."}
+              </p>
             </form>
           </FadeIn>
         </div>
 
-        <div className="mt-20 pt-8 border-t border-border/40 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-          <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">
-            Ishan Sarvaiya · Enterprise .NET &amp; Azure · ishansarvaiya.in
-          </p>
-          <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">
-            &copy; {new Date().getFullYear()}
-          </p>
+        <div className="mt-24 flex flex-col items-start justify-between gap-3 border-t border-border pt-6 text-sm text-muted-foreground sm:flex-row sm:items-center">
+          <p>Ishan Sarvaiya · Enterprise .NET &amp; Azure · ishansarvaiya.in</p>
+          <p>&copy; {new Date().getFullYear()}</p>
           <a
             href={`mailto:${contactEmail}`}
-            className="font-mono text-xs tracking-widest uppercase text-muted-foreground hover:text-primary transition-colors"
+            className="inline-flex min-h-11 items-center hover:text-foreground"
           >
             {contactEmail}
           </a>
@@ -207,42 +186,47 @@ function FooterLinks({
   calendlyUrl: string;
 }) {
   return (
-    <div className="flex flex-col gap-3">
-      <a href={githubUrl} target="_blank" rel="noopener noreferrer" className={linkClass}>
-        <Github size={16} />
+    <div className="mt-10 flex flex-wrap gap-3">
+      <ButtonLink
+        href={githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        variant="secondary"
+      >
+        <Github size={16} aria-hidden="true" />
         github / ishansarvaiya
-      </a>
-      <a
+      </ButtonLink>
+      <ButtonLink
         href={linkedinUrl}
         target="_blank"
         rel="noopener noreferrer"
+        variant="secondary"
         onClick={() => trackEvent("linkedin_click")}
-        className={linkClass}
       >
-        <Linkedin size={16} />
+        <Linkedin size={16} aria-hidden="true" />
         linkedin / ishansarvaiya
-      </a>
-      <a
+      </ButtonLink>
+      <ButtonLink
         href={resumeUrl}
         target="_blank"
         rel="noopener noreferrer"
+        variant="secondary"
         onClick={() => trackEvent("resume_download")}
-        className={linkClass}
       >
-        <Download size={16} />
+        <Download size={16} aria-hidden="true" />
         Download Resume
-      </a>
+      </ButtonLink>
       {calendlyUrl && (
-        <a
+        <ButtonLink
           href={calendlyUrl}
           target="_blank"
           rel="noopener noreferrer"
+          variant="secondary"
           onClick={() => trackEvent("calendly_click")}
-          className={linkClass}
         >
-          <Calendar size={16} />
+          <Calendar size={16} aria-hidden="true" />
           Book a discovery call
-        </a>
+        </ButtonLink>
       )}
     </div>
   );

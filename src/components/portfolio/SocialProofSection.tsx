@@ -1,5 +1,6 @@
+import { ExternalLink } from "lucide-react";
 import { FadeIn } from "./FadeIn";
-import { MaterialIcon } from "./MaterialIcon";
+import { Section, SectionHeader, ButtonLink } from "./Primitives";
 import { useSiteConfig } from "@/context/SiteConfigContext";
 import { trackEvent } from "@/lib/analytics";
 
@@ -9,44 +10,38 @@ export function SocialProofSection() {
   const { linkedinUrl } = useSiteConfig();
 
   return (
-    <section id="proof" className="py-24 px-8 border-y border-border/20">
-      <div className="max-w-3xl mx-auto text-center">
-        <FadeIn>
-          <p className="font-mono text-primary text-xs tracking-[0.3em] uppercase mb-4">
-            Trusted Delivery
-          </p>
-          <h2 className="font-headline text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            Recommendations on LinkedIn
-          </h2>
-          <p className="text-muted-foreground text-base font-light mb-8 max-w-lg mx-auto">
-            Peer and client feedback from production engagements — view full
-            recommendations on my LinkedIn profile.
-          </p>
-          <a
+    <Section id="proof" width="narrow" labelledBy="proof-title">
+      <FadeIn>
+        <SectionHeader
+          id="proof-title"
+          eyebrow="Trusted Delivery"
+          title="Recommendations on LinkedIn"
+          lead="Peer and client feedback from production engagements — view full recommendations on my LinkedIn profile."
+          className="mb-8"
+        />
+        <div className="text-center">
+          <ButtonLink
             href={linkedinUrl}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackEvent("linkedin_click")}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-primary text-primary-foreground font-bold text-sm tracking-tight hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-colors"
           >
             View LinkedIn Recommendations
-            <MaterialIcon name="open_in_new" className="text-[18px]" />
-          </a>
-        </FadeIn>
+            <ExternalLink size={16} aria-hidden="true" />
+          </ButtonLink>
+        </div>
+      </FadeIn>
 
-        <FadeIn delay={0.15}>
-          <div className="mt-14 flex flex-wrap justify-center gap-8 items-center">
-            {COMPANIES.map((company) => (
-              <span
-                key={company}
-                className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground"
-              >
-                {company}
-              </span>
-            ))}
-          </div>
-        </FadeIn>
-      </div>
-    </section>
+      <FadeIn delay={0.08}>
+        <ul
+          aria-label="Companies"
+          className="mt-14 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-[1.0625rem] font-semibold tracking-tight text-muted-foreground"
+        >
+          {COMPANIES.map((company) => (
+            <li key={company}>{company}</li>
+          ))}
+        </ul>
+      </FadeIn>
+    </Section>
   );
 }

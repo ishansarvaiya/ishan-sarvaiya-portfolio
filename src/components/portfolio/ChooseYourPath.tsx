@@ -1,5 +1,5 @@
 import { FadeIn } from "./FadeIn";
-import { MaterialIcon } from "./MaterialIcon";
+import { Section, SectionHeader, ButtonLink } from "./Primitives";
 import { useSiteConfig } from "@/context/SiteConfigContext";
 import { trackEvent, type AnalyticsEvent } from "@/lib/analytics";
 
@@ -13,9 +13,6 @@ type Cta = {
 
 type PathConfig = {
   id: string;
-  icon: string;
-  accent: string;
-  iconColor: string;
   title: string;
   subtitle: string;
   body: string;
@@ -41,9 +38,6 @@ export function ChooseYourPath() {
   const paths: PathConfig[] = [
     {
       id: "hire",
-      icon: "work",
-      accent: "border-border hover:border-foreground/30",
-      iconColor: "text-foreground",
       title: "For Hiring Teams",
       subtitle: "Resume-ready proof of enterprise delivery",
       body: "Production-grade systems on the Microsoft stack — ASP.NET Web API, EF Core, Angular, and Azure — with clean architecture, observability, and operational reliability.",
@@ -61,9 +55,6 @@ export function ChooseYourPath() {
     },
     {
       id: "build",
-      icon: "architecture",
-      accent: "border-primary/40 hover:border-primary/70",
-      iconColor: "text-primary",
       title: "For Founders & Product Teams",
       subtitle: "Scoped builds, not open-ended dev hours",
       body: "MVPs, API backends, admin portals, and Azure foundations — typically 4–12 week engagements with clear milestones, documented architecture, and maintainable handoff.",
@@ -78,53 +69,41 @@ export function ChooseYourPath() {
   ];
 
   return (
-    <section id="path" className="py-24 px-8">
+    <Section id="path" width="wide" labelledBy="path-title">
       <FadeIn>
-        <div className="max-w-7xl mx-auto text-center mb-14">
-          <p className="font-mono text-primary text-xs tracking-[0.3em] uppercase mb-4">
-            Start Here
-          </p>
-          <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            Two ways to evaluate my work
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg font-light">
-            Whether you&apos;re filling a senior role or scoping a product build, pick
-            the path that gets you to the right proof in under 60 seconds.
-          </p>
-        </div>
+        <SectionHeader
+          id="path-title"
+          eyebrow="Start Here"
+          title="Two ways to evaluate my work"
+          lead="Whether you're filling a senior role or scoping a product build, pick the path that gets you to the right proof in under 60 seconds."
+        />
       </FadeIn>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 mt-14">
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         {paths.map((path, i) => (
-          <FadeIn key={path.id} delay={i * 0.1}>
+          <FadeIn key={path.id} delay={i * 0.06} className="h-full">
             <PathCard path={path} />
           </FadeIn>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }
 
 function PathCard({ path }: { path: PathConfig }) {
   return (
-    <article
-      className={`flex flex-col h-full p-8 rounded-xl bg-card border ${path.accent} transition-all duration-300 hover:-translate-y-1`}
-    >
-      <MaterialIcon name={path.icon} className={`text-3xl mb-5 ${path.iconColor}`} />
-      <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground mb-2">
-        {path.subtitle}
-      </p>
-      <h3 className="font-headline text-2xl font-bold mb-4">{path.title}</h3>
-      <p className="text-muted-foreground text-sm leading-relaxed mb-6">{path.body}</p>
-      <ul className="space-y-2 mb-6 flex-1">
+    <article className="flex h-full flex-col rounded-[1.75rem] bg-card p-8 md:p-10">
+      <p className="text-eyebrow text-muted-foreground">{path.subtitle}</p>
+      <h3 className="text-headline mt-2">{path.title}</h3>
+      <p className="mt-4 text-muted-foreground text-pretty">{path.body}</p>
+      <ul className="mt-8 flex-1 divide-y divide-border border-y border-border">
         {path.bullets.map((bullet) => (
-          <li key={bullet} className="flex items-start gap-2 text-sm text-muted-foreground">
-            <span className="text-primary mt-0.5 shrink-0 text-xs">›</span>
+          <li key={bullet} className="py-3 text-[0.9375rem]">
             {bullet}
           </li>
         ))}
       </ul>
-      <p className="font-mono text-xs text-muted-foreground mb-5">{path.trust}</p>
+      <p className="mt-6 text-sm text-muted-foreground">{path.trust}</p>
       <PathCtas ctas={path.ctas} />
     </article>
   );
@@ -132,22 +111,18 @@ function PathCard({ path }: { path: PathConfig }) {
 
 function PathCtas({ ctas }: { ctas: Cta[] }) {
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
       {ctas.map((cta) => (
-        <a
+        <ButtonLink
           key={cta.label}
           href={cta.href}
           target={cta.external ? "_blank" : undefined}
           rel={cta.external ? "noopener noreferrer" : undefined}
           onClick={() => cta.event && trackEvent(cta.event)}
-          className={
-            cta.primary
-              ? "px-5 py-2.5 rounded-xl bg-primary text-primary-foreground font-mono text-xs tracking-wide font-semibold hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-colors"
-              : "px-5 py-2.5 rounded-xl border border-border font-mono text-xs tracking-wide text-muted-foreground hover:text-foreground hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-colors"
-          }
+          variant={cta.primary ? "primary" : "link"}
         >
           {cta.label}
-        </a>
+        </ButtonLink>
       ))}
     </div>
   );

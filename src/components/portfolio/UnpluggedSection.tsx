@@ -1,66 +1,42 @@
 import { FadeIn } from "./FadeIn";
+import { Section, SectionHeader } from "./Primitives";
 import { HOBBIES } from "@/data/portfolio";
 
 export function UnpluggedSection() {
   return (
-    <section id="unplugged" className="py-32 px-8 bg-surface-low">
-      <div className="max-w-7xl mx-auto">
-        <FadeIn>
-          <p className="font-mono text-primary text-sm tracking-[0.3em] uppercase mb-4">
-            BEYOND THE TERMINAL
-          </p>
-          <h2 className="font-headline text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            Unplugged <span className="text-outline">// Off-Screen</span>
-          </h2>
-          <p className="text-muted-foreground mb-16 max-w-xl text-base">
-            The engineer is just one layer. Here's what runs underneath.
-          </p>
-        </FadeIn>
+    <Section id="unplugged" tone="grey" width="wide" labelledBy="unplugged-title">
+      <FadeIn>
+        <SectionHeader
+          id="unplugged-title"
+          eyebrow="Beyond the terminal"
+          title={
+            <>
+              Unplugged <span className="text-muted-foreground">Off-Screen</span>
+            </>
+          }
+          lead="The engineer is just one layer. Here's what runs underneath."
+        />
+      </FadeIn>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
-          {HOBBIES.map((hobby, index) => (
-            <FadeIn key={hobby.title} delay={index * 0.06}>
-              <article
-                className="group relative p-6 rounded-xl border bg-card overflow-hidden transition-all duration-300 h-full flex flex-col"
-                style={{ borderColor: hobby.accent + "22" }}
-              >
-                {/* Subtle corner gradient on hover */}
-                <span
-                  className="absolute -top-8 -right-8 w-24 h-24 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none blur-2xl"
-                  style={{ backgroundColor: hobby.accent + "18" }}
-                  aria-hidden="true"
-                />
-
-                {/* Emoji */}
-                <span
-                  className="text-3xl mb-4 block"
-                  role="img"
-                  aria-hidden="true"
-                >
+      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {HOBBIES.map((hobby, index) => (
+          <li key={hobby.title} className="h-full">
+            <FadeIn delay={(index % 4) * 0.05} className="h-full">
+              <article className="flex h-full flex-col rounded-3xl bg-background p-6">
+                <span className="mb-4 block text-3xl" aria-hidden="true">
                   {hobby.emoji}
                 </span>
-
-                {/* Title */}
-                <h3 className="font-headline font-semibold text-base text-foreground mb-2 transition-colors duration-200">
+                <h3 className="text-[1.0625rem] font-semibold tracking-tight">
                   {hobby.title}
                 </h3>
-
-                {/* Left accent bar */}
-                <span
-                  className="absolute left-0 top-6 bottom-6 w-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-r"
-                  style={{ backgroundColor: hobby.accent }}
-                  aria-hidden="true"
-                />
-
-                {/* Description */}
-                <p className="text-sm text-muted-foreground leading-relaxed mt-auto">
+                <p className="mt-2 text-[0.9375rem] text-muted-foreground text-pretty">
                   {hobby.description}
                 </p>
               </article>
             </FadeIn>
-          ))}
-        </div>
-      </div>
-    </section>
+          </li>
+        ))}
+      </ul>
+    </Section>
   );
 }
