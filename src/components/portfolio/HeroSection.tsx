@@ -21,12 +21,12 @@ export function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center pt-24 px-8 overflow-hidden">
       <div
-        className="fixed inset-0 pointer-events-none z-0"
+        className="absolute inset-0 pointer-events-none z-0"
         aria-hidden="true"
       >
         <GridBg />
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.12]"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.08]"
           style={{
             backgroundImage:
               "radial-gradient(circle at center, hsl(var(--primary)) 0%, transparent 65%)",
@@ -61,7 +61,7 @@ export function Hero() {
 
         <motion.p
           variants={item}
-          className="font-headline text-2xl md:text-3xl font-bold tracking-tight text-gradient mb-8"
+          className="font-headline text-2xl md:text-3xl font-bold tracking-tight text-primary mb-8"
         >
           Enterprise .NET &amp; Cloud Engineer
         </motion.p>
@@ -78,7 +78,7 @@ export function Hero() {
 
         <motion.p
           variants={item}
-          className="font-mono text-[10px] md:text-xs text-muted-foreground/80 tracking-widest uppercase mb-8"
+          className="font-mono text-xs text-muted-foreground tracking-widest uppercase mb-8"
         >
           Open to senior engineering roles · Select freelance engagements · Remote
         </motion.p>
@@ -89,7 +89,7 @@ export function Hero() {
         >
           <a
             href="#path"
-            className="px-8 py-3.5 bg-gradient-to-r from-primary to-secondary rounded-xl text-primary-foreground font-bold tracking-tight hover:scale-105 transition-transform duration-300 inline-flex items-center justify-center gap-2"
+            className="px-8 py-3.5 bg-primary rounded-xl text-primary-foreground font-bold tracking-tight hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-colors duration-200 inline-flex items-center justify-center gap-2"
           >
             Choose Your Path
             <MaterialIcon name="arrow_downward" className="text-[18px]" />
@@ -99,7 +99,7 @@ export function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackEvent("resume_download")}
-            className="px-8 py-3.5 rounded-xl border border-border font-mono text-sm tracking-wide text-muted-foreground hover:text-foreground hover:border-primary/40 transition-all inline-flex items-center justify-center gap-2"
+            className="px-8 py-3.5 rounded-xl border border-border font-mono text-sm tracking-wide text-muted-foreground hover:text-foreground hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-colors inline-flex items-center justify-center gap-2"
           >
             <MaterialIcon name="download" className="text-[18px]" />
             Download Resume
@@ -113,20 +113,13 @@ export function Hero() {
           {HERO_METRICS.map((metric) => (
             <span
               key={metric}
-              className="px-3 py-1.5 rounded-full font-mono text-[10px] md:text-xs tracking-wide text-muted-foreground bg-surface-low border border-border/30"
+              className="px-3 py-1.5 rounded-full font-mono text-xs tracking-wide text-muted-foreground bg-surface-low border border-border"
             >
               {metric}
             </span>
           ))}
         </motion.div>
       </motion.div>
-
-      <div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40 z-10"
-        aria-hidden="true"
-      >
-        <MaterialIcon name="expand_more" />
-      </div>
     </section>
   );
 }
