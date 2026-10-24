@@ -21,7 +21,7 @@ export function UnpluggedSection() {
           {HOBBIES.map((hobby, index) => (
             <FadeIn key={hobby.title} delay={index * 0.06}>
               <article
-                className="group relative p-6 rounded-2xl border bg-card overflow-hidden transition-all duration-300 hover:border-opacity-50 h-full flex flex-col"
+                className="group relative p-6 rounded-xl border bg-card overflow-hidden transition-all duration-300 h-full flex flex-col"
                 style={{ borderColor: hobby.accent + "22" }}
               >
                 {/* Subtle corner gradient on hover */}
