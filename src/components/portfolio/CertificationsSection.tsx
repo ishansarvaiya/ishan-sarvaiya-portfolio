@@ -35,11 +35,11 @@ export function CertificationsSection() {
 
 function CertCard({ cert }: { cert: Certification }) {
   const inner = (
-    <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-card border border-border/20 hover:border-primary/30 transition-colors">
+    <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors">
       <MaterialIcon name="verified" className="text-primary text-xl shrink-0" />
       <div className="text-left">
         <p className="font-headline font-semibold text-sm">{cert.name}</p>
-        <p className="font-mono text-[10px] text-muted-foreground">
+        <p className="font-mono text-xs text-muted-foreground">
           {cert.issuer}
           {cert.year ? ` · ${cert.year}` : ""}
         </p>
@@ -53,7 +53,7 @@ function CertCard({ cert }: { cert: Certification }) {
         href={cert.credentialUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="block"
+        className="block rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         {inner}
       </a>
