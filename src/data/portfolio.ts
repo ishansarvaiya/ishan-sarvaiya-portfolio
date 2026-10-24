@@ -220,7 +220,6 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     azureMetrics: [
       "Azure Functions: consumption plan with per-function concurrency caps",
-      "AKS HPA: 2 → 20 replicas driven by CPU and queue-depth metrics",
     ],
     microsoftStack: [".NET 8 API Gateway", "Azure Functions", "Azure Front Door", "PostgreSQL", "Service Bus"],
     tags: ["Python", "RabbitMQ", "Elasticsearch", ".NET 8", "Data Scraping", "Speech-to-Text", "Ansible", "Prometheus", "Grafana"],
@@ -246,11 +245,6 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Supported 10,000+ daily active users.",
       "Maintained 99.9% transaction reliability.",
       "Faster incident diagnosis through centralized logs and health dashboards.",
-    ],
-    azureMetrics: [
-      "P95 API latency < 180ms under normal load",
-      "Autoscale 2 → 8 App Service instances on CPU",
-      "~22% Azure spend reduction after right-sizing SKUs",
     ],
     microsoftStack: [".NET Core → .NET 8", "ASP.NET Web API", "EF Core", "SQL Server", "Azure App Service", "Key Vault"],
     tags: [".NET Core", "Azure", "SQL Server", "JWT"],
@@ -303,7 +297,6 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     azureMetrics: [
       "Azure SQL geo-redundant backup for audit records",
-      "~15% storage cost savings via cold-tier audit log archival",
     ],
     microsoftStack: [".NET Core", "ASP.NET Web API", "SQL Server", "Payment Gateway Integration"],
     tags: [".NET Core", "SQL Server", "Payment Gateway"],
